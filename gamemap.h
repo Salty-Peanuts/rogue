@@ -29,7 +29,7 @@ class GameMap
         vector<Chamber*> chambers, 
         bool npc_movement);
     ~GameMap();
-    void start(PlayerCharacter* pc);
+    void start();
     void addObject(AbstractObject* object);
     void deleteObject(AbstractObject* object);
     void moveCharacter(PlayerCharacter* pc, int dir);
