@@ -3,17 +3,15 @@
 #include <map>
 #include "combatmanager.h"
 #include "playercharacter.h"
-#include "NPC.h"
-#include "item.h"
+#include "abstractobject.h"
 #include "chamber.h"
 using namespace std;
 
 
-class Map 
+class GameMap 
 {
     vector<vector<char>> game_map;
-    vector<NPC*> tiles_NPC;
-    vector<Item*> tiles_item;
+    vector<AbstractObjects*> object_tiles,
     char player_race;
     PlayerCharacter* player_character;
     CombatManager* attack;
@@ -22,17 +20,15 @@ class Map
     bool npc_movement;
 
  public:
-    Map(vector<vector<char>> game_map, 
-        vector<NPC*> tiles_NPC, 
-        vector<Item*> tiles_item, 
+    GameMap(vector<vector<char>> game_map, 
+        vector<AbstractObjects*> object_tiles,
         char player_race, 
-        PlayerCharacter* 
-        player_character, 
+        PlayerCharacter* player_character, 
         CombatManager* attack, 
         map<string, int> direction_map, 
         vector<Chamber*> chambers, 
         bool npc_movement);
-    ~Map();
+    ~GameMap();
     void start(PlayerCharacter* pc);
     void addObject(AbstractObject* object);
     void deleteObject(AbstractObject* object);
