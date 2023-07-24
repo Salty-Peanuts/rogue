@@ -1,7 +1,7 @@
 #include <vector>
 #include <string>
 #include <map>
-#include "map.h"
+#include "gamemap.h"
 using namespace std;
 
 GameMap::GameMap(vector<vector<char>> game_map,
