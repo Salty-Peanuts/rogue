@@ -1,4 +1,4 @@
-#include "map.h"
+#include "gamemap.h"
 
 class UIRender
 {
@@ -8,4 +8,4 @@ class UIRender
     UIRender(Map* map);
     ~UIRender();
     void update() const override;
-}
+};

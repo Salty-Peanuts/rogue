@@ -1,4 +1,4 @@
-#include "map.h"
+#include "gamemap.h"
 
 class RenderMap 
 {
@@ -8,4 +8,4 @@ class RenderMap
     RenderMap(Map* map);
     ~RenderMap();
     void update() const override;
-}
+};

@@ -1,4 +1,4 @@
-#include "map.h"
+#include "gamemap.h"
 #include "abstractcharacter.h"
 using namespace std;
 
