@@ -2,12 +2,75 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <control.h>
 
 
 using namespace std;
 
+// read map layuout from file
+void readFile(string file_name, char map_layout[79][25]) {
+    string str;
+    ifstream input (file_name);
+    for (int i = 0; i < 79; i++) {
+        getline(input, str);
+        for (int j = 0; j < 25; j++) {
+            map_layout[i][j] = str[j];
+        }
+    }
+}
+
+// print out the map
+void printMap(char map_layout[79][25]) {
+    for (int i = 0; i < 79; i++) {
+        for (int j = 0; j < 25; j++) {
+            cout << map_layout[i][j];
+        }
+    }
+}
 
 int main() {
+    char map_layout[79][25];
+    readFile("cc3k-emptySingleFloor.txt", map_layout);
+    printMap(map_layout);
+
+    // ask to choose race
+    while (true) {
+        string cmd;
+        do {
+            cout << "Welcome to CC3K" << endl << "Please choose a race to start:" << endl
+            << "Shade: s" << endl << "Goblin: g" << endl << "Drow: d" << endl << "Vampire: v" << endl << "Troll: t";
+            cin >> cmd;
+        } while (cmd != "s" || cmd != "g" || cmd != "d" || cmd != "t" || cmd != "v");
+
+        // start game
+        Control c = new Control(map_layout);
+        c.start(cmd);
+
+        // check the ending state of the game
+        if (c.status == "restart") {
+            continue;
+        }
+        else if (c.status == "quit") {
+            break;
+        }
+        else if (c.status == "won") {
+
+        }
+        else if (c.status == "lost") {
+
+        }
+
+        // ask if the player wants to restart
+        do {
+            cout << "Do you want to replay (r) or quit (q)?" << endl;
+            cin >> cmd;
+        } while (cmd != "r" || cmd != "q");
+    }
+
+
+
+
+    /*
     map<string, int> m_dir;
     m_dir["nw"] = 0;
     m_dir["no"] = 1;
@@ -87,5 +150,6 @@ int main() {
             }
         }
     }
+    */
 
 }
