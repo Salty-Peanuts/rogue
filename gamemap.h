@@ -1,6 +1,7 @@
 #include <vector>
 #include <string>
 #include <map>
+#include "./observer/subject.h"
 #include "combatmanager.h"
 #include "./characters/playercharacter.h"
 #include "abstractobject.h"
@@ -8,7 +9,7 @@
 using namespace std;
 
 
-class GameMap 
+class GameMap : public Subject
 {
     vector<vector<AbstractObject*>> game_map;
     vector<vector<AbstractObject*>> object_tiles;
@@ -36,5 +37,5 @@ class GameMap
     void moveNPC();
     void reset();
     bool isStair();
-    virtual void update() const = 0;
+    void update();
 };

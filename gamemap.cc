@@ -23,29 +23,22 @@ GameMap::GameMap(vector<vector<AbstractObject*>> game_map,
 
 GameMap::~GameMap() 
 {
-    
+
 }
 
-void GameMap::start(PlayerCharacter* pc)
+void GameMap::start()
 {
 
 }
 
 void GameMap::addObject(AbstractObject* object)
 {
-    object_tiles.emplace_back(object);
-    game_map[object->getX()][object->getY()] = object->getToken();
+
 }
 
 void GameMap::deleteObject(AbstractObject* object)
 {
-    for (int i = 0; i < object_tiles.size(); ++i) {
-        if (object_tiles[i] == object) {
-            object_tiles.erase(i);
-            game_map[object->getX()][object->getY()] = '.';
-            break;
-        }
-    }
+    
 }
 
 void GameMap::moveCharacter(int dir)
@@ -132,13 +125,15 @@ void GameMap::moveNPC()
 
 void GameMap::reset()
 {
-
+    object_tiles.clear();
 }
 
 bool GameMap::isStair()
 {
-    if (game_map[player_character->getX()][player_character->getY()] == '\\')
-        return true;
-    else
-        return false;
+    
+}
+
+void GameMap::update()
+{
+    notifyObservers();
 }
