@@ -4,17 +4,23 @@
 #include "gamemap.h"
 using namespace std;
 
-GameMap::GameMap(vector<vector<char>> game_map,
-        vector<AbstractObjects*> object_tiles,
-        char player_race,
+GameMap::GameMap(vector<vector<AbstractObject*>> game_map,
+        vector<vector<AbstractObject*>> object_tiles = {},
         PlayerCharacter* player_character,
         CombatManager* attack,
         map<string, int> direction_map,
         vector<Chamber*> chambers,
-        bool npc_movement): game_map{game_map}, tiles_NPC{tiles_NPC}
-                            player_race{player_race}, player_character{player_character},
+        bool npc_movement): game_map{game_map}, player_character{player_character},
                             attack{attack}, direction_map{direction_map},
-                            chambers{chambers}, npc_movement{npc_movement} {}
+                            chambers{chambers}, npc_movement{npc_movement} 
+{
+    // if the object_tiles vector is empty, then we need to initialize it to a set size
+    if (object_tiles.empty()) {
+        // initialize the object_tiles vector to the same size as the game_map
+        object_tiles = vector<vector<AbstractObject*>> (game_map.size(), vector<AbstractObject*> (game_map[0].size(), nullptr));
+    }
+}
+
 GameMap::~GameMap() 
 {
     for (auto i : object_tiles) {
@@ -35,6 +41,7 @@ void GameMap::start(PlayerCharacter* pc)
 void GameMap::addObject(AbstractObject* object)
 {
     object_tiles.emplace_back(object);
+    game_map[object->getX()][object->getY()] = object->getToken();
 }
 
 void GameMap::deleteObject(AbstractObject* object)
@@ -42,15 +49,55 @@ void GameMap::deleteObject(AbstractObject* object)
     for (int i = 0; i < object_tiles.size(); ++i) {
         if (object_tiles[i] == object) {
             object_tiles.erase(i);
+            game_map[object->getX()][object->getY()] = '.';
             break;
         }
     }
 }
 
-void GameMap::moveCharacter(PlayerCharacter* pc, int dir)
+void GameMap::moveCharacter(int dir)
 {
-    if (validMove(pc, dir)) {
-
+    if (validMove(player_character, dir)) {
+        int x = player_character->getX();
+        int y = player_character->getY();
+        switch (dir) {
+            case direction_map["no"]:
+                player_character->y = player_character->getY() - 1;
+                game_map[x][y] = '.';
+                break;
+            case direction_map["so"]:
+                player_character->y = player_character->getY() + 1;
+                game_map[x][y] = '.';
+                break;
+            case direction_map["ea"]:
+                player_character->x = player_character->getX() + 1;
+                game_map[x][y] = '.';
+                break;
+            case direction_map["we"]:
+                player_character->x = player_character->getX() - 1;
+                game_map[x][y] = '.';
+                break;
+            case direction_map["ne"]:
+                player_character->x = player_character->getX() + 1;
+                player_character->y = player_character->getY() - 1;
+                game_map[x][y] = '.';
+                break;
+            case direction_map["nw"]:
+                player_character->x = player_character->getX() - 1;
+                player_character->y = player_character->getY() - 1;
+                game_map[x][y] = '.';
+                break;
+            case direction_map["se"]:
+                player_character->x = player_character->getX() + 1;
+                player_character->y = player_character->getY() + 1;
+                game_map[x][y] = '.';
+                break;
+            case direction_map["sw"]:
+                player_character->x = player_character->getX() - 1;
+                player_character->y = player_character->getY() + 1;
+                game_map[x][y] = '.';
+                break;
+        }
     }
 }
 
@@ -83,4 +130,22 @@ bool GameMap::validMove(AbstractObject* object, int dir)
 void GameMap::usePotion(PlayerCharacter&)
 {
 
+}
+
+void GameMap::moveNPC()
+{
+
+}
+
+void GameMap::reset()
+{
+
+}
+
+bool GameMap::isStair()
+{
+    if (game_map[player_character->getX()][player_character->getY()] == '\\')
+        return true;
+    else
+        return false;
 }

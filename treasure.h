@@ -9,4 +9,4 @@ class Treasure
     ~Treasure();
     int getValue();
     void setValue(int value);
-}
+};
