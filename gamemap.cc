@@ -23,14 +23,7 @@ GameMap::GameMap(vector<vector<AbstractObject*>> game_map,
 
 GameMap::~GameMap() 
 {
-    for (auto i : object_tiles) {
-        delete i;
-    }
-    for (auto i : chambers) {
-        delete i;
-    }
-    delete player_character;
-    delete attack;
+    
 }
 
 void GameMap::start(PlayerCharacter* pc)

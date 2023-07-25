@@ -2,10 +2,10 @@
 
 class UIRender
 {
-    Map* map;
+    GameMap* map;
     
  public:
-    UIRender(Map* map);
+    UIRender(GameMap* map);
     ~UIRender();
     void update() const override;
 };

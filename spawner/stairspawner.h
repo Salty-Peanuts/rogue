@@ -1,6 +1,6 @@
 #include "objectspawner.h"
 
-class StairSpawner
+class StairSpawner : public ObjectSpawner
 {
     int stair_probability;
 
@@ -8,4 +8,4 @@ class StairSpawner
     StairSpawner(int stair_probability);
     ~StairSpawner();
     AbstractObject* spawn() const override;
-}
+};

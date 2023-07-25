@@ -1,9 +1,10 @@
 #include "objectspawner.h"
 #include <map>
 #include <string>
+#include <vector>
 using namespace std;
 
-class ItemSpawner
+class ItemSpawner : public ObjectSpawner
 {
     vector<string> item_type;
     map<string, int> item_probability;
@@ -11,4 +12,4 @@ class ItemSpawner
     ItemSpawner(vector<string> item_type, map<string, int> item_probability);
     ~ItemSpawner();
     AbstractObject* spawn() const override;
-}
+};

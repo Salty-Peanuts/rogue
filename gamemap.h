@@ -5,13 +5,13 @@
 #include "./characters/playercharacter.h"
 #include "abstractobject.h"
 #include "chamber.h"
-using namespace std
+using namespace std;
 
 
 class GameMap 
 {
     vector<vector<AbstractObject*>> game_map;
-    vector<vector<AbstractObject*>> object_tiles,
+    vector<vector<AbstractObject*>> object_tiles;
     PlayerCharacter* player_character;
     CombatManager* attack;
     map<string, int> direction_map;
@@ -36,5 +36,5 @@ class GameMap
     void moveNPC();
     void reset();
     bool isStair();
-    virtual update() const = 0;
+    virtual void update() const = 0;
 };

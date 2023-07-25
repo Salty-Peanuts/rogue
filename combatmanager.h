@@ -1,4 +1,3 @@
-#include "gamemap.h"
 #include "abstractcharacter.h"
 using namespace std;
 
@@ -9,7 +8,7 @@ class CombatManager
  public:
     CombatManager(int dir);
     ~CombatManager();
-    void NPCAttack(Map& map, AbstractCharacter* initiator, AbstractCharacter* reciever);
-    void playerAttack(Map& map, AbstractCharacter* initiator, AbstractCharacter* reciever);
-    bool isValid(Map& map, AbstractCharacter* initiator, AbstractCharacter* reciever);
-}
+    void NPCAttack(GameMap& map, AbstractCharacter* initiator, AbstractCharacter* reciever);
+    void playerAttack(GameMap& map, AbstractCharacter* initiator, AbstractCharacter* reciever);
+    bool isValid(GameMap& map, AbstractCharacter* initiator, AbstractCharacter* reciever);
+};

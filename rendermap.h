@@ -2,10 +2,10 @@
 
 class RenderMap 
 {
-    Map* map;
+    GameMap* map;
 
  public:
-    RenderMap(Map* map);
+    RenderMap(GameMap* map);
     ~RenderMap();
     void update() const override;
 };

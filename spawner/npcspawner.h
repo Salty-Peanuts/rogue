@@ -4,7 +4,7 @@
 #include <vector>
 using namespace std;
 
-class NPCSpawner
+class NPCSpawner : public ObjectSpawner
 {
     vector<string> npc_race;
     map<string, int> npc_probability;
@@ -12,4 +12,4 @@ class NPCSpawner
     NPCSpawner(vector<string> npc_race, map<string, int> npc_probability);
     ~NPCSpawner();
     AbstractObject* spawn() const override;
-}
+};
