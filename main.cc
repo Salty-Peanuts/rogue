@@ -2,34 +2,36 @@
 #include <string>
 #include <fstream>
 #include <sstream>
-#include <control.h>
+#include <controller.h>
 
 
 using namespace std;
+const int col = 79;
+const int row = 25;
 
 // read map layuout from file
-void readFile(string file_name, char map_layout[79][25]) {
+void readFile(string file_name, char map_layout[col][row]) {
     string str;
     ifstream input (file_name);
-    for (int i = 0; i < 79; i++) {
+    for (int i = 0; i < col; i++) {
         getline(input, str);
-        for (int j = 0; j < 25; j++) {
+        for (int j = 0; j < row; j++) {
             map_layout[i][j] = str[j];
         }
     }
 }
 
 // print out the map
-void printMap(char map_layout[79][25]) {
-    for (int i = 0; i < 79; i++) {
-        for (int j = 0; j < 25; j++) {
+void printMap(char map_layout[col][row]) {
+    for (int i = 0; i < col; i++) {
+        for (int j = 0; j < row; j++) {
             cout << map_layout[i][j];
         }
     }
 }
 
 int main() {
-    char map_layout[79][25];
+    char map_layout[col][row];
     readFile("cc3k-emptySingleFloor.txt", map_layout);
     printMap(map_layout);
 
@@ -43,8 +45,8 @@ int main() {
         } while (cmd != "s" || cmd != "g" || cmd != "d" || cmd != "t" || cmd != "v");
 
         // start game
-        Control c = new Control(map_layout);
-        c.start(cmd);
+        Controller c = new Controller(map_layout, cmd);
+        c.run_game();
 
         // check the ending state of the game
         if (c.status == "restart") {
@@ -65,6 +67,11 @@ int main() {
             cout << "Do you want to replay (r) or quit (q)?" << endl;
             cin >> cmd;
         } while (cmd != "r" || cmd != "q");
+
+        if (cmd == "r") {
+            continue;
+        }
+        else break;
     }
 
 
