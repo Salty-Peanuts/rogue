@@ -1,3 +1,6 @@
+#ifndef ITEMSPAWNER_H
+#define ITEMSPAWNER_H
+
 #include "objectspawner.h"
 #include <map>
 #include <string>
@@ -13,3 +16,5 @@ class ItemSpawner : public ObjectSpawner
     ~ItemSpawner();
     AbstractObject* spawn() const override;
 };
+
+#endif

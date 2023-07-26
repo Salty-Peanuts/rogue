@@ -1,3 +1,6 @@
+#ifndef GAMEMAP_H
+#define GAMEMAP_H
+
 #include <vector>
 #include <string>
 #include <map>
@@ -39,3 +42,5 @@ class GameMap : public Subject
     bool isStair();
     void update();
 };
+
+#endif

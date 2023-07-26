@@ -1,3 +1,6 @@
+#ifndef ABSTRACTOBJECT_H
+#define ABSTRACTOBJECT_H
+
 class AbstractObject
 {
     int x, y;
@@ -8,3 +11,5 @@ class AbstractObject
     int getY();
     char getToken();
 };
+
+#endif

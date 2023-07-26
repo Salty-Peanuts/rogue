@@ -1,3 +1,6 @@
+#ifndef COMBATMANAGER_H
+#define COMBATMANAGER_H
+
 #include "abstractcharacter.h"
 using namespace std;
 
@@ -12,3 +15,5 @@ class CombatManager
     void playerAttack(GameMap& map, AbstractCharacter* initiator, AbstractCharacter* reciever);
     bool isValid(GameMap& map, AbstractCharacter* initiator, AbstractCharacter* reciever);
 };
+
+#endif

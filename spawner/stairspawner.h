@@ -1,3 +1,6 @@
+#ifndef STAIRSPAWNER_H
+#define STAIRSPAWNER_H
+
 #include "objectspawner.h"
 
 class StairSpawner : public ObjectSpawner
@@ -9,3 +12,5 @@ class StairSpawner : public ObjectSpawner
     ~StairSpawner();
     AbstractObject* spawn() const override;
 };
+
+#endif

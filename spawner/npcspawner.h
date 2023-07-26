@@ -1,3 +1,6 @@
+#ifndef NPCSPAWNER_H
+#define NPCSPAWNER_H
+
 #include "objectspawner.h"
 #include <map>
 #include <string>
@@ -13,3 +16,5 @@ class NPCSpawner : public ObjectSpawner
     ~NPCSpawner();
     AbstractObject* spawn() const override;
 };
+
+#endif
