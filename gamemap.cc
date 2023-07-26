@@ -23,7 +23,21 @@ GameMap::GameMap(vector<vector<AbstractObject*>> game_map,
 
 GameMap::~GameMap() 
 {
-
+    for (auto row : game_map) {
+        for (auto object : row) {
+            delete object;
+        }
+    }
+    for (auto row : object_tiles) {
+        for (auto object : row) {
+            delete object;
+        }
+    }
+    delete player_character;
+    delete attack;
+    for (auto chamber : chambers) {
+        delete chamber;
+    }
 }
 
 void GameMap::start()
@@ -33,57 +47,24 @@ void GameMap::start()
 
 void GameMap::addObject(AbstractObject* object)
 {
-
+    int x = object->getX();
+    int y = object->getY();
+    object_tiles[x][y] = object;
 }
 
 void GameMap::deleteObject(AbstractObject* object)
 {
-    
+    int x = object->getX();
+    int y = object->getY();
+    object_tiles[x][y] = nullptr;
 }
 
 void GameMap::moveCharacter(int dir)
 {
+    int x = player_character->getX();
+    int y = player_character->getY();
     if (validMove(player_character, dir)) {
-        int x = player_character->getX();
-        int y = player_character->getY();
-        switch (dir) {
-            case direction_map["no"]:
-                player_character->y = player_character->getY() - 1;
-                game_map[x][y] = '.';
-                break;
-            case direction_map["so"]:
-                player_character->y = player_character->getY() + 1;
-                game_map[x][y] = '.';
-                break;
-            case direction_map["ea"]:
-                player_character->x = player_character->getX() + 1;
-                game_map[x][y] = '.';
-                break;
-            case direction_map["we"]:
-                player_character->x = player_character->getX() - 1;
-                game_map[x][y] = '.';
-                break;
-            case direction_map["ne"]:
-                player_character->x = player_character->getX() + 1;
-                player_character->y = player_character->getY() - 1;
-                game_map[x][y] = '.';
-                break;
-            case direction_map["nw"]:
-                player_character->x = player_character->getX() - 1;
-                player_character->y = player_character->getY() - 1;
-                game_map[x][y] = '.';
-                break;
-            case direction_map["se"]:
-                player_character->x = player_character->getX() + 1;
-                player_character->y = player_character->getY() + 1;
-                game_map[x][y] = '.';
-                break;
-            case direction_map["sw"]:
-                player_character->x = player_character->getX() - 1;
-                player_character->y = player_character->getY() + 1;
-                game_map[x][y] = '.';
-                break;
-        }
+        if ()
     }
 }
 

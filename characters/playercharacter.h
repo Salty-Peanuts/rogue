@@ -1,4 +1,4 @@
-class PlayerCharacter
+class PlayerCharacter : public AbstractObject
 {
 
 };
