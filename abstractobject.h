@@ -11,6 +11,7 @@ class AbstractObject
     int getY();
     char getToken();
     bool isTraversible();
+    string identify();
 };
 
 #endif
