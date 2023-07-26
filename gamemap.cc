@@ -64,7 +64,31 @@ void GameMap::moveCharacter(int dir)
     int x = player_character->getX();
     int y = player_character->getY();
     if (validMove(player_character, dir)) {
-        if ()
+        if (dir == direction_map["no"]) {
+            player_character->setX(x);
+            player_character->setY(y - 1);
+        } else if (dir == direction_map["so"]) {
+            player_character->setX(x);
+            player_character->setY(y + 1);
+        } else if (dir == direction_map["ea"]) {
+            player_character->setX(x + 1);
+            player_character->setY(y);
+        } else if (dir == direction_map["we"]) {
+            player_character->setX(x - 1);
+            player_character->setY(y);
+        } else if (dir == direction_map["ne"]) {
+            player_character->setX(x + 1);
+            player_character->setY(y - 1);
+        } else if (dir == direction_map["nw"]) {
+            player_character->setX(x - 1);
+            player_character->setY(y - 1);
+        } else if (dir == direction_map["se"]) {
+            player_character->setX(x + 1);
+            player_character->setY(y + 1);
+        } else if (dir == direction_map["sw"]) {
+            player_character->setX(x - 1);
+            player_character->setY(y + 1);
+        }
     }
 }
 
@@ -72,25 +96,8 @@ bool GameMap::validMove(AbstractObject* object, int dir)
 {
     int x = object->getX();
     int y = object->getY();
-    switch (dir) {
-        case direction_map["no"]:
-            return game_map[x][y - 1] == '.' || game_map[x][y - 1] == '+' || game_map[x][y - 1] == '#' || game_map[x][y - 1] == 'G';
-        case direction_map["so"]:
-            return game_map[x][y + 1] == '.' || game_map[x][y + 1] == '+' || game_map[x][y + 1] == '#' || game_map[x][y + 1] == 'G';
-        case direction_map["ea"]:
-            return game_map[x + 1][y] == '.' || game_map[x + 1][y] == '+' || game_map[x + 1][y] == '#' || game_map[x + 1][y] == 'G';
-        case direction_map["we"]:
-            return game_map[x - 1][y] == '.' || game_map[x - 1][y] == '+' || game_map[x - 1][y] == '#' || game_map[x - 1][y] == 'G';
-        case direction_map["ne"]:
-            return game_map[x + 1][y - 1] == '.' || game_map[x + 1][y - 1] == '+' || game_map[x + 1][y - 1] == '#' || game_map[x + 1][y - 1] == 'G';
-        case direction_map["nw"]:
-            return game_map[x - 1][y - 1] == '.' || game_map[x - 1][y - 1] == '+' || game_map[x - 1][y - 1] == '#' || game_map[x - 1][y - 1] == 'G';
-        case direction_map["se"]:
-            return game_map[x + 1][y + 1] == '.' || game_map[x + 1][y + 1] == '+' || game_map[x + 1][y + 1] == '#' || game_map[x + 1][y + 1] == 'G';
-        case direction_map["sw"]:
-            return game_map[x - 1][y + 1] == '.' || game_map[x - 1][y + 1] == '+' || game_map[x - 1][y + 1] == '#' || game_map[x - 1][y + 1] == 'G';
-        default:
-            return false;
+    if (dir == direction_map["no"]) {
+        
     }
 }
 
