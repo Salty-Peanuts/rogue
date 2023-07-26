@@ -1,5 +1,5 @@
-#ifndef __POT_EFFECT__
-#define __POT_EFFECT__
+#ifndef POT_EFFECT_H
+#define POT_EFFECT_H
 
 
 
