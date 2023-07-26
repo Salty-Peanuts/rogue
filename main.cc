@@ -46,19 +46,19 @@ int main() {
 
         // start game
         Controller c = new Controller(map_layout, cmd);
-        c.run_game();
+        string result = c.run_game();
 
         // check the ending state of the game
-        if (c.status == "restart") {
+        if (result == "restart") {
             continue;
         }
-        else if (c.status == "quit") {
+        else if (result == "quit") {
             break;
         }
-        else if (c.status == "won") {
+        else if (result == "won") {
 
         }
-        else if (c.status == "lost") {
+        else if (result == "lost") {
 
         }
 

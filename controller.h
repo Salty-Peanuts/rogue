@@ -16,8 +16,8 @@ class Controller {
  public:
     Controller(char map_layout[col][row], string race);
     ~Controller();
-    void run_game();
-
+    string run_game();
+    
 };
 
 #endif

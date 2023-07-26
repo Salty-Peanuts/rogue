@@ -13,9 +13,10 @@ GameMap::GameMap(vector<vector<AbstractObject*>> game_map,
         CombatManager* attack,
         map<string, int> direction_map,
         vector<Chamber*> chambers,
-        bool npc_movement): game_map{game_map}, player_character{player_character},
+        bool npc_movement,
+        int floor_level): game_map{game_map}, player_character{player_character},
                             attack{attack}, direction_map{direction_map},
-                            chambers{chambers}, npc_movement{npc_movement} 
+                            chambers{chambers}, npc_movement{npc_movement}, floor_level{floor_level}
 {
     // if the object_tiles vector is empty, then we need to initialize it to a set size
     if (object_tiles.empty()) {
@@ -62,6 +63,7 @@ void GameMap::deleteObject(AbstractObject* object)
     object_tiles[x][y] = nullptr;
 }
 
+// change this method's return type to bool? true if valid and false otherwise
 void GameMap::moveCharacter(int dir)
 {
     int x = player_character->getX();
@@ -148,4 +150,9 @@ bool GameMap::isStair()
 void GameMap::update()
 {
     notifyObservers();
+}
+
+int GameMap::getLevel() 
+{
+    return floor_level;
 }

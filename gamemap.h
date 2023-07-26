@@ -21,6 +21,7 @@ class GameMap : public Subject
     map<string, int> direction_map;
     vector<Chamber*> chambers;
     bool npc_movement;
+    int floor_level;
 
  public:
     GameMap(vector<vector<AbstractObject*>> game_map, 
@@ -29,7 +30,8 @@ class GameMap : public Subject
         CombatManager* attack, 
         map<string, int> direction_map, 
         vector<Chamber*> chambers, 
-        bool npc_movement);
+        bool npc_movement,
+        int floor_level);
     ~GameMap();
     void start();
     void addObject(AbstractObject* object);
@@ -42,6 +44,8 @@ class GameMap : public Subject
     void reset();
     bool isStair();
     void update();
+    int getLevel();
+
 };
 
 #endif
