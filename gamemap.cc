@@ -1,7 +1,10 @@
 #include <vector>
 #include <string>
 #include <map>
+#include <cstdlib>
+#include <ctime>
 #include "gamemap.h"
+#include "./npcs/NPC.h"
 using namespace std;
 
 GameMap::GameMap(vector<vector<AbstractObject*>> game_map,
@@ -96,19 +99,40 @@ bool GameMap::validMove(AbstractObject* object, int dir)
 {
     int x = object->getX();
     int y = object->getY();
-    if (dir == direction_map["no"]) {
-        
-    }
 }
 
-void GameMap::usePotion(PlayerCharacter&)
+void GameMap::usePotion(string potion)
 {
+    player_character->usePotion(potion);
+}
 
+bool GameMap::playerInRange(AbstractObject* npc)
+{
+    int x = npc->getX();
+    int y = npc->getY();
+    if (npc->isHostile() && object_tiles[x][y - 1] == player_character) {
+        return true;
+    } else if (npc->isHostile() && object_tiles[x][y - 1] == player_character) {
+        return true;
+    } else if (npc->hostile && object_tiles[x][y - 1] == player_character) {
+        return true;
+    } else if (npc->hostile && object_tiles[x][y - 1] == player_character) {
+        return true;
+    } else if (npc->hostile && object_tiles[x][y - 1] == player_character) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 void GameMap::moveNPC()
 {
+    srand(time(0));
+    if (npc_movement) {
 
+        int random_dir = 1 + (rand() % 8);
+
+    }
 }
 
 void GameMap::reset()
