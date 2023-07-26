@@ -1,5 +1,5 @@
-#ifndef __CONTROLLER_H__
-#define __CONTROLLER_H__
+#ifndef CONTROLLER_H
+#define CONTROLLER_H
 
 #include <gamemap.h>
 

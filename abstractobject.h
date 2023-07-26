@@ -10,6 +10,7 @@ class AbstractObject
     int getX();
     int getY();
     char getToken();
+    bool isTraversible();
 };
 
 #endif
