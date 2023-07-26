@@ -16,7 +16,7 @@ class AbstractCharacter : public AbstractObject
         virtual void death();
         void setX(int x);
         void setY(int y);
-        void moveTo(int x, int y);
+        void move(int dir);
         virtual bool isTraversible();
 };
 
