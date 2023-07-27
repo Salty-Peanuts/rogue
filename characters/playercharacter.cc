@@ -2,8 +2,8 @@
 
 using namespace std;
 
-PlayerCharacter::PlayerCharacter():
-    AbstractCharacter{}, token{'@'}, gold{0} {}
+PlayerCharacter::PlayerCharacter(int x, int y, char token, int hp, int atk, int def):
+    AbstractCharacter{x, y, '@', hp, atk, def}, gold{0} {}
 
 
 PlayerCharacter::~PlayerCharacter() {

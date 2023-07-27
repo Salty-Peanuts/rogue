@@ -2,6 +2,10 @@
 
 using namespace std;
 
+AbstractCharacter::AbstractCharacter(int x, int y, char token, int hp, int atk, int def):
+    AbstractObject{x, y, token}, hp{hp}, atk{atk}, def{def}, traversible{false} {}
+
+
 void AbstractCharacter::move(int dir) {
     int x = getX();
     int y = getY();

@@ -1,5 +1,11 @@
 #include "abstractobject.h"
 
+
+AbstractObject::AbstractObject(int x, int y, char token) :
+    x{x}, y{y}, token{token} {}
+
+
+
 int AbstractObject::getX()
 {
     return x;

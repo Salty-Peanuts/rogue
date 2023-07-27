@@ -9,7 +9,7 @@ class NPC : public AbstractCharacter
     bool hasMoved;
 
     public:
-        NPC();
+        NPC(int x, int y, char token, int hp, int atk, int def);
         void death();
         bool isHostile();
         bool wasMoved();

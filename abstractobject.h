@@ -10,7 +10,7 @@ class AbstractObject
     int x, y;
     char token;
  public:
-    AbstractObject();
+    AbstractObject(int x, int y, char token);
     virtual ~AbstractObject() = 0;
     int getX();
     int getY();

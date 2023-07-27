@@ -10,12 +10,11 @@ using namespace std;
 
 class PlayerCharacter : public AbstractCharacter 
 {
-    char token = '@';
     vector<PotionEffect *> potion_effects;
     int gold;
 
     public:
-        PlayerCharacter();
+        PlayerCharacter(int x, int y, char token, int hp, int atk, int def);
         ~PlayerCharacter();
         void usePotion(string pot);
         void removePotions();
