@@ -11,6 +11,7 @@ class AbstractCharacter : public AbstractObject
     bool traversible;
 
     public:
+        AbstractCharacter();
         virtual void attack(AbstractCharacter *character);
         virtual void recieveAttack(AbstractCharacter *character);
         virtual void death();

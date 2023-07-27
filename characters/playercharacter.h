@@ -2,6 +2,7 @@
 #define PLAYERCHARACTER_H
 
 #include <vector>
+#include <PotionEffect.h>
 
 class PlayerCharacter : public AbstractObject
 {
