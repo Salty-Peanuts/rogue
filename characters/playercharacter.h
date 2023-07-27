@@ -2,9 +2,13 @@
 #define PLAYERCHARACTER_H
 
 #include <vector>
-#include <PotionEffect.h>
+#include <string>
+#include "abstractcharacter.h"
+#include "PotionEffect.h"
 
-class PlayerCharacter : public AbstractObject
+using namespace std;
+
+class PlayerCharacter : public AbstractCharacter 
 {
     char token = '@';
     vector<PotionEffect *> potion_effects;
