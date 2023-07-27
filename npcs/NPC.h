@@ -13,6 +13,8 @@ class NPC : public AbstractCharacter
         void death();
         bool isHostile();
         bool wasMoved();
+        virtual void attack(AbstractCharacter* receiver);
+        virtual void receiveAttack(AbstractCharacter* attacker);
 };
 
 #endif
