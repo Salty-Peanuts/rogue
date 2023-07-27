@@ -6,7 +6,7 @@
 class Merchant : public NPC
 {
     public:
-        Merchant();
+        Merchant(int x, int y);
         void attack(AbstractCharacter* receiver);
         void receiveAttack(AbstractCharacter* attacker);
 };

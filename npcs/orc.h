@@ -6,7 +6,7 @@
 class Orcs : public NPC
 {
     public:
-        Orcs();
+        Orcs(int x, int y);
         void attack(AbstractCharacter* receiver);
         void receiveAttack(AbstractCharacter* attacker);
 };

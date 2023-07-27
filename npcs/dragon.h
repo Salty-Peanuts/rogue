@@ -6,7 +6,7 @@
 class Dragon : public NPC
 {
     public:
-        Dragon();
+        Dragon(int x, int y);
         void attack(AbstractCharacter* receiver);
         void receiveAttack(AbstractCharacter* attacker);
 };

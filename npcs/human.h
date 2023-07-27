@@ -6,7 +6,7 @@
 class Human : public NPC
 {
     public:
-        Human();
+        Human(int x, int y);
         void attack(AbstractCharacter* receiver);
         void receiveAttack(AbstractCharacter* attacker);
 };

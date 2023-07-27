@@ -6,7 +6,7 @@
 class Halfling : public NPC
 {
     public:
-        Halfling();
+        Halfling(int x, int y);
         void attack(AbstractCharacter* receiver);
         void receiveAttack(AbstractCharacter* attacker);
 };

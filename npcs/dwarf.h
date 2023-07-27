@@ -6,7 +6,7 @@
 class Dwarf : public NPC
 {
     public:
-        Dwarf();
+        Dwarf(int x, int y);
         void attack(AbstractCharacter* receiver);
         void receiveAttack(AbstractCharacter* attacker);
 };
