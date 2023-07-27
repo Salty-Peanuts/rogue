@@ -3,6 +3,8 @@
 
 #include "abstractcharacter.h"
 
+using namespace std;
+
 class NPC : public AbstractCharacter 
 {
     bool hostile;

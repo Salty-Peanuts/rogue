@@ -11,20 +11,18 @@
 #include "chamber.h"
 using namespace std;
 
-
 class GameMap : public Subject
 {
-    vector<vector<AbstractObject*>> game_map;
+    vector<vector<char>> game_map;
     vector<vector<AbstractObject*>> object_tiles;
     PlayerCharacter* player_character;
     CombatManager* attack;
-    map<string, int> direction_map;
     vector<Chamber*> chambers;
     bool npc_movement;
     int floor_level;
 
  public:
-    GameMap(vector<vector<AbstractObject*>> game_map, 
+    GameMap(vector<vector<char>> game_map, 
         vector<vector<AbstractObject*>> object_tiles,
         PlayerCharacter* player_character, 
         CombatManager* attack, 
@@ -41,7 +39,7 @@ class GameMap : public Subject
     void usePotion(string potion);
     void npcLogic();
     // void moveNPC();
-    bool playerInRange(AbstractObject* object);
+    int playerInRange(AbstractObject* object);
     void reset();
     bool isStair();
     void update();

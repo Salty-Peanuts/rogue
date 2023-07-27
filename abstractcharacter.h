@@ -3,6 +3,8 @@
 
 #include "abstractobject.h"
 
+using namespace std;
+
 class AbstractCharacter : public AbstractObject
 {
     int hp;

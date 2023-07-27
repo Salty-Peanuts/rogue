@@ -7,7 +7,7 @@
 #include "./npcs/NPC.h"
 using namespace std;
 
-GameMap::GameMap(vector<vector<AbstractObject*>> game_map,
+GameMap::GameMap(vector<vector<char>> game_map,
         vector<vector<AbstractObject*>> object_tiles = {},
         PlayerCharacter* player_character,
         CombatManager* attack = nullptr,
@@ -15,8 +15,8 @@ GameMap::GameMap(vector<vector<AbstractObject*>> game_map,
         vector<Chamber*> chambers,
         bool npc_movement,
         int floor_level): game_map{game_map}, player_character{player_character},
-                            attack{attack}, direction_map{direction_map},
-                            chambers{chambers}, npc_movement{npc_movement}, floor_level{floor_level}
+                            attack{attack}, chambers{chambers}, 
+                            npc_movement{npc_movement}, floor_level{floor_level}
 {
     // if the object_tiles vector is empty, then we need to initialize it to a set size
     if (object_tiles.empty()) {
@@ -64,37 +64,12 @@ void GameMap::deleteObject(AbstractObject* object)
     object_tiles[x][y] = nullptr;
 }
 
-// change this method's return type to bool? true if valid and false otherwise
 bool GameMap::moveCharacter(int dir)
 {
     int x = player_character->getX();
     int y = player_character->getY();
     if (validMove(player_character, dir)) {
-        if (dir == direction_map["no"]) {
-            player_character->setX(x);
-            player_character->setY(y - 1);
-        } else if (dir == direction_map["so"]) {
-            player_character->setX(x);
-            player_character->setY(y + 1);
-        } else if (dir == direction_map["ea"]) {
-            player_character->setX(x + 1);
-            player_character->setY(y);
-        } else if (dir == direction_map["we"]) {
-            player_character->setX(x - 1);
-            player_character->setY(y);
-        } else if (dir == direction_map["ne"]) {
-            player_character->setX(x + 1);
-            player_character->setY(y - 1);
-        } else if (dir == direction_map["nw"]) {
-            player_character->setX(x - 1);
-            player_character->setY(y - 1);
-        } else if (dir == direction_map["se"]) {
-            player_character->setX(x + 1);
-            player_character->setY(y + 1);
-        } else if (dir == direction_map["sw"]) {
-            player_character->setX(x - 1);
-            player_character->setY(y + 1);
-        }
+        player_character->move(dir);
         return true;
     } else {
         return false;
@@ -105,6 +80,18 @@ bool GameMap::validMove(AbstractObject* object, int dir)
 {
     int x = object->getX();
     int y = object->getY();
+    PlayerCharacter* player = dynamic_cast<PlayerCharacter*>(object);
+    NPC* npc = dynamic_cast<NPC*>(object);
+    if (player) {
+        // check collision for player
+        switch (dir) {
+
+        }
+    } else if (npc) {
+        // check collision for NPC
+    } else {
+        return false;
+    }
 }
 
 void GameMap::usePotion(string potion)
@@ -113,28 +100,28 @@ void GameMap::usePotion(string potion)
 }
 
 
-bool GameMap::playerInRange(AbstractObject* npc)
+int GameMap::playerInRange(AbstractObject* npc)
 {
     int x = npc->getX();
     int y = npc->getY();
     if (object_tiles[x][y - 1] == player_character) {
-        return true;
+        return direction_map["no"];
     } else if (object_tiles[x][y + 1] == player_character) {
-        return true;
+        return direction_map["so"];
     } else if (object_tiles[x - 1][y] == player_character) {
-        return true;
+        return direction_map["we"];
     } else if (object_tiles[x + 1][y] == player_character) {
-        return true;
+        return direction_map["ea"];
     } else if (object_tiles[x + 1][y + 1] == player_character) {
-        return true;
+        return direction_map["se"];
     } else if (object_tiles[x + 1][y - 1] == player_character) {
-        return true;
+        return direction_map["ne"];
     } else if (object_tiles[x - 1][y + 1] == player_character) {
-        return true;
+        return direction_map["sw"];
     } else if (object_tiles[x - 1][y - 1] == player_character) {
-        return true;
+        return direction_map["nw"];
     } else {
-        return false;
+        return 0;
     }
 }
 
@@ -158,16 +145,24 @@ void GameMap::npcLogic() {
                 continue;
             } else if (object_tiles[i][j]->identify() == "NPC" && playerInRange(object_tiles[i][j])) {
                 // attack
+                delete attack;
+                attack = new CombatManager(playerInRange(object_tiles[i][j]));
+                attack->NPCAttack(*this, object_tiles[i][j], player_character);
             } else if (object_tiles[i][j]->identify() == "NPC" && !playerInRange(object_tiles[i][j])) {
+                NPC* npc = dynamic_cast<NPC*>(object_tiles[i][j]);
+                if (npc->wasMoved()) {
+                    return;
+                }
                 // move in a random direction
                 bool success = false;
                 while (!success) {
                     srand(time(0));
                     int random_dir = 1 + (rand() % 8);
-                    switch (random_dir) {
-                        case 
+                    if (npc->wasMoved() && validMove(npc, random_dir)) {
+                        npc->move(random_dir);
+                        success = true;
                     }
-                }
+                } // need some way to unset all the wasMoved flags
             }
         }
     }
