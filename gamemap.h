@@ -19,6 +19,7 @@ class GameMap : public Subject
     CombatManager* attack;
     vector<Chamber*> chambers;
     bool npc_movement;
+    string last_action;
     int floor_level;
 
  public:
@@ -29,6 +30,7 @@ class GameMap : public Subject
         map<string, int> direction_map, 
         vector<Chamber*> chambers, 
         bool npc_movement,
+        string last_action,
         int floor_level);
     ~GameMap();
     void start();
@@ -39,12 +41,20 @@ class GameMap : public Subject
     void usePotion(string potion);
     void npcLogic();
     // void moveNPC();
+    bool playerAtk(int dir);
     int playerInRange(AbstractObject* object);
     void reset();
     bool isStair();
     void update();
-    int getLevel();
 
+    // Getters
+    int getLevel() const;
+    string getLastAction() const;
+    int getWidth() const;
+    int getHeight() const;
+    char gameMapAt(int x, int y) const;
+    AbstractObject* objectTilesAt(int x, int y) const;
+    PlayerCharacter* getPlayerCharacter() const;
 };
 
 #endif

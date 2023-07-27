@@ -14,9 +14,11 @@ GameMap::GameMap(vector<vector<char>> game_map,
         map<string, int> direction_map,
         vector<Chamber*> chambers,
         bool npc_movement,
+        string last_action = "Player Character Has Spawned";
         int floor_level): game_map{game_map}, player_character{player_character},
                             attack{attack}, chambers{chambers}, 
-                            npc_movement{npc_movement}, floor_level{floor_level}
+                            npc_movement{npc_movement}, last_action{last_action},
+                            floor_level{floor_level}
 {
     // if the object_tiles vector is empty, then we need to initialize it to a set size
     if (object_tiles.empty()) {
@@ -85,7 +87,7 @@ bool GameMap::validMove(AbstractObject* object, int dir)
     if (player) {
         // check collision for player
         switch (dir) {
-
+             
         }
     } else if (npc) {
         // check collision for NPC
@@ -150,6 +152,7 @@ void GameMap::npcLogic() {
                 attack->NPCAttack(*this, object_tiles[i][j], player_character);
             } else if (object_tiles[i][j]->identify() == "NPC" && !playerInRange(object_tiles[i][j])) {
                 NPC* npc = dynamic_cast<NPC*>(object_tiles[i][j]);
+                // check if npc was moved
                 if (npc->wasMoved()) {
                     return;
                 }
@@ -168,22 +171,32 @@ void GameMap::npcLogic() {
     }
 }
 
-void GameMap::reset()
+bool playerAtk(int dir)
 {
-    object_tiles.clear();
+
 }
+
+void GameMap::reset() { object_tiles.clear(); }
 
 bool GameMap::isStair()
 {
     
 }
 
-void GameMap::update()
-{
-    notifyObservers();
-}
+void GameMap::update() { notifyObservers(); }
 
-int GameMap::getLevel() 
-{
-    return floor_level;
-}
+// Getters
+
+int GameMap::getLevel() const { return floor_level; }
+
+string getLastAction() const { return last_action; }
+
+int GameMap::getWidth() const { return game_map.size(); }
+
+int GameMap::getHeight() const { return game_map[0].size(); }
+
+char GameMap::gameMapAt(int x, int y) const { return game_map[x][y]; }
+
+PlayerCharacter* GameMap::getPlayerCharacter() const { return player_character; }
+
+AbstractObject* GameMap::objectTilesAt(int x, int y) const { return object_tiles[x][y]; }

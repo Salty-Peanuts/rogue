@@ -2,6 +2,7 @@
 #define COMBATMANAGER_H
 
 #include "abstractobject.h"
+#include "gamemap.h"
 using namespace std;
 
 class CombatManager

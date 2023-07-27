@@ -5,7 +5,7 @@
 
 class UIRender : public Observer
 {
-    GameMap* map;
+    GameMap* subject;
     
  public:
     UIRender(GameMap* map);

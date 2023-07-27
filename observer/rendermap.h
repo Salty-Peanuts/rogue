@@ -5,7 +5,7 @@
 
 class RenderMap : public Observer
 {
-    GameMap* map;
+    GameMap* subject;
 
  public:
     RenderMap(GameMap* map);
