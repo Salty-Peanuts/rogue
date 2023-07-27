@@ -3,7 +3,7 @@
 using namespace std;
 
 PlayerCharacter::PlayerCharacter(int x, int y, int hp, int atk, int def):
-    AbstractCharacter{x, y, '@', hp, atk, def}, gold{0} {}
+    AbstractCharacter{x, y, '@', hp, atk, def}, gold{0}, max_hp{hp} {}
 
 
 PlayerCharacter::~PlayerCharacter() {
@@ -35,3 +35,9 @@ void PlayerCharacter::updateGold(int value) {
 string PlayerCharacter::identify() {
     return "PlayerCharacter";
 }
+
+
+int PlayerCharacter::getMaxHP() {
+    return max_hp;
+}
+
