@@ -10,7 +10,7 @@ using namespace std;
 GameMap::GameMap(vector<vector<AbstractObject*>> game_map,
         vector<vector<AbstractObject*>> object_tiles = {},
         PlayerCharacter* player_character,
-        CombatManager* attack,
+        CombatManager* attack = nullptr,
         map<string, int> direction_map,
         vector<Chamber*> chambers,
         bool npc_movement,
@@ -46,7 +46,7 @@ GameMap::~GameMap()
 
 void GameMap::start()
 {
-
+    // spawn stuff in map
 }
 
 void GameMap::addObject(AbstractObject* object)
@@ -60,11 +60,12 @@ void GameMap::deleteObject(AbstractObject* object)
 {
     int x = object->getX();
     int y = object->getY();
+    delete object_tiles[x][y];
     object_tiles[x][y] = nullptr;
 }
 
 // change this method's return type to bool? true if valid and false otherwise
-void GameMap::moveCharacter(int dir)
+bool GameMap::moveCharacter(int dir)
 {
     int x = player_character->getX();
     int y = player_character->getY();
@@ -94,6 +95,9 @@ void GameMap::moveCharacter(int dir)
             player_character->setX(x - 1);
             player_character->setY(y + 1);
         }
+        return true;
+    } else {
+        return false;
     }
 }
 
@@ -108,25 +112,33 @@ void GameMap::usePotion(string potion)
     player_character->usePotion(potion);
 }
 
+
 bool GameMap::playerInRange(AbstractObject* npc)
 {
     int x = npc->getX();
     int y = npc->getY();
-    if (npc->isHostile() && object_tiles[x][y - 1] == player_character) {
+    if (object_tiles[x][y - 1] == player_character) {
         return true;
-    } else if (npc->isHostile() && object_tiles[x][y - 1] == player_character) {
+    } else if (object_tiles[x][y + 1] == player_character) {
         return true;
-    } else if (npc->hostile && object_tiles[x][y - 1] == player_character) {
+    } else if (object_tiles[x - 1][y] == player_character) {
         return true;
-    } else if (npc->hostile && object_tiles[x][y - 1] == player_character) {
+    } else if (object_tiles[x + 1][y] == player_character) {
         return true;
-    } else if (npc->hostile && object_tiles[x][y - 1] == player_character) {
+    } else if (object_tiles[x + 1][y + 1] == player_character) {
+        return true;
+    } else if (object_tiles[x + 1][y - 1] == player_character) {
+        return true;
+    } else if (object_tiles[x - 1][y + 1] == player_character) {
+        return true;
+    } else if (object_tiles[x - 1][y - 1] == player_character) {
         return true;
     } else {
         return false;
     }
 }
 
+/*
 void GameMap::moveNPC()
 {
     srand(time(0));
@@ -134,6 +146,30 @@ void GameMap::moveNPC()
 
         int random_dir = 1 + (rand() % 8);
 
+    }
+}
+*/
+
+void GameMap::npcLogic() {
+    // first look for NPC objects in the object_tiles vector
+    for (int i = 0; i < object_tiles.size(); ++i) {
+        for (int j = 0; j < object_tiles[i].size(); ++i) {
+            if (object_tiles[i][j] == nullptr) {
+                continue;
+            } else if (object_tiles[i][j]->identify() == "NPC" && playerInRange(object_tiles[i][j])) {
+                // attack
+            } else if (object_tiles[i][j]->identify() == "NPC" && !playerInRange(object_tiles[i][j])) {
+                // move in a random direction
+                bool success = false;
+                while (!success) {
+                    srand(time(0));
+                    int random_dir = 1 + (rand() % 8);
+                    switch (random_dir) {
+                        case 
+                    }
+                }
+            }
+        }
     }
 }
 
