@@ -10,7 +10,6 @@ class NPC : public AbstractCharacter
 
     public:
         NPC();
-        ~NPC();
         void death();
         bool isHostile();
         bool wasMoved();
