@@ -8,7 +8,7 @@ class AbstractCharacter : public AbstractObject
     int hp;
     int atk;
     int def;
-    bool traversible;
+    bool traversible = false;
 
     public:
         AbstractCharacter(int x, int y, char token, int hp, int atk, int def);
