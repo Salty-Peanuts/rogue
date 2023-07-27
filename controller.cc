@@ -4,12 +4,9 @@
 #include <iostream>
 #include <map>
 #include "combatmanager.h"
+#include "constants.h"
 
 using namespace std;
-
-extern const int col;
-extern const int row;
-extern map<string, int> m_dir;
 
 
 Controller::Controller(vector<vector<char>> map_layout, string race) {
