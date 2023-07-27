@@ -15,10 +15,8 @@ class AbstractCharacter : public AbstractObject
         virtual void attack(AbstractCharacter *character);
         virtual void recieveAttack(AbstractCharacter *character);
         virtual void death();
-        void setX(int x);
-        void setY(int y);
-        void move(int dir);
         virtual bool isTraversible();
+        void move(int dir);
 };
 
 #endif
