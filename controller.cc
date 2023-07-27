@@ -1,9 +1,9 @@
-#include <controller.h>
+#include "controller.h"
 #include <string>
-#include <gamemap.h>
+#include "gamemap.h"
 #include <iostream>
 #include <map>
-
+#include "combatmanager.h"
 
 using namespace std;
 
@@ -60,7 +60,22 @@ string Controller::run_game() {
                 continue;
             }
         }
+
+        // if attack
         else if (cmd == "a") {
+            cin >> cmd;
+            if (m_dir[cmd] != 0) {
+                gameMap->playerAtk(m_dir[cmd]);
+                gameMap->render();
+                continue;
+            }
+            else {
+                cout << "Invalid attack, please try again" << endl;
+            }
+        }
+
+        // if use potion
+        else if (cmd == "u") {
             
         }
     }
