@@ -7,11 +7,13 @@
 
 using namespace std;
 
-const int col = 79;
-const int row = 25;
+extern const int col;
+extern const int row;
+extern map<string, int> m_dir;
 
 
-Controller::Controller(char map_layout[col][row], string race) {
+Controller::Controller(vector<vector<char>> map_layout, string race) {
+
     // set map layout, race of the player character, and npc movement = true
     GameMap gm = new GameMap(map_layout, race, true);
     gameMap = &gm;
@@ -25,16 +27,6 @@ Controller::~Controller() {
 string Controller::run_game() {
     gameMap->start();
     cout << "The game starts now: " << endl;
-    
-    map<string, int> m_dir;
-    m_dir["nw"] = 1;
-    m_dir["no"] = 2;
-    m_dir["ne"] = 3;
-    m_dir["we"] = 4;
-    m_dir["ea"] = 5;
-    m_dir["sw"] = 6;
-    m_dir["so"] = 7;
-    m_dir["se"] = 8;
 
     while (true) {
         string cmd;

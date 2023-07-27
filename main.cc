@@ -3,35 +3,47 @@
 #include <fstream>
 #include <sstream>
 #include <controller.h>
+#include <map>
 
 
 using namespace std;
 const int col = 79;
 const int row = 25;
+const map<string, int> m_dir{{"nw", 1},
+                        {"no", 2},
+                        {"ne", 3}, 
+                        {"we", 4},
+                        {"ea", 5},
+                        {"sw", 6},
+                        {"so", 7},
+                        {"se", 8}};
+
 
 // read map layuout from file
-void readFile(string file_name, char map_layout[col][row]) {
+void readFile(string file_name, vector<vector<char>> map_layout) {
     string str;
     ifstream input (file_name);
     for (int i = 0; i < col; i++) {
         getline(input, str);
         for (int j = 0; j < row; j++) {
-            map_layout[i][j] = str[j];
+            map_layout.at(i).push_back(str[j]);
         }
     }
 }
 
 // print out the map
-void printMap(char map_layout[col][row]) {
+void printMap(vector<vector<char>> map_layout) {
     for (int i = 0; i < col; i++) {
         for (int j = 0; j < row; j++) {
-            cout << map_layout[i][j];
+            cout << (map_layout.at(i)).at(j);
         }
     }
 }
 
 int main() {
-    char map_layout[col][row];
+
+    
+    vector<vector<char>> map_layout;
     readFile("cc3k-emptySingleFloor.txt", map_layout);
     printMap(map_layout);
 
@@ -78,7 +90,7 @@ int main() {
 
 
     /*
-    map<string, int> m_dir;
+
     m_dir["nw"] = 0;
     m_dir["no"] = 1;
     m_dir["ne"] = 2;
