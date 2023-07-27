@@ -2,7 +2,7 @@
 
 using namespace std;
 
-PlayerCharacter::PlayerCharacter(int x, int y, char token, int hp, int atk, int def):
+PlayerCharacter::PlayerCharacter(int x, int y, int hp, int atk, int def):
     AbstractCharacter{x, y, '@', hp, atk, def}, gold{0} {}
 
 
