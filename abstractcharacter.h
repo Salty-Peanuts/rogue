@@ -3,6 +3,8 @@
 
 #include "abstractobject.h"
 
+using namespace std;
+
 class AbstractCharacter : public AbstractObject
 {
     int hp;
@@ -16,6 +18,7 @@ class AbstractCharacter : public AbstractObject
         virtual void recieveAttack(AbstractCharacter *character);
         virtual void death();
         virtual bool isTraversible();
+        virtual string identify();
         void move(int dir);
 };
 

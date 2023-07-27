@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <ctime>
 #include "gamemap.h"
+#include "constants.h"
 #include "./npcs/NPC.h"
 using namespace std;
 

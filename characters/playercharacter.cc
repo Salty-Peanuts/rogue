@@ -32,4 +32,6 @@ void PlayerCharacter::updateGold(int value) {
     gold += value;
 }
 
-
+string PlayerCharacter::identify() {
+    return "PlayerCharacter";
+}

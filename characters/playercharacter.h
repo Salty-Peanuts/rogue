@@ -20,6 +20,7 @@ class PlayerCharacter : public AbstractCharacter
         void removePotions();
         void death();
         void updateGold(int value);
+        string identify();
 };
 
 #endif

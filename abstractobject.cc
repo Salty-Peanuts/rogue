@@ -1,4 +1,5 @@
 #include "abstractobject.h"
+#include "constants.h"
 
 
 AbstractObject::AbstractObject(int x, int y, char token) :

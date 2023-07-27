@@ -3,6 +3,8 @@
 
 #include "abstractcharacter.h"
 
+using namespace std;
+
 class NPC : public AbstractCharacter 
 {
     bool hostile;
@@ -15,6 +17,7 @@ class NPC : public AbstractCharacter
         bool wasMoved();
         virtual void attack(AbstractCharacter* receiver);
         virtual void receiveAttack(AbstractCharacter* attacker);
+        string identify();
 };
 
 #endif

@@ -1,5 +1,5 @@
-#ifndef __ITEM__
-#define __ITEM__
+#ifndef ITEM
+#define ITEM
 
 #include <string>
 #include "../abstractobject.h"
@@ -9,6 +9,8 @@ class Item : public AbstractObject
 {
     string item_type;
     char token;
+    public: 
+        string identify();
 };
 
 
