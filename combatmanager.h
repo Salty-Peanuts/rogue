@@ -1,7 +1,7 @@
 #ifndef COMBATMANAGER_H
 #define COMBATMANAGER_H
 
-#include "abstractcharacter.h"
+#include "abstractobject.h"
 using namespace std;
 
 class CombatManager
@@ -11,9 +11,10 @@ class CombatManager
  public:
     CombatManager(int dir);
     ~CombatManager();
-    void NPCAttack(GameMap& map, AbstractCharacter* initiator, AbstractCharacter* reciever);
-    void playerAttack(GameMap& map, AbstractCharacter* initiator, AbstractCharacter* reciever);
-    bool isValid(GameMap& map, AbstractCharacter* initiator, AbstractCharacter* reciever);
+    void NPCAttack(GameMap& map, AbstractObject* initiator, AbstractObject* reciever);
+    void playerAttack(GameMap& map, AbstractObject* initiator, AbstractObject* reciever);
+    bool isValid(GameMap& map, AbstractObject* initiator, AbstractObject* reciever);
+    void setDirection(int dir);
 };
 
 #endif
