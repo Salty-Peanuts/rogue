@@ -36,10 +36,11 @@ class GameMap : public Subject
     void start();
     void addObject(AbstractObject* object);
     void deleteObject(AbstractObject* object);
-    void moveCharacter(int dir);
+    bool moveCharacter(int dir);
     bool validMove(AbstractObject* object, int dir);
     void usePotion(string potion);
-    void moveNPC();
+    void npcLogic();
+    // void moveNPC();
     bool playerInRange(AbstractObject* object);
     void reset();
     bool isStair();
