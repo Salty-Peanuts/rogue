@@ -6,12 +6,8 @@
 
 class Shade : public PlayerCharacter
 {
-    int hp = 125;
-    int attack = 25;
-    int defense = 25;
-
     public:
-        Shade();
+        Shade(int x, int y);
         ~Shade();
         void attack(AbstractCharacter *receiver);
         void receiveAttack(AbstractCharacter *attacker);

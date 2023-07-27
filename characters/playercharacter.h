@@ -14,7 +14,7 @@ class PlayerCharacter : public AbstractCharacter
     int gold;
 
     public:
-        PlayerCharacter(int x, int y, char token, int hp, int atk, int def);
+        PlayerCharacter(int x, int y, int hp, int atk, int def);
         ~PlayerCharacter();
         void usePotion(string pot);
         void removePotions();

@@ -6,12 +6,8 @@
 
 class Goblin : public PlayerCharacter
 {
-    int hp = 110;
-    int attack = 15;
-    int defense = 20;
-
     public:
-        Goblin();
+        Goblin(int x, int y);
         ~Goblin();
         void attack(AbstractCharacter *receiver);
         void receiveAttack(AbstractCharacter *attacker);

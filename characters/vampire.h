@@ -11,7 +11,7 @@ class Vampire : public PlayerCharacter
     int defense = 25;
 
     public:
-        Vampire();
+        Vampire(int x, int y);
         ~Vampire();
         void attack(AbstractCharacter *receiver);
         void receiveAttack(AbstractCharacter *attacker);
