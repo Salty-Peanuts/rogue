@@ -11,14 +11,13 @@ class AbstractCharacter : public AbstractObject
     bool traversible;
 
     public:
-        void attack(AbstractCharacter *character);
-        void recieveAttack(AbstractCharacter *character);
-        void move(int dir);
-        void death();
-        void moveTo(int x, int y);
+        virtual void attack(AbstractCharacter *character);
+        virtual void recieveAttack(AbstractCharacter *character);
+        virtual void death();
         void setX(int x);
         void setY(int y);
-        bool isTraversible();
+        void move(int dir);
+        virtual bool isTraversible();
 };
 
 #endif

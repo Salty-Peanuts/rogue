@@ -10,8 +10,8 @@ class AbstractObject
     int getX();
     int getY();
     char getToken();
-    bool isTraversible();
-    string identify();
+    virtual bool isTraversible();
+    virtual string identify();
 };
 
 #endif
