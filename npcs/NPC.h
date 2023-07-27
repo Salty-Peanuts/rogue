@@ -15,6 +15,7 @@ class NPC : public AbstractCharacter
         bool wasMoved();
         virtual void attack(AbstractCharacter* receiver);
         virtual void receiveAttack(AbstractCharacter* attacker);
+        string identify();
 };
 
 #endif
