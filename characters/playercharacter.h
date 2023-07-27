@@ -11,6 +11,8 @@ class PlayerCharacter : public AbstractObject
     int gold;
 
     public:
+        PlayerCharacter();
+        ~PlayerCharacter();
         void usePotion(string pot);
         void removePotions();
         void death();
