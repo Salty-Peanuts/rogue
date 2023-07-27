@@ -4,7 +4,7 @@
 #include "playercharacter.h"
 #include "abstractcharacter.h"
 
-class VampireTroll : public PlayerCharacter
+class Troll : public PlayerCharacter
 {
     public:
         Troll(int x, int y);
