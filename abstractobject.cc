@@ -14,3 +14,15 @@ char AbstractObject::getToken()
 {
     return token;
 }
+
+
+void AbstractObject::setX(int x) 
+{
+    this->x = x;
+}
+
+void AbstractObject::setY(int y) 
+{
+    this->y = y;
+}
+
