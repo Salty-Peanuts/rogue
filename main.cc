@@ -77,6 +77,9 @@ int main() {
         else break;
     }
 
+    // print out results
+    cout << "Thank you for playing!" << endl;
+    
 
 
 
