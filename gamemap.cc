@@ -141,9 +141,11 @@ void GameMap::moveNPC()
 */
 
 void GameMap::npcLogic() {
+    int width = game_map.size();
+    int height = game_map[0].size();
     // first look for NPC objects in the object_tiles vector
-    for (int i = 0; i < object_tiles.size(); ++i) {
-        for (int j = 0; j < object_tiles[i].size(); ++i) {
+    for (int i = 0; i < width; ++i) {
+        for (int j = 0; j < height; ++i) {
             if (object_tiles[i][j] == nullptr) {
                 continue;
             } else if (object_tiles[i][j]->identify() == "NPC" && playerInRange(object_tiles[i][j])) {
@@ -163,19 +165,34 @@ void GameMap::npcLogic() {
                     srand(time(0));
                     int random_dir = 1 + (rand() % 8);
                     if (!npc->wasMoved() && validMove(npc, random_dir)) {
+                        int old_x = npc->getX();
+                        int old_y = npc->getY();
                         npc->move(random_dir);
+                        npc->setMoved(true);
+                        object_tiles[old_x][old_y] = nullptr;
+                        object_tiles[npc->getX()][npc->getY()] = npc; // moving on object_tiles
                         success = true;
                     }
-                } // need some way to unset all the wasMoved flags
+                } 
             }
         }
     }
-    
+    // need some way to unset all the wasMoved flags
+    for (int i = 0; i < width; ++i) {
+        for (int j = 0; j < height; ++i) {
+            if (object_tiles[i][j] == nullptr) {
+                continue;
+            } else if (object_tiles[i][j]->identify() == "NPC") {
+                NPC* npc = dynamic_cast<NPC*>(object_tiles[i][j]);
+                npc->setMoved(false);
+            }
+        }
+    }
 }
 
 bool playerAtk(int dir)
 {
-
+    
 }
 
 void GameMap::reset() { object_tiles.clear(); }

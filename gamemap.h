@@ -27,7 +27,7 @@ class GameMap : public Subject
         vector<vector<AbstractObject*>> object_tiles,
         PlayerCharacter* player_character, 
         CombatManager* attack, 
-        map<string, int> direction_map, 
+        //map<string, int> direction_map, 
         vector<Chamber*> chambers, 
         bool npc_movement,
         string last_action,
