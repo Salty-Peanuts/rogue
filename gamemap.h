@@ -22,17 +22,11 @@ class GameMap : public Subject
     bool npc_movement;
     string last_action;
     int floor_level;
+    int width;
+    int height;
 
  public:
-    GameMap(vector<vector<char>> game_map,
-        string race, 
-        vector<vector<AbstractObject*>> object_tiles,
-        PlayerCharacter* player_character, 
-        CombatManager* attack, 
-        vector<Chamber*> chambers, 
-        bool npc_movement,
-        string last_action,
-        int floor_level);
+    GameMap(vector<vector<char>> game_map, string race);
     ~GameMap();
     void start();
     void addObject(AbstractObject* object);
@@ -41,7 +35,6 @@ class GameMap : public Subject
     bool validMove(AbstractObject* object, int dir);
     void usePotion(string potion);
     void npcLogic();
-    // void moveNPC();
     bool playerAtk(int dir);
     int playerInRange(AbstractObject* object);
     void reset();

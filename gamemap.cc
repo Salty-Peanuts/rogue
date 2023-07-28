@@ -10,15 +10,17 @@
 using namespace std;
 
 
-GameMap::GameMap(vector<vector<char>> game_map, string race): game_map{game_map} {
+GameMap::GameMap(vector<vector<char>> game_map, string race): game_map{game_map}, string{string} {
     PlayerCharacter *pc = new PlayerCharacter(race);
     player_character = pc;
     object_tiles = {};
-    attack = nullptr;
+    attack = new CombatManager(0);
     Chamber = {};
     npc_movement = true;
     last_action = "";
     floor_level = 0;
+    width = game_map.size();
+    height = game_map[0].size();
 }
 
 /*
@@ -145,8 +147,6 @@ void GameMap::moveNPC()
 */
 
 void GameMap::npcLogic() {
-    int width = game_map.size();
-    int height = game_map[0].size();
     // first look for NPC objects in the object_tiles vector
     for (int i = 0; i < width; ++i) {
         for (int j = 0; j < height; ++i) {
@@ -154,10 +154,9 @@ void GameMap::npcLogic() {
                 continue;
             } else if (object_tiles[i][j]->identify() == "NPC" && playerInRange(object_tiles[i][j])) {
                 // attack
-                delete attack;
-                attack = new CombatManager(playerInRange(object_tiles[i][j]));
+                attack->setDirection(playerInRange(object_tiles[i][j]));
                 attack->NPCAttack(*this, object_tiles[i][j], player_character);
-            } else if (object_tiles[i][j]->identify() == "NPC" && !playerInRange(object_tiles[i][j])) {
+            } else if (object_tiles[i][j]->identify() == "NPC" && !playerInRange(object_tiles[i][j]) && npc_movement) {
                 NPC* npc = dynamic_cast<NPC*>(object_tiles[i][j]);
                 // check if npc was moved
                 if (npc->wasMoved()) {
@@ -196,10 +195,23 @@ void GameMap::npcLogic() {
 
 bool playerAtk(int dir)
 {
-    
+    attack->setDirection(dir);
+    attack->playerAttack(*this, player_character);
 }
 
-void GameMap::reset() { object_tiles.clear(); }
+void GameMap::reset() { 
+    for (int i = 0; i < width; ++i) {
+        for (int j = 0; j < height; ++i) {
+            if (object_tiles[i][j] == nullptr) {
+                continue;
+            } else if (object_tiles[i][j]->identify() == "NPC") {
+                delete object_tiles[i][j];
+                object_tiles[i][j] = nullptr;
+            }
+        }
+    }
+    attack->setDirection(0);
+}
 
 bool GameMap::isStair()
 {
