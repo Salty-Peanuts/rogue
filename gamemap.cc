@@ -9,18 +9,9 @@
 using namespace std;
 
 GameMap::GameMap(vector<vector<char>> game_map,
-        vector<vector<AbstractObject*>> object_tiles = {},
-        PlayerCharacter* player_character,
-        CombatManager* attack = nullptr,
-        map<string, int> direction_map,
-        vector<Chamber*> chambers,
-        bool npc_movement,
-        string last_action = "Player Character Has Spawned";
-        int floor_level): game_map{game_map}, player_character{player_character},
-                            attack{attack}, chambers{chambers}, 
-                            npc_movement{npc_movement}, last_action{last_action},
-                            floor_level{floor_level}
-{
+        string race,): game_map{game_map} {
+            
+        }
     // if the object_tiles vector is empty, then we need to initialize it to a set size
     if (object_tiles.empty()) {
         // initialize the object_tiles vector to the same size as the game_map

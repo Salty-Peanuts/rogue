@@ -32,8 +32,6 @@ void printMap(vector<vector<char>> map_layout) {
 }
 
 int main() {
-
-    
     vector<vector<char>> map_layout;
     readFile("cc3k-emptySingleFloor.txt", map_layout);
     printMap(map_layout);
@@ -48,8 +46,8 @@ int main() {
         } while (cmd != "s" || cmd != "g" || cmd != "d" || cmd != "t" || cmd != "v");
 
         // start game
-        Controller c = new Controller(map_layout, cmd);
-        string result = c.run_game();
+        Controller *c = new Controller(map_layout, cmd);
+        string result = c->run_game();
 
         // check the ending state of the game
         if (result == "restart") {
@@ -79,6 +77,7 @@ int main() {
 
     // print out results
     cout << "Thank you for playing!" << endl;
+    cout << "Project by Adam Han, Dat Bui, Jerry Zhang" << endl;
     
 
 
