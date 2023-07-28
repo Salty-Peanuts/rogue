@@ -6,18 +6,31 @@
 #include "gamemap.h"
 #include "constants.h"
 #include "./npcs/NPC.h"
+#include "abstractcharacter.h"
 using namespace std;
 
+
+GameMap::GameMap(vector<vector<char>> game_map, string race): game_map{game_map} {
+    PlayerCharacter *pc = new PlayerCharacter(race);
+    player_character = pc;
+    object_tiles = {};
+    attack = nullptr;
+    Chamber = {};
+    npc_movement = true;
+    last_action = "";
+    floor_level = 0;
+}
+
+/*
 GameMap::GameMap(vector<vector<char>> game_map,
-        string race,): game_map{game_map} {
-            
-        }
+                 string race): game_map{game_map} {
     // if the object_tiles vector is empty, then we need to initialize it to a set size
     if (object_tiles.empty()) {
         // initialize the object_tiles vector to the same size as the game_map
         object_tiles = vector<vector<AbstractObject*>> (game_map.size(), vector<AbstractObject*> (game_map[0].size(), nullptr));
     }
 }
+*/
 
 GameMap::~GameMap() 
 {
@@ -177,6 +190,11 @@ bool GameMap::isStair()
 }
 
 void GameMap::update() { notifyObservers(); }
+
+void GameMap::changeNPCmovement() {
+    if (npc_movement) npc_movement = false;
+    else npc_movement = true;
+}
 
 // Getters
 

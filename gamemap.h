@@ -23,15 +23,9 @@ class GameMap : public Subject
     int floor_level;
 
  public:
-    GameMap(vector<vector<char>> game_map, 
-        vector<vector<AbstractObject*>> object_tiles,
-        PlayerCharacter* player_character, 
-        CombatManager* attack, 
-        map<string, int> direction_map, 
-        vector<Chamber*> chambers, 
-        bool npc_movement,
-        string last_action,
-        int floor_level);
+    GameMap(vector<vector<char>> game_map,
+        string race,
+        vector<vector<AbstractObject*>> object_tiles);
     ~GameMap();
     void start();
     void addObject(AbstractObject* object);
@@ -46,6 +40,7 @@ class GameMap : public Subject
     void reset();
     bool isStair();
     void update();
+    void changeNPCmovement();
 
     // Getters
     int getLevel() const;

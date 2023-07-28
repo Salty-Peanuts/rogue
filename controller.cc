@@ -70,11 +70,8 @@ string Controller::run_game() {
                 cout << "Invalid attack, please try again" << endl;
             }
         }
-
-        // if use potion
-        else if (cmd == "u") {
-            
+        else if (cmd == "f") {
+            gameMap->changeNPCmovement();
         }
     }
-
 }
