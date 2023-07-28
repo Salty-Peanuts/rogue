@@ -12,8 +12,8 @@ using namespace std;
 Controller::Controller(vector<vector<char>> map_layout, string race) {
 
     // set map layout, race of the player character, and npc movement = true
-    GameMap gm = new GameMap(map_layout, race, true);
-    gameMap = &gm;
+    GameMap *gm = new GameMap(map_layout, race);
+    gameMap = gm;
 }
 
 Controller::~Controller() {
@@ -38,7 +38,7 @@ string Controller::run_game() {
             if (gameMap->moveCharacter(m_dir[cmd])) {
                 // if the player reaches the stair
                 if (gameMap->isStair()) {
-                    if (gameMap->floor_level == 5) {
+                    if (gameMap->getLevel() == 5) {
                         return "won";
                     }
                     else {
@@ -70,11 +70,8 @@ string Controller::run_game() {
                 cout << "Invalid attack, please try again" << endl;
             }
         }
-
-        // if use potion
-        else if (cmd == "u") {
-            
+        else if (cmd == "f") {
+            gameMap->changeNPCmovement();
         }
     }
-
 }
