@@ -108,21 +108,21 @@ int GameMap::playerInRange(AbstractObject* npc)
     int x = npc->getX();
     int y = npc->getY();
     if (object_tiles[x][y - 1] == player_character) {
-        return direction_map["no"];
+        return m_dir["no"];
     } else if (object_tiles[x][y + 1] == player_character) {
-        return direction_map["so"];
+        return m_dir["so"];
     } else if (object_tiles[x - 1][y] == player_character) {
-        return direction_map["we"];
+        return m_dir["we"];
     } else if (object_tiles[x + 1][y] == player_character) {
-        return direction_map["ea"];
+        return m_dir["ea"];
     } else if (object_tiles[x + 1][y + 1] == player_character) {
-        return direction_map["se"];
+        return m_dir["se"];
     } else if (object_tiles[x + 1][y - 1] == player_character) {
-        return direction_map["ne"];
+        return m_dir["ne"];
     } else if (object_tiles[x - 1][y + 1] == player_character) {
-        return direction_map["sw"];
+        return m_dir["sw"];
     } else if (object_tiles[x - 1][y - 1] == player_character) {
-        return direction_map["nw"];
+        return m_dir["nw"];
     } else {
         return 0;
     }
@@ -155,14 +155,14 @@ void GameMap::npcLogic() {
                 NPC* npc = dynamic_cast<NPC*>(object_tiles[i][j]);
                 // check if npc was moved
                 if (npc->wasMoved()) {
-                    return;
+                    continue;
                 }
                 // move in a random direction
                 bool success = false;
                 while (!success) {
                     srand(time(0));
                     int random_dir = 1 + (rand() % 8);
-                    if (npc->wasMoved() && validMove(npc, random_dir)) {
+                    if (!npc->wasMoved() && validMove(npc, random_dir)) {
                         npc->move(random_dir);
                         success = true;
                     }
@@ -170,6 +170,7 @@ void GameMap::npcLogic() {
             }
         }
     }
+    
 }
 
 bool playerAtk(int dir)
