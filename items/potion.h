@@ -1,9 +1,10 @@
 #ifndef POTION_H
 #define POTION_H
 
+#include "item.h"
+
 using namespace std;
 
-#include "item.h"
 
 class Potion : public Item
 {
@@ -13,6 +14,7 @@ class Potion : public Item
     Potion(int value);
     ~Potion();
     bool isTraversible() override;
+    string identify;
 
 };
 
