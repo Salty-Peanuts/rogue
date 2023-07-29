@@ -39,6 +39,7 @@ class GameMap : public Subject
     bool isStair();
     void update();
     void changeNPCmovement();
+    bool isDead();
 
     // Getters
     int getLevel() const;

@@ -9,9 +9,18 @@ Merchant::Merchant(int x, int y):
 
 // might have to rewrite for 
 
-void Merchant::attack(AbstractCharacter* receiver) {
+int Merchant::attack(AbstractCharacter* receiver) {
+    // handles 50% of npc missing attack
+    srand((unsigned) time(NULL));
+    int random = rand() % 2;
+
+    if (random == 1) {
+        return MISSED_ATTACK;
+    }
+
     int damage = ceil((100 / (100 + receiver->getDef())) * getAtk());
     receiver->getHP() -= damage;
+    return damage;
 }
 
 

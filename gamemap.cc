@@ -4,10 +4,22 @@
 #include "constants.h"
 #include "./npcs/NPC.h"
 #include "abstractcharacter.h"
+#include <vector>
+#include "itemspawner.h"
+#include "npcspawner.h"
+#include "objectspawner.h"
+#include "stairspawner.h"
+#include "playercharacter.h"
+#include "shade.h"
+#include "goblin.h"
+#include "drow.h"
+#include "vampire.h"
+#include "troll.h"
+#include <cstdlib>
 using namespace std;
 
 
-GameMap::GameMap(vector<vector<char>> game_map, string race): game_map{game_map} {
+GameMap::GameMap(vector<vector<char>> game_map, string race): game_map{game_map}, player_race{race} {
     PlayerCharacter *pc = nullptr;
     player_character = pc;
     object_tiles = {};
@@ -39,7 +51,25 @@ GameMap::~GameMap()
 
 void GameMap::start()
 {
-    // spawn stuff in map
+    struct Coordinates {
+        int x;
+        int y;
+    };
+    vector<Coordinates> all_dots;
+    for (int i = 0; i < col; i++) {
+        for (int j = 0; j < row; j++) {
+            if ((game_map.at(i)).at(j) == '.') {
+                Coordinates dot;
+                dot.x = j;
+                dot.y = i;
+                all_dots.push_back(dot);
+            }
+        }
+    }
+    for (int i = 0; i < 10; i++) {
+        Coordinates
+    }
+    
 }
 
 void GameMap::addObject(AbstractObject* object)
@@ -63,6 +93,15 @@ bool GameMap::moveCharacter(int dir)
     int y = player_character->getY();
     if (validMove(player_character, dir)) {
         player_character->move(dir);
+        auto dir_iter = m_dir.begin();
+        while (dir_iter != m_dir.end()) {
+            if (dir_iter->second == dir) {
+                last_action += "The player has moved ";
+                last_action += dir_iter->first;
+                break;
+            }
+            dir_iter++;
+        }
         return true;
     } else {
         return false;
@@ -183,6 +222,7 @@ void GameMap::reset() {
         }
     }
     attack->setDirection(0);
+    last_action = "";
 }
 
 bool GameMap::isStair()
@@ -196,6 +236,14 @@ void GameMap::changeNPCmovement() {
     if (npc_movement) npc_movement = false;
     else npc_movement = true;
 }
+
+bool GameMap::isDead() {
+    if (player_character->getHP() <= 0) {
+        return true;
+    }
+    return false;
+}
+
 
 // Getters
 

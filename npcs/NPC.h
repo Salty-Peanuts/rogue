@@ -19,7 +19,7 @@ class NPC : public AbstractCharacter
         bool isHostile();
         bool wasMoved();
         string identify() = 0;
-        virtual void attack(AbstractCharacter* receiver);
+        virtual int attack(AbstractCharacter* receiver);
         virtual string getRace();
 };
 

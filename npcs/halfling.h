@@ -9,7 +9,7 @@ class Halfling : public NPC
 {
     public:
         Halfling(int x, int y);
-        void attack(AbstractCharacter* receiver) override;
+        int attack(AbstractCharacter* receiver) override;
         string getRace() override;
 };
 

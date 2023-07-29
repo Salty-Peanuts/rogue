@@ -11,7 +11,7 @@ class Shade : public PlayerCharacter
     public:
         Shade(int x, int y);
         ~Shade();
-        void attack(AbstractCharacter *receiver) override;
+        int attack(AbstractCharacter *receiver) override;
         string getRace() override;
 };
 

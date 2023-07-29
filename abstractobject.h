@@ -2,6 +2,7 @@
 #define ABSTRACTOBJECT_H
 
 #include <string>
+#include "constants.h"
 
 using namespace std;
 
