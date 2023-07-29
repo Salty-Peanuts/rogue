@@ -14,3 +14,7 @@ void BoostAtk::removePotion(int &hp, int &atk, int &def) {
 }
 
 
+int BoostAtk::potionStrength() {
+    return atk_increase;
+}
+

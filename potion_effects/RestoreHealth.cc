@@ -19,3 +19,7 @@ void RestoreHealth::removePotion(int &hp, int &atk, int &def) {
 }
 
 
+int RestoreHealth::potionStrength() {
+    return health_increase;
+}
+

@@ -19,3 +19,7 @@ void PoisonHealth::removePotion(int &hp, int &atk, int &def) {
 }
 
 
+int PoisonHealth::potionStrength() {
+    return health_decrease;
+}
+

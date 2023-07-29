@@ -10,6 +10,7 @@ class BoostAtk : public PotionEffect
         BoostAtk();
         void usePotion(int &hp, int &atk, int &def, int max_hp);
         void removePotion(int &hp, int &atk, int &def);
+        int potionStrength() override;
 };
 
 

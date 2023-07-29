@@ -18,4 +18,7 @@ void WoundDef::removePotion(int &hp, int &atk, int &def) {
     atk += def_decrease;
 }
 
+int WoundDef::potionStrength() {
+    return def_decrease;
+}
 

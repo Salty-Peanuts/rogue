@@ -14,3 +14,7 @@ void BoostDef::removePotion(int &hp, int &atk, int &def) {
 }
 
 
+int BoostDef::potionStrength() {
+    return def_increase;
+}
+

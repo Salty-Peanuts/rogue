@@ -19,3 +19,7 @@ void WoundAtk::removePotion(int &hp, int &atk, int &def) {
 }
 
 
+int WoundAtk::potionStrength() {
+    return atk_decrease;
+}
+
