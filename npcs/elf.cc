@@ -7,6 +7,14 @@ Elf::Elf(int x, int y):
 
 
 int Elf::attack(AbstractCharacter* receiver) {
+    // handles 50% of npc missing attack
+    srand((unsigned) time(NULL));
+    int random = rand() % 2;
+
+    if (random == 1) {
+        return MISSED_ATTACK;
+    }
+
     // Elfs have special interaction where they attack twice 
         // (Except against Drow)
 
