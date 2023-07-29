@@ -24,11 +24,10 @@ GameMap::GameMap(vector<vector<char>> game_map, string race): game_map{game_map}
     player_character = pc;
     for (int i = 0; i < col; i++) {
         for (int j = 0; j < row; j++) {
-            (object_tiles.at(i)).at(j) = nullptr;
+            object_tiles[j][i] = nullptr;
         }
     }
     attack = new CombatManager(0);
-    Chamber = {};
     npc_movement = true;
     last_action = "";
     floor_level = 0;
@@ -62,10 +61,10 @@ void GameMap::start()
     vector<Coordinates> all_dots;
     for (int i = 0; i < col; i++) {
         for (int j = 0; j < row; j++) {
-            if ((game_map.at(i)).at(j) == '.') {
+            if (game_map[j][i] == '.') {
                 Coordinates dot;
-                dot.x = j;
-                dot.y = i;
+                dot.x = i;
+                dot.y = j;
                 all_dots.push_back(dot);
             }
         }
@@ -107,13 +106,6 @@ void GameMap::start()
     }
 
 
-
-
-    
-
-
-
-    
 }
 
 void GameMap::addObject(AbstractObject* object)
@@ -248,7 +240,7 @@ void GameMap::npcLogic() {
     }
 }
 
-bool playerAtk(int dir)
+bool GameMap::playerAtk(int dir)
 {
     attack->setDirection(dir);
     attack->playerAttack(*this, player_character);

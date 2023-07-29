@@ -15,21 +15,23 @@ void readFile(string file_name, vector<vector<char>> map_layout) {
     string str;
     ifstream input (file_name);
     for (int i = 0; i < col; i++) {
-        vector<char> each_row;
+        map_layout.push_back({});
+    }
+    for (int i = 0; i < row; i++) {
         getline(input, str);
-        for (int j = 0; j < row; j++) {
-            each_row.push_back(str[j]);
+        for (int j = 0; j < col; j++) {
+            map_layout[j][i] = str[j];
         }
-        map_layout.push_back(each_row);
     }
 }
 
 // print out the map
 void printMap(vector<vector<char>> map_layout) {
-    for (int i = 0; i < col; i++) {
-        for (int j = 0; j < row; j++) {
-            cout << (map_layout.at(i)).at(j);
+    for (int i = 0; i < row; i++) { 
+        for (int j = 0; j < col; j++) {
+            cout << map_layout[j][i];
         }
+        cout << endl;
     }
 }
 

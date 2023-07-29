@@ -10,7 +10,6 @@ class Treasure
  public:
     Treasure(int value);
     ~Treasure();
-    int getValue();
     void setValue(int value);
 };
 
