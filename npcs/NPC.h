@@ -18,10 +18,10 @@ class NPC : public AbstractCharacter
         void death();
         bool isHostile();
         bool wasMoved();
-        string identify();
+        string identify() = 0;
         virtual void attack(AbstractCharacter* receiver);
         virtual void receiveAttack(AbstractCharacter* attacker);
-        virtual string getRace() = 0;
+        virtual string getRace();
 };
 
 #endif

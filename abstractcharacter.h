@@ -19,6 +19,7 @@ class AbstractCharacter : public AbstractObject
         virtual void death();
         virtual bool isTraversible();
         virtual string identify() = 0;
+        virtual string getRace();
         void move(int dir);
 
         int &getHP();
