@@ -9,12 +9,22 @@ using namespace std;
 
 class NPCSpawner : public ObjectSpawner
 {
-    vector<string> npc_race;
-    map<string, int> npc_probability;
+    string npc_race;
+    int npc_probability = 18;
+    map<string, int> npc_type {
+        {"Human", 4},
+        {"Dwarf", 3},
+        {"Halfling", 5},
+        {"Elf", 2},
+        {"Orc", 2},
+        {"Merchant", 2}
+    };
  public:
-    NPCSpawner(vector<string> npc_race, map<string, int> npc_probability);
+    NPCSpawner(string npc_race);
     ~NPCSpawner();
     AbstractObject* spawn() const override;
+    AbstractObject* spawnRandom(int x, int y) override;
+    void setNPCRace(string race);
 };
 
 #endif
