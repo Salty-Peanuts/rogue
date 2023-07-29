@@ -11,7 +11,7 @@ class Troll : public PlayerCharacter
     public:
         Troll(int x, int y);
         ~Troll();
-        void attack(AbstractCharacter *receiver) override;
+        int attack(AbstractCharacter *receiver) override;
         string getRace() override;
 };
 

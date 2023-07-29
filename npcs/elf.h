@@ -9,7 +9,7 @@ class Elf : public NPC
 {
     public:
         Elf(int x, int y);
-        void attack(AbstractCharacter* receiver) override;
+        int attack(AbstractCharacter* receiver) override;
         string getRace() override;
 };
 

@@ -62,4 +62,8 @@ int & AbstractCharacter::getDef() {
 
 
 
+bool AbstractCharacter::isTraversible(AbstractObject *traveler) {
+    return false;
+}
+
 

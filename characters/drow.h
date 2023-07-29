@@ -11,7 +11,7 @@ class Drow : public PlayerCharacter
     public:
         Drow(int x, int y);
         ~Drow();
-        void attack(AbstractCharacter *receiver) override;
+        int attack(AbstractCharacter *receiver) override;
         string getRace() override;
 };
 

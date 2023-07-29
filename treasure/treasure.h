@@ -1,9 +1,11 @@
 #ifndef TREASURE_H
 #define TREASURE_H
 
-#include "./items/item.h"
+#include "item.h"
 
-class Treasure
+using namespace std;
+
+class Treasure : public Item
 {
     int value;
     
@@ -11,6 +13,7 @@ class Treasure
     Treasure(int value);
     ~Treasure();
     void setValue(int value);
+    bool isTraversible() override;
 };
 
 #endif

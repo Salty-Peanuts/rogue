@@ -6,7 +6,7 @@ using namespace std;
 Troll::Troll(int x, int y) :
     PlayerCharacter{x, y, 120, 25, 15} {}
 
-void Troll::attack(AbstractCharacter *receiver) {
+int Troll::attack(AbstractCharacter *receiver) {
     // deals with if receiver is halfling (50% chance of missing attack)
     if (receiver->getRace() == "halfling") {
         // randomly produces either 0 or 1
@@ -14,12 +14,13 @@ void Troll::attack(AbstractCharacter *receiver) {
         int random = rand() % 2;
 
         if (random == 1) {
-            return;
+            return MISSED_ATTACK;
         }
     }
 
     int damage = ceil((100 / (100 + receiver->getDef())) * getAtk());
     receiver->getHP() -= damage;
+    return damage;
 }
 
 
