@@ -23,7 +23,9 @@ class PlayerCharacter : public AbstractCharacter
         void updateGold(int value);
         string identify();
         int getMaxHP();
-        virtual string getRace();
+        virtual string getRace() = 0;
+        virtual void attack(AbstractCharacter *receiver);
+        virtual void receiveAttack(AbstractCharacter *attacker);
         
 };
 

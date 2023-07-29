@@ -18,7 +18,7 @@ class AbstractCharacter : public AbstractObject
         virtual void recieveAttack(AbstractCharacter *character);
         virtual void death();
         virtual bool isTraversible();
-        virtual string identify();
+        virtual string identify() = 0;
         void move(int dir);
 };
 
