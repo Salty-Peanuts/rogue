@@ -7,7 +7,8 @@ Human::Human(int x, int y):
 
 
 void Human::attack(AbstractCharacter* receiver) {
-
+    int damage = ceil((100 / (100 + receiver->getDef())) * getAtk());
+    receiver->getHP() -= damage;
 }
 
 

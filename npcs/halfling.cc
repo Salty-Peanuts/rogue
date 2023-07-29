@@ -7,7 +7,8 @@ Halfling::Halfling(int x, int y):
 
 
 void Halfling::attack(AbstractCharacter* receiver) {
-
+    int damage = ceil((100 / (100 + receiver->getDef())) * getAtk());
+    receiver->getHP() -= damage;
 }
 
 

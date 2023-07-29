@@ -7,7 +7,8 @@ Dragon::Dragon(int x, int y):
 
 
 void Dragon::attack(AbstractCharacter* receiver) {
-
+    int damage = ceil((100 / (100 + receiver->getDef())) * getAtk());
+    receiver->getHP() -= damage;
 }
 
 
