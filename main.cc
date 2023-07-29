@@ -15,10 +15,12 @@ void readFile(string file_name, vector<vector<char>> map_layout) {
     string str;
     ifstream input (file_name);
     for (int i = 0; i < col; i++) {
+        vector<char> each_row;
         getline(input, str);
         for (int j = 0; j < row; j++) {
-            map_layout.at(i).push_back(str[j]);
+            each_row.push_back(str[j]);
         }
+        map_layout.push_back(each_row);
     }
 }
 

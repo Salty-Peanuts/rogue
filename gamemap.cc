@@ -4,13 +4,18 @@
 #include "constants.h"
 #include "./npcs/NPC.h"
 #include "abstractcharacter.h"
+#include <vector>
 using namespace std;
 
 
 GameMap::GameMap(vector<vector<char>> game_map, string race): game_map{game_map} {
     PlayerCharacter *pc = nullptr;
     player_character = pc;
-    object_tiles = {};
+    for (int i = 0; i < col; i++) {
+        for (int j = 0; j < row; j++) {
+            (object_tiles.at(i)).at(j) = nullptr;
+        }
+    }
     attack = new CombatManager(0);
     Chamber = {};
     npc_movement = true;
@@ -39,7 +44,25 @@ GameMap::~GameMap()
 
 void GameMap::start()
 {
-    // spawn stuff in map
+    struct Coordinates {
+        int x;
+        int y;
+    };
+    vector<Coordinates> all_dots;
+    for (int i = 0; i < col; i++) {
+        for (int j = 0; j < row; j++) {
+            if ((game_map.at(i)).at(j) == '.') {
+                Coordinates dot;
+                dot.x = j;
+                dot.y = i;
+                all_dots.push_back(dot);
+            }
+        }
+    }
+    for (int i = 0; i < 10; i++) {
+        Coordinates
+    }
+    
 }
 
 void GameMap::addObject(AbstractObject* object)
