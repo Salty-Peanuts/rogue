@@ -3,6 +3,7 @@
 
 #include <string>
 #include "../abstractobject.h"
+
 using namespace std;
 
 class Item : public AbstractObject
@@ -10,7 +11,8 @@ class Item : public AbstractObject
     string item_type;
     char token;
     public: 
-        string identify();
+        virtual string identify() = 0;
+        virtual bool isTraversible();
 };
 
 
