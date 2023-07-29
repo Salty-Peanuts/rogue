@@ -10,7 +10,8 @@ Merchant::Merchant(int x, int y):
 // might have to rewrite for 
 
 void Merchant::attack(AbstractCharacter* receiver) {
-
+    int damage = ceil((100 / (100 + receiver->getDef())) * getAtk());
+    receiver->getHP() -= damage;
 }
 
 
