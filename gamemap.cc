@@ -7,11 +7,32 @@
 #include "constants.h"
 #include "./npcs/NPC.h"
 #include "abstractcharacter.h"
+#include "shade.h"
+#include "drow.h"
+#include "goblin.h"
+#include "troll.h"
+#include "vampire.h"
 using namespace std;
 
 
-GameMap::GameMap(vector<vector<char>> game_map, string race): game_map{game_map}, string{string} {
-    PlayerCharacter *pc = new PlayerCharacter(race);
+GameMap::GameMap(vector<vector<char>> game_map, string race): game_map{game_map} {
+    PlayerCharacter *pc;
+    if (race == "s") {
+        pc = new Shade(0, 0);
+    }
+    if (race == "d") {
+        pc = new Drow(0, 0);
+    }
+    if (race == "v") {
+        pc = new Vampire(0, 0);
+    }
+    if (race == "g") {
+        pc = new Goblin(0, 0);
+    }
+    if (race == "t") {
+        pc = new Troll(0, 0);
+    }
+
     player_character = pc;
     object_tiles = {};
     attack = new CombatManager(0);
@@ -223,6 +244,12 @@ void GameMap::update() { notifyObservers(); }
 void GameMap::changeNPCmovement() {
     if (npc_movement) npc_movement = false;
     else npc_movement = true;
+}
+
+// move the object to the x, y coordinate
+void GameMap::quickMove(AbstractObject *abObj, int x, int y) {
+    abObj->setX(x);
+    abObj->setY(y);
 }
 
 // Getters

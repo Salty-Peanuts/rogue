@@ -41,6 +41,7 @@ class GameMap : public Subject
     bool isStair();
     void update();
     void changeNPCmovement();
+    void quickMove(AbstractObject *abObj, int x, int y)
 
     // Getters
     int getLevel() const;
