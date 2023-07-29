@@ -3,10 +3,17 @@
 
 #include <vector>
 #include <string>
+#include <math.h>
+
+// for random number generation
+#include <cstdlib>
+#include <ctime>
+
 #include "abstractcharacter.h"
 #include "PotionEffect.h"
 
 using namespace std;
+
 
 class PlayerCharacter : public AbstractCharacter 
 {
