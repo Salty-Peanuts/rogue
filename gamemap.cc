@@ -104,8 +104,6 @@ void GameMap::start()
     else if (player_race == "t") {
         player_character = new Troll(x, y);
     }
-
-
 }
 
 void GameMap::addObject(AbstractObject* object)
