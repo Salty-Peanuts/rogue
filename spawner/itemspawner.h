@@ -30,6 +30,7 @@ class ItemSpawner : public ObjectSpawner
     ~ItemSpawner();
     AbstractObject* spawn(int x, int y) override;
     AbstractObject* spawnRandom(int x, int y) ovveride;
+    void setItemType(char item_type);
 };
 
 #endif
