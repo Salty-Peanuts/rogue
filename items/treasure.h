@@ -1,7 +1,7 @@
 #ifndef TREASURE_H
 #define TREASURE_H
 
-#include "./items/item.h"
+#include "item.h"
 
 class Treasure
 {
