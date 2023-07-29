@@ -34,6 +34,8 @@ void Vampire::attack(AbstractCharacter *receiver) {
         getHP() -= 5;
 
         // check if losing 5 HP causes death
+        
+        // we may delete this and check this in combat manager instead ******
         if (getHP() <= 0) {
             death();
         }
@@ -41,8 +43,6 @@ void Vampire::attack(AbstractCharacter *receiver) {
     else {
         getHP() += 5;
     }
-
-
 }
 
 void Vampire::receiveAttack(AbstractCharacter *attacker) {
