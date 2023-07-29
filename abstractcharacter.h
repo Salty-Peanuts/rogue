@@ -20,6 +20,10 @@ class AbstractCharacter : public AbstractObject
         virtual bool isTraversible();
         virtual string identify() = 0;
         void move(int dir);
+
+        int &getHP();
+        int &getAtk();
+        int &getDef();
 };
 
 #endif

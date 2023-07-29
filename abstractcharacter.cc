@@ -46,3 +46,20 @@ void AbstractCharacter::move(int dir) {
 }
 
 
+int & AbstractCharacter::getHP() {
+    return hp;
+}
+
+
+int & AbstractCharacter::getAtk() {
+    return atk;
+}
+
+
+int & AbstractCharacter::getDef() {
+    return def;
+}
+
+
+
+
