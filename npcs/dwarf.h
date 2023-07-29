@@ -9,7 +9,7 @@ class Dwarf : public NPC
 {
     public:
         Dwarf(int x, int y);
-        void attack(AbstractCharacter* receiver) override;
+        int attack(AbstractCharacter* receiver) override;
         string getRace() override;
 };
 

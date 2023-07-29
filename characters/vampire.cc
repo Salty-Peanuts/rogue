@@ -6,7 +6,7 @@ using namespace std;
 Vampire::Vampire(int x, int y) :
     PlayerCharacter{x, y, 50, 25, 25} { toggleMaxHP(false); }
 
-void Vampire::attack(AbstractCharacter *receiver) {
+int Vampire::attack(AbstractCharacter *receiver) {
     // deals with if receiver is halfling (50% chance of missing attack)
     if (receiver->getRace() == "halfling") {
         // randomly produces either 0 or 1
@@ -14,7 +14,7 @@ void Vampire::attack(AbstractCharacter *receiver) {
         int random = rand() % 2;
 
         if (random == 1) {
-            return;
+            return MISSED_ATTACK;
         }
     }
 
@@ -32,6 +32,8 @@ void Vampire::attack(AbstractCharacter *receiver) {
     else {
         getHP() += 5;
     }
+
+    return damage;
 }
 
 

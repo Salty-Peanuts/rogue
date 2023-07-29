@@ -9,7 +9,7 @@ class Dragon : public NPC
 {
     public:
         Dragon(int x, int y);
-        void attack(AbstractCharacter* receiver) override;
+        int attack(AbstractCharacter* receiver) override;
         string getRace() override;
 };
 
