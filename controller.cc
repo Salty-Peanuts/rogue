@@ -73,5 +73,6 @@ string Controller::run_game() {
         else if (cmd == "f") {
             gameMap->changeNPCmovement();
         }
+        if (gameMap->isDead()) return "lost";
     }
 }

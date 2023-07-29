@@ -5,10 +5,21 @@
 #include "./npcs/NPC.h"
 #include "abstractcharacter.h"
 #include <vector>
+#include "itemspawner.h"
+#include "npcspawner.h"
+#include "objectspawner.h"
+#include "stairspawner.h"
+#include "playercharacter.h"
+#include "shade.h"
+#include "goblin.h"
+#include "drow.h"
+#include "vampire.h"
+#include "troll.h"
+#include <cstdlib>
 using namespace std;
 
 
-GameMap::GameMap(vector<vector<char>> game_map, string race): game_map{game_map} {
+GameMap::GameMap(vector<vector<char>> game_map, string race): game_map{game_map}, player_race{race} {
     PlayerCharacter *pc = nullptr;
     player_character = pc;
     for (int i = 0; i < col; i++) {
@@ -59,9 +70,49 @@ void GameMap::start()
             }
         }
     }
-    for (int i = 0; i < 10; i++) {
-        Coordinates
+
+    // spawn both potion and gold
+    for (int i = 0; i < 20; i++) {
+        int ran_num = rand() % all_dots.size();
+        int x = all_dots.at(ran_num).x;
+        int y = all_dots.at(ran_num).y;
+        all_dots.erase(all_dots.begin() + ran_num);
+        ItemSpawner *is;
+        if (i < 10) is = new ItemSpawner("Potion");
+        else is = new ItemSpawner("Treasure");
+        object_tiles.at(x).at(y) = is->spawnRandom(x, y);
+        delete is;
     }
+
+
+    // spawn player
+    int ran_num = rand() % all_dots.size();
+    int x = all_dots.at(ran_num).x;
+    int y = all_dots.at(ran_num).y;
+    all_dots.erase(all_dots.begin() + ran_num);
+    if (player_race == "s") {
+        player_character = new Shade(x, y);
+    }
+    else if (player_race == "g") {
+        player_character = new Goblin(x, y);
+    }
+    else if (player_race == "d") {
+        player_character = new Drow(x, y);
+    }
+    else if (player_race == "v") {
+        player_character = new Vampire(x, y);
+    }
+    else if (player_race == "t") {
+        player_character = new Troll(x, y);
+    }
+
+
+
+
+    
+
+
+
     
 }
 
@@ -86,6 +137,15 @@ bool GameMap::moveCharacter(int dir)
     int y = player_character->getY();
     if (validMove(player_character, dir)) {
         player_character->move(dir);
+        auto dir_iter = m_dir.begin();
+        while (dir_iter != m_dir.end()) {
+            if (dir_iter->second == dir) {
+                last_action += "The player has moved ";
+                last_action += dir_iter->first;
+                break;
+            }
+            dir_iter++;
+        }
         return true;
     } else {
         return false;
@@ -206,6 +266,7 @@ void GameMap::reset() {
         }
     }
     attack->setDirection(0);
+    last_action = "";
 }
 
 bool GameMap::isStair()
@@ -219,6 +280,14 @@ void GameMap::changeNPCmovement() {
     if (npc_movement) npc_movement = false;
     else npc_movement = true;
 }
+
+bool GameMap::isDead() {
+    if (player_character->getHP() <= 0) {
+        return true;
+    }
+    return false;
+}
+
 
 // Getters
 
