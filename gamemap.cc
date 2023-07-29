@@ -22,7 +22,11 @@ using namespace std;
 GameMap::GameMap(vector<vector<char>> game_map, string race): game_map{game_map}, player_race{race} {
     PlayerCharacter *pc = nullptr;
     player_character = pc;
-    object_tiles = {};
+    for (int i = 0; i < col; i++) {
+        for (int j = 0; j < row; j++) {
+            (object_tiles.at(i)).at(j) = nullptr;
+        }
+    }
     attack = new CombatManager(0);
     Chamber = {};
     npc_movement = true;
@@ -66,9 +70,49 @@ void GameMap::start()
             }
         }
     }
-    for (int i = 0; i < 10; i++) {
-        Coordinates
+
+    // spawn both potion and gold
+    for (int i = 0; i < 20; i++) {
+        int ran_num = rand() % all_dots.size();
+        int x = all_dots.at(ran_num).x;
+        int y = all_dots.at(ran_num).y;
+        all_dots.erase(all_dots.begin() + ran_num);
+        ItemSpawner *is;
+        if (i < 10) is = new ItemSpawner("Potion");
+        else is = new ItemSpawner("Treasure");
+        object_tiles.at(x).at(y) = is->spawnRandom(x, y);
+        delete is;
     }
+
+
+    // spawn player
+    int ran_num = rand() % all_dots.size();
+    int x = all_dots.at(ran_num).x;
+    int y = all_dots.at(ran_num).y;
+    all_dots.erase(all_dots.begin() + ran_num);
+    if (player_race == "s") {
+        player_character = new Shade(x, y);
+    }
+    else if (player_race == "g") {
+        player_character = new Goblin(x, y);
+    }
+    else if (player_race == "d") {
+        player_character = new Drow(x, y);
+    }
+    else if (player_race == "v") {
+        player_character = new Vampire(x, y);
+    }
+    else if (player_race == "t") {
+        player_character = new Troll(x, y);
+    }
+
+
+
+
+    
+
+
+
     
 }
 
