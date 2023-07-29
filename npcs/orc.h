@@ -1,14 +1,17 @@
-#ifndef ORCS_H
-#define ORCS_H
+#ifndef ORC_H
+#define ORC_H
 
 #include "NPC.h"
 
-class Orcs : public NPC
+using namespace std;
+
+class Orc : public NPC
 {
     public:
-        Orcs(int x, int y);
+        Orc(int x, int y);
         void attack(AbstractCharacter* receiver);
         void receiveAttack(AbstractCharacter* attacker);
+        string getRace();
 };
 
 

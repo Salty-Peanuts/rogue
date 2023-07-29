@@ -16,3 +16,7 @@ void Dwarf::receiveAttack(AbstractCharacter* attacker) {
 }
 
 
+string Dwarf::getRace() {
+    return "dwarf";
+}
+

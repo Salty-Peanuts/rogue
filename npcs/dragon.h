@@ -3,12 +3,15 @@
 
 #include "NPC.h"
 
+using namespace std;
+
 class Dragon : public NPC
 {
     public:
         Dragon(int x, int y);
         void attack(AbstractCharacter* receiver);
         void receiveAttack(AbstractCharacter* attacker);
+        string getRace();
 };
 
 

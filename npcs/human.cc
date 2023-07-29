@@ -15,4 +15,7 @@ void Human::receiveAttack(AbstractCharacter* attacker) {
 
 }
 
+string Human::getRace() {
+    return "human";
+}
 

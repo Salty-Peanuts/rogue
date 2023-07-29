@@ -16,3 +16,7 @@ void Elf::receiveAttack(AbstractCharacter* attacker) {
 }
 
 
+string Elf::getRace() {
+    return "elf";
+}
+

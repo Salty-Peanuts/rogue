@@ -17,3 +17,7 @@ void Merchant::receiveAttack(AbstractCharacter* attacker) {
 }
 
 
+string Merchant::getRace() {
+    return "merchant";
+}
+

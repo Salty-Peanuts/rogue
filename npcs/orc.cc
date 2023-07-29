@@ -16,3 +16,7 @@ void Orc::receiveAttack(AbstractCharacter* attacker) {
 }
 
 
+string Orc::getRace() {
+    return "orc";
+}
+
