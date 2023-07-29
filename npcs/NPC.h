@@ -9,6 +9,9 @@ class NPC : public AbstractCharacter
 {
     bool hasMoved;
 
+    protected:
+        bool hostile;
+
     public:
         NPC(int x, int y, char token, int hp, int atk, int def);
         ~NPC();
@@ -16,7 +19,6 @@ class NPC : public AbstractCharacter
         bool isHostile();
         bool wasMoved();
         string identify();
-        void changeHostility(bool hostility);
         virtual void attack(AbstractCharacter* receiver);
         virtual void receiveAttack(AbstractCharacter* attacker);
         virtual string getRace() = 0;
