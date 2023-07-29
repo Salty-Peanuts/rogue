@@ -12,11 +12,6 @@ void Dragon::attack(AbstractCharacter* receiver) {
 }
 
 
-void Dragon::receiveAttack(AbstractCharacter* attacker) {
-
-}
-
-
 string Dragon::getRace() {
     return "dragon";
 }

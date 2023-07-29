@@ -15,10 +15,6 @@ void Merchant::attack(AbstractCharacter* receiver) {
 }
 
 
-void Merchant::receiveAttack(AbstractCharacter* attacker) {
-
-}
-
 
 string Merchant::getRace() {
     return "merchant";

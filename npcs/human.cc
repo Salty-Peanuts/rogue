@@ -12,10 +12,6 @@ void Human::attack(AbstractCharacter* receiver) {
 }
 
 
-void Human::receiveAttack(AbstractCharacter* attacker) {
-
-}
-
 string Human::getRace() {
     return "human";
 }

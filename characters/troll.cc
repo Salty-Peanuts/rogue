@@ -22,9 +22,6 @@ void Troll::attack(AbstractCharacter *receiver) {
     receiver->getHP() -= damage;
 }
 
-void Troll::receiveAttack(AbstractCharacter *attacker) {
-    // implement
-}
 
 string Troll::getRace() {
     return "troll";

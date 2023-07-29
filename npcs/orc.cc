@@ -20,11 +20,6 @@ void Orc::attack(AbstractCharacter* receiver) {
 }
 
 
-void Orc::receiveAttack(AbstractCharacter* attacker) {
-
-}
-
-
 string Orc::getRace() {
     return "orc";
 }
