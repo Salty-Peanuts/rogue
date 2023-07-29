@@ -22,9 +22,6 @@ void Shade::attack(AbstractCharacter *receiver) {
     receiver->getHP() -= damage;
 }
 
-void Shade::receiveAttack(AbstractCharacter *attacker) {
-    // implement
-}
 
 
 string Shade::getRace() {

@@ -35,8 +35,8 @@ class PlayerCharacter : public AbstractCharacter
         int getGold();
         virtual string getRace() = 0;
         virtual void attack(AbstractCharacter *receiver);
-        virtual void receiveAttack(AbstractCharacter *attacker);
         
 };
 
 #endif
+

@@ -12,11 +12,6 @@ void Dwarf::attack(AbstractCharacter* receiver) {
 }
 
 
-void Dwarf::receiveAttack(AbstractCharacter* attacker) {
-
-}
-
-
 string Dwarf::getRace() {
     return "dwarf";
 }

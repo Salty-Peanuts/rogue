@@ -10,7 +10,6 @@ class Orc : public NPC
     public:
         Orc(int x, int y);
         void attack(AbstractCharacter* receiver) override;
-        void receiveAttack(AbstractCharacter* attacker) override;
         string getRace() override;
 };
 

@@ -28,21 +28,10 @@ void Vampire::attack(AbstractCharacter *receiver) {
 
     if (receiver->getRace() == "dwarf") {
         getHP() -= 5;
-
-        // check if losing 5 HP causes death
-
-        // we may delete this and check this in combat manager instead ******
-        if (getHP() <= 0) {
-            death();
-        }
     }
     else {
         getHP() += 5;
     }
-}
-
-void Vampire::receiveAttack(AbstractCharacter *attacker) {
-    // implement
 }
 
 

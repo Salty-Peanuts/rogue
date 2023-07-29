@@ -22,9 +22,7 @@ void Goblin::attack(AbstractCharacter *receiver) {
     receiver->getHP() -= damage;
 }
 
-void Goblin::receiveAttack(AbstractCharacter *attacker) {
-    // implement
-}
+
 
 string Goblin::getRace() {
     return "goblin";

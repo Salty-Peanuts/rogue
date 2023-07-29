@@ -12,7 +12,6 @@ class Vampire : public PlayerCharacter
         Vampire(int x, int y);
         ~Vampire();
         void attack(AbstractCharacter *receiver) override;
-        void receiveAttack(AbstractCharacter *attacker) override;
         string getRace() override;
 };
 

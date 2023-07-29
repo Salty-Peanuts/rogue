@@ -12,7 +12,6 @@ class Goblin : public PlayerCharacter
         Goblin(int x, int y);
         ~Goblin();
         void attack(AbstractCharacter *receiver) override;
-        void receiveAttack(AbstractCharacter *attacker) override;
         string getRace() override;
 };
 

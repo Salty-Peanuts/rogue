@@ -12,11 +12,6 @@ void Halfling::attack(AbstractCharacter* receiver) {
 }
 
 
-void Halfling::receiveAttack(AbstractCharacter* attacker) {
-
-}
-
-
 string Halfling::getRace() {
     return "halfling";
 }
