@@ -1,59 +1,27 @@
-#include <vector>
-#include <string>
-#include <map>
 #include <cstdlib>
 #include <ctime>
 #include "gamemap.h"
 #include "constants.h"
 #include "./npcs/NPC.h"
 #include "abstractcharacter.h"
-#include "shade.h"
-#include "drow.h"
-#include "goblin.h"
-#include "troll.h"
-#include "vampire.h"
+#include <vector>
 using namespace std;
 
 
 GameMap::GameMap(vector<vector<char>> game_map, string race): game_map{game_map} {
-    PlayerCharacter *pc;
-    if (race == "s") {
-        pc = new Shade(0, 0);
-    }
-    if (race == "d") {
-        pc = new Drow(0, 0);
-    }
-    if (race == "v") {
-        pc = new Vampire(0, 0);
-    }
-    if (race == "g") {
-        pc = new Goblin(0, 0);
-    }
-    if (race == "t") {
-        pc = new Troll(0, 0);
-    }
-
+    PlayerCharacter *pc = nullptr;
     player_character = pc;
-    object_tiles = {};
+    for (int i = 0; i < col; i++) {
+        for (int j = 0; j < row; j++) {
+            (object_tiles.at(i)).at(j) = nullptr;
+        }
+    }
     attack = new CombatManager(0);
     Chamber = {};
     npc_movement = true;
     last_action = "";
     floor_level = 0;
-    width = game_map.size();
-    height = game_map[0].size();
 }
-
-/*
-GameMap::GameMap(vector<vector<char>> game_map,
-                 string race): game_map{game_map} {
-    // if the object_tiles vector is empty, then we need to initialize it to a set size
-    if (object_tiles.empty()) {
-        // initialize the object_tiles vector to the same size as the game_map
-        object_tiles = vector<vector<AbstractObject*>> (game_map.size(), vector<AbstractObject*> (game_map[0].size(), nullptr));
-    }
-}
-*/
 
 GameMap::~GameMap() 
 {
@@ -76,7 +44,25 @@ GameMap::~GameMap()
 
 void GameMap::start()
 {
-    // spawn stuff in map
+    struct Coordinates {
+        int x;
+        int y;
+    };
+    vector<Coordinates> all_dots;
+    for (int i = 0; i < col; i++) {
+        for (int j = 0; j < row; j++) {
+            if ((game_map.at(i)).at(j) == '.') {
+                Coordinates dot;
+                dot.x = j;
+                dot.y = i;
+                all_dots.push_back(dot);
+            }
+        }
+    }
+    for (int i = 0; i < 10; i++) {
+        Coordinates
+    }
+    
 }
 
 void GameMap::addObject(AbstractObject* object)
@@ -155,22 +141,10 @@ int GameMap::playerInRange(AbstractObject* npc)
     }
 }
 
-/*
-void GameMap::moveNPC()
-{
-    srand(time(0));
-    if (npc_movement) {
-
-        int random_dir = 1 + (rand() % 8);
-
-    }
-}
-*/
-
 void GameMap::npcLogic() {
     // first look for NPC objects in the object_tiles vector
-    for (int i = 0; i < width; ++i) {
-        for (int j = 0; j < height; ++i) {
+    for (int i = 0; i < col; ++i) {
+        for (int j = 0; j < row; ++i) {
             if (object_tiles[i][j] == nullptr) {
                 continue;
             } else if (object_tiles[i][j]->identify() == "NPC" && playerInRange(object_tiles[i][j])) {
@@ -202,8 +176,8 @@ void GameMap::npcLogic() {
         }
     }
     // need some way to unset all the wasMoved flags
-    for (int i = 0; i < width; ++i) {
-        for (int j = 0; j < height; ++i) {
+    for (int i = 0; i < col; ++i) {
+        for (int j = 0; j < row; ++i) {
             if (object_tiles[i][j] == nullptr) {
                 continue;
             } else if (object_tiles[i][j]->identify() == "NPC") {
@@ -221,8 +195,8 @@ bool playerAtk(int dir)
 }
 
 void GameMap::reset() { 
-    for (int i = 0; i < width; ++i) {
-        for (int j = 0; j < height; ++i) {
+    for (int i = 0; i < col; ++i) {
+        for (int j = 0; j < row; ++i) {
             if (object_tiles[i][j] == nullptr) {
                 continue;
             } else if (object_tiles[i][j]->identify() == "NPC") {
@@ -246,21 +220,11 @@ void GameMap::changeNPCmovement() {
     else npc_movement = true;
 }
 
-// move the object to the x, y coordinate
-void GameMap::quickMove(AbstractObject *abObj, int x, int y) {
-    abObj->setX(x);
-    abObj->setY(y);
-}
-
 // Getters
 
 int GameMap::getLevel() const { return floor_level; }
 
 string getLastAction() const { return last_action; }
-
-int GameMap::getWidth() const { return game_map.size(); }
-
-int GameMap::getHeight() const { return game_map[0].size(); }
 
 char GameMap::gameMapAt(int x, int y) const { return game_map[x][y]; }
 

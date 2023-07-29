@@ -14,7 +14,7 @@ using namespace std;
 class GameMap : public Subject
 {
     vector<vector<char>> game_map;
-    string race;
+    string player_race;
     vector<vector<AbstractObject*>> object_tiles;
     PlayerCharacter* player_character;
     CombatManager* attack;
@@ -22,8 +22,6 @@ class GameMap : public Subject
     bool npc_movement;
     string last_action;
     int floor_level;
-    int width;
-    int height;
 
  public:
     GameMap(vector<vector<char>> game_map, string race);
@@ -41,13 +39,10 @@ class GameMap : public Subject
     bool isStair();
     void update();
     void changeNPCmovement();
-    void quickMove(AbstractObject *abObj, int x, int y)
 
     // Getters
     int getLevel() const;
     string getLastAction() const;
-    int getWidth() const;
-    int getHeight() const;
     char gameMapAt(int x, int y) const;
     AbstractObject* objectTilesAt(int x, int y) const;
     PlayerCharacter* getPlayerCharacter() const;

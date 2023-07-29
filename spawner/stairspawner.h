@@ -5,12 +5,11 @@
 
 class StairSpawner : public ObjectSpawner
 {
-    int stair_probability;
-
+    char tile_type = '\\';
  public:
-    StairSpawner(int stair_probability);
+    StairSpawner();
     ~StairSpawner();
-    AbstractObject* spawn() const override;
+    AbstractObject* spawn(int x, int y) override;
 };
 
 #endif

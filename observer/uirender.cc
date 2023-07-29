@@ -2,7 +2,7 @@
 #include <iostream>
 #include "uirender.h"
 
-UIRender::UIRender(GameMap* map): subject{subject} {}
+UIRender::UIRender(GameMap* gameMap): subject{subject} {}
 
 UIRender::~UIRender() 
 {
