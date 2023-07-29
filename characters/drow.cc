@@ -1,10 +1,6 @@
 #include "drow.h"
 #include "constants.h"
 
-// for random number generation
-#include <cstdlib>
-#include <ctime>
-
 using namespace std;
 
 Drow::Drow(int x, int y) :
@@ -23,7 +19,9 @@ void Drow::attack(AbstractCharacter *receiver) {
         }
     }
 
-    receiver->getHP() -= getAtk();
+    int damage = ceil((100 / (100 + receiver->getDef())) * getAtk());
+    receiver->getHP() -= damage;
+
     if (receiver->getHP() <= 0) {
         receiver->death();
     }
