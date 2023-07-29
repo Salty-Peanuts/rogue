@@ -9,9 +9,10 @@ using namespace std;
 
 class ItemSpawner : public ObjectSpawner
 {
-    char item_type;
+    string item_type;
     int potion_probability = 6;
     int treasure_probability = 8;
+    /*
     map<string, int> potion_type {
         {"RH", 0},
         {"BA", 1},
@@ -25,12 +26,13 @@ class ItemSpawner : public ObjectSpawner
         {"small", 1},
         {"dragon", 2}
     };
+    */
  public:
-    ItemSpawner(char item_type);
+    ItemSpawner(string item_type);
     ~ItemSpawner();
     AbstractObject* spawn(int x, int y) override;
-    AbstractObject* spawnRandom(int x, int y) ovveride;
-    void setItemType(char item_type);
+    AbstractObject* spawnRandom(int x, int y) override;
+    void setItemType(string item_type);
 };
 
 #endif

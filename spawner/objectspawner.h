@@ -1,7 +1,7 @@
 #ifndef OBJECTSPAWNER_H
 #define OBJECTSPAWNER_H
 
-#include "abstractobject.h"
+#include "../abstractobject.h"
 
 class ObjectSpawner
 {
