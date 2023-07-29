@@ -14,3 +14,6 @@ map<string, int> m_dir{{"nw", 1},
                         {"sw", 6},
                         {"so", 7},
                         {"se", 8}};
+
+
+const int MISSED_ATTACK = -1;
