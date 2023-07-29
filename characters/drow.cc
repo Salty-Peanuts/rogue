@@ -1,17 +1,32 @@
 #include "drow.h"
 #include "constants.h"
 
+// for random number generation
+#include <cstdlib>
+#include <ctime>
+
 using namespace std;
 
 Drow::Drow(int x, int y) :
     PlayerCharacter{x, y, 150, 25, 15} {}
 
-void Drow::attack(AbstractCharacter *receiver) {
-    // implement attack
-}
 
-void Drow::receiveAttack(AbstractCharacter *attacker) {
-    // implement
+void Drow::attack(AbstractCharacter *receiver) {
+    // deals with if receiver is halfling (50% chance of missing attack)
+    if (receiver->getRace() == "halfling") {
+        // randomly produces either 0 or 1
+        srand((unsigned) time(NULL));
+        int random = rand() % 2;
+
+        if (random == 1) {
+            return;
+        }
+    }
+
+    receiver->getHP() -= getAtk();
+    if (receiver->getHP() <= 0) {
+        receiver->death();
+    }
 }
 
 
