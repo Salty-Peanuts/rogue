@@ -22,7 +22,7 @@ class NPCSpawner : public ObjectSpawner
  public:
     NPCSpawner(string npc_race);
     ~NPCSpawner();
-    AbstractObject* spawn() const override;
+    AbstractObject* spawn(int x, int y) override;
     AbstractObject* spawnRandom(int x, int y) override;
     void setNPCRace(string race);
 };

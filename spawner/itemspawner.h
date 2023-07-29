@@ -13,12 +13,12 @@ class ItemSpawner : public ObjectSpawner
     int potion_probability = 6;
     int treasure_probability = 8;
     map<string, int> potion_type {
-        {"RH", 1},
-        {"BA", 2},
-        {"BD", 3},
-        {"PH", 4},
-        {"WA", 5},
-        {"WD", 6}
+        {"RH", 0},
+        {"BA", 1},
+        {"BD", 2},
+        {"PH", 3},
+        {"WA", 4},
+        {"WD", 5}
     };
     map<string, int> treasure_type {
         {"normal", 5},
