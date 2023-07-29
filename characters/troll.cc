@@ -20,10 +20,6 @@ void Troll::attack(AbstractCharacter *receiver) {
 
     int damage = ceil((100 / (100 + receiver->getDef())) * getAtk());
     receiver->getHP() -= damage;
-
-    if (receiver->getHP() <= 0) {
-        receiver->death();
-    }
 }
 
 void Troll::receiveAttack(AbstractCharacter *attacker) {

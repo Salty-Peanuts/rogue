@@ -21,10 +21,6 @@ void Vampire::attack(AbstractCharacter *receiver) {
     int damage = ceil((100 / (100 + receiver->getDef())) * getAtk());
     receiver->getHP() -= damage;
 
-    if (receiver->getHP() <= 0) {
-        receiver->death();
-    }
-
 
     // handles vampire special attack interactions ----
     // vampires gain 5 hp with every successfull attack
@@ -34,7 +30,7 @@ void Vampire::attack(AbstractCharacter *receiver) {
         getHP() -= 5;
 
         // check if losing 5 HP causes death
-        
+
         // we may delete this and check this in combat manager instead ******
         if (getHP() <= 0) {
             death();

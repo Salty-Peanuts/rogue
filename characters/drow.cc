@@ -21,10 +21,6 @@ void Drow::attack(AbstractCharacter *receiver) {
 
     int damage = ceil((100 / (100 + receiver->getDef())) * getAtk());
     receiver->getHP() -= damage;
-
-    if (receiver->getHP() <= 0) {
-        receiver->death();
-    }
 }
 
 
