@@ -4,7 +4,7 @@
 using namespace std;
 
 Vampire::Vampire(int x, int y) :
-    PlayerCharacter{x, y, 50, 25, 25} {}
+    PlayerCharacter{x, y, 50, 25, 25} { toggleMaxHP(false); }
 
 void Vampire::attack(AbstractCharacter *receiver) {
     // implement attack

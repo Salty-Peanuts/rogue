@@ -13,6 +13,7 @@ class PlayerCharacter : public AbstractCharacter
     vector<PotionEffect *> potion_effects;
     int gold;
     int max_hp;
+    bool has_max_hp = true;
 
     public:
         PlayerCharacter(int x, int y, int hp, int atk, int def);
@@ -22,7 +23,8 @@ class PlayerCharacter : public AbstractCharacter
         void death();
         void updateGold(int value);
         string identify();
-        int getMaxHP();
+        int &getMaxHP();
+        void toggleMaxHP(bool has_max);
         int getGold();
         virtual string getRace() = 0;
         virtual void attack(AbstractCharacter *receiver);

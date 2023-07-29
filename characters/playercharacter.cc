@@ -21,6 +21,14 @@ void PlayerCharacter::usePotion(string pot) {
     PotionEffect *new_pot;
     if (pot == "RH") {
         new_pot = new RestoreHealth();
+
+        // runs if the player does not have a max hp
+        if (has_max_hp = false) {
+            potion_effects.push_back(new_pot);
+            new_pot->usePotion(getHP(), getAtk(), getDef(), getMaxHP() + new_pot->potionStrength());
+            return;
+        }
+        
     }
     if (pot == "BA") {
         new_pot = new BoostAtk();
@@ -70,7 +78,14 @@ string PlayerCharacter::identify() {
 }
 
 
-int PlayerCharacter::getMaxHP() {
+int &PlayerCharacter::getMaxHP() {
     return max_hp;
 }
+
+
+void PlayerCharacter::toggleMaxHP(bool has_max) {
+    has_max_hp = has_max;
+}
+
+
 
