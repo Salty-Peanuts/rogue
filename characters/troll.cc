@@ -14,4 +14,7 @@ void Troll::receiveAttack(AbstractCharacter *attacker) {
     // implement
 }
 
+string Troll::getRace() {
+    return "troll";
+}
 

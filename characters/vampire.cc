@@ -15,3 +15,7 @@ void Vampire::receiveAttack(AbstractCharacter *attacker) {
 }
 
 
+string Vampire::getRace() {
+    return "vampire";
+}
+

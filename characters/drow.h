@@ -4,6 +4,8 @@
 #include "playercharacter.h"
 #include "abstractcharacter.h"
 
+using namespace std;
+
 class Drow : public PlayerCharacter
 {
     public:
@@ -11,6 +13,7 @@ class Drow : public PlayerCharacter
         ~Drow();
         void attack(AbstractCharacter *receiver);
         void receiveAttack(AbstractCharacter *attacker);
+        string getRace();
 };
 
 #endif

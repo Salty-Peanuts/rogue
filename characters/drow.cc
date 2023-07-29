@@ -15,3 +15,8 @@ void Drow::receiveAttack(AbstractCharacter *attacker) {
 }
 
 
+string Drow::getRace() {
+    return "drow";
+}
+
+

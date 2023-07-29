@@ -23,6 +23,8 @@ class PlayerCharacter : public AbstractCharacter
         void updateGold(int value);
         string identify();
         int getMaxHP();
+        virtual string getRace();
+        
 };
 
 #endif

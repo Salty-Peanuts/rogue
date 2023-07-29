@@ -14,4 +14,7 @@ void Goblin::receiveAttack(AbstractCharacter *attacker) {
     // implement
 }
 
+string Goblin::getRace() {
+    return "goblin";
+}
 

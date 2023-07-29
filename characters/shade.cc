@@ -15,3 +15,7 @@ void Shade::receiveAttack(AbstractCharacter *attacker) {
 }
 
 
+string Shade::getRace() {
+    return "shade";
+}
+
