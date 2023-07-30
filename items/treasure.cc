@@ -15,3 +15,12 @@ string Treasure::identify() {
     return "Treasure";
 }
 
+
+int Treasure::getValue() {
+    return value;
+}
+
+void Treasure::setValue(int value) {
+    this->value = value;
+}
+
