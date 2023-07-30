@@ -7,7 +7,7 @@ Treasure::Treasure(int x, int y, int value) :
     Item{x, y, 'G'}, value{value} {}
 
 
-bool Treasure::isTraversible() {
+bool Treasure::isTraversible(AbstractObject *traveler) {
     return true;
 }
 
