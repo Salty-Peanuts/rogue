@@ -13,7 +13,7 @@ using namespace std;
 
 class GameMap : public Subject
 {
-    vector<vector<char>> game_map;
+    vector<vector<AbstractObject*>> game_map;
     string player_race;
     vector<vector<AbstractObject*>> object_tiles;
     PlayerCharacter* player_character;

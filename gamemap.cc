@@ -215,12 +215,8 @@ bool GameMap::validMove(AbstractObject* object, int dir)
 {
     int x = object->getX();
     int y = object->getY();
-    PlayerCharacter* player = dynamic_cast<PlayerCharacter*>(object);
-    NPC* npc = dynamic_cast<NPC*>(object);
-    if (player) {
-        // check collision for player
-        if (dir == m_dir["no"]) {
-        if (object_tiles[x][y - 1]->isTraversible(object) && game_map[x][y - 1] == '.' || game_map[x][y - 1] == '+') return true;
+    if (dir == m_dir["no"]) {
+        if (object_tiles[x][y - 1]->isTraversible(object) && game_map[x][y - 1]->isTraversible(object)) return true;
         else return false;
     } else if (dir == m_dir["so"]) {
         if (object_tiles[x][y + 1]->isTraversible(object)) return true;
@@ -229,7 +225,7 @@ bool GameMap::validMove(AbstractObject* object, int dir)
         if (object_tiles[x - 1][y]->isTraversible(object)) return true;
         else return false;
     } else if (dir == m_dir["ea"]) {
-        if (object_tiles[x + 1][y] == nullptr) return true;
+        if (object_tiles[x + 1][y] == ) return true;
         else return false;
     } else if (dir == m_dir["ne"]) {
         if (object_tiles[x + 1][y - 1] == nullptr) return true;
@@ -243,11 +239,6 @@ bool GameMap::validMove(AbstractObject* object, int dir)
     } else if (dir == m_dir["sw"]) {
         if (object_tiles[x - 1][y + 1] == nullptr) return true;
         else return false;
-    } else if (npc) {
-        // check collision for NPC
-    } else {
-        return false;
-    }
     }
 }
 
