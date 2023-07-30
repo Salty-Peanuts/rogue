@@ -16,10 +16,36 @@
 #include "./characters/vampire.h"
 #include "./characters/troll.h"
 #include "./items/treasure.h"
+#include "./floortiles/floor.h"
+#include "./floortiles/walls.h"
+#include "./floortiles/stair.h"
+#include "./floortiles/ceiling.h"
+#include "./floortiles/passage.h"
+
 using namespace std;
 
 
-GameMap::GameMap(vector<vector<char>> game_map, string race): game_map{game_map}, player_race{race} {
+GameMap::GameMap(vector<vector<char>> game_map_in, string race): player_race{race} {
+    for (int i = 0; i < col; i++) {
+        for (int j = 0; j < row; j++) {
+            if (game_map_in[i][j] == '.') {
+                game_map[i][j] = new Floor(i, j);
+            }
+            if (game_map_in[i][j] == '|') {
+                game_map[i][j] = new Walls(i, j);
+            }
+            if (game_map_in[i][j] == '\\') {
+                game_map[i][j] = new Stair(i, j);
+            }
+            if (game_map_in[i][j] == '-') {
+                game_map[i][j] = new Ceiling(i, j);
+            }
+            if (game_map_in[i][j] == '#') {
+                game_map[i][j] = new Passage(i, j);
+            }
+            else game_map[i][j] = nullptr;
+        }
+    }
     PlayerCharacter *pc = nullptr;
     player_character = pc;
     for (int i = 0; i < row; i++) {
@@ -61,7 +87,7 @@ void GameMap::start()
     vector<Coordinates> all_dots;
     for (int i = 0; i < col; i++) {
         for (int j = 0; j < row; j++) {
-            if (game_map[i][j] == '.') {
+            if (game_map[i][j]->getToken() == '.') {
                 Coordinates dot;
                 dot.x = i;
                 dot.y = j;
@@ -381,7 +407,7 @@ void GameMap::printMap() {
             if (object_tiles[i][j] != nullptr) {
                 cout << object_tiles[i][j]->getToken();
             }
-            else cout << game_map[i][j];
+            else cout << game_map[i][j]->getToken();
         }
         cout << endl;
      }
