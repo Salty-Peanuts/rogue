@@ -3,7 +3,9 @@
 using namespace std;
 
 Dragon::Dragon(int x, int y, DragonHoard *dragon_hoard):
-    NPC{x, y, 'D', 150, 20, 20}, dragon_hoard{dragon_hoard} {}
+    NPC{x, y, 'D', 150, 20, 20}, dragon_hoard{dragon_hoard} {
+        regular_gold_dropper = false;
+    }
 
 
 int Dragon::attack(AbstractCharacter* receiver) {

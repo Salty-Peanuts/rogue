@@ -11,6 +11,7 @@ class NPC : public AbstractCharacter
 
     protected:
         bool hostile;
+        bool regular_gold_dropper;
 
     public:
         NPC(int x, int y, char token, int hp, int atk, int def);

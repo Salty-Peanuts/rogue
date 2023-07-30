@@ -5,9 +5,11 @@ using namespace std;
 
 
 Merchant::Merchant(int x, int y):
-    NPC{x, y, 'M', 30, 70, 5} { hostile = aggravated; }
+    NPC{x, y, 'M', 30, 70, 5} { 
+        hostile = aggravated; 
+        regular_gold_dropper = false;
+    }
 
-// might have to rewrite for 
 
 int Merchant::attack(AbstractCharacter* receiver) {
     // handles 50% of npc missing attack
