@@ -40,6 +40,7 @@ class GameMap : public Subject
     void update();
     void changeNPCmovement();
     bool isDead();
+    void printMap();
 
     // Getters
     int getLevel() const;
