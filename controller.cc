@@ -31,7 +31,6 @@ string Controller::run_game() {
         if (cmd == "r") {
             return "restart";
         }
-
         // if a valid move command
         else if (m_dir[cmd] != 0) {
             // if the move is valid
@@ -39,16 +38,17 @@ string Controller::run_game() {
                 // if the player reaches the stair
                 if (gameMap->isStair()) {
                     if (gameMap->getLevel() == 5) {
+                        cout << "Congratulations, you won! Your score is: " << gameMap->getScore() << endl;
                         return "won";
                     }
                     else {
                         cout << "You reached a new floor!" << endl;
                         gameMap->reset();
-                        gameMap->update();
+                        gameMap->start();
                         continue;
                     }
                 }
-                gameMap->render();
+                gameMap->printMap();
                 continue;
             }
             // if the move is not valid
@@ -63,7 +63,7 @@ string Controller::run_game() {
             cin >> cmd;
             if (m_dir[cmd] != 0) {
                 gameMap->playerAtk(m_dir[cmd]);
-                gameMap->render();
+                gameMap->printMap();
                 continue;
             }
             else {
@@ -73,6 +73,9 @@ string Controller::run_game() {
         else if (cmd == "f") {
             gameMap->changeNPCmovement();
         }
-        if (gameMap->isDead()) return "lost";
+        if (gameMap->isDead()) {
+            cout << "Your HP is below 0, you lost!" << endl;
+            return "lost";
+        }
     }
 }
