@@ -73,9 +73,6 @@ GameMap::~GameMap()
     }
     delete player_character;
     delete attack;
-    for (auto chamber : chambers) {
-        delete chamber;
-    }
 }
 
 void GameMap::start()
@@ -420,7 +417,7 @@ int GameMap::getLevel() const { return floor_level; }
 
 string GameMap::getLastAction() const { return last_action; }
 
-char GameMap::gameMapAt(int x, int y) const { return game_map[x][y]; }
+char GameMap::gameMapAt(int x, int y) const { return game_map[x][y]->getToken(); }
 
 PlayerCharacter* GameMap::getPlayerCharacter() const { return player_character; }
 

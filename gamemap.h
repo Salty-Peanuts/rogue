@@ -18,7 +18,6 @@ class GameMap : public Subject
     vector<vector<AbstractObject*>> object_tiles;
     PlayerCharacter* player_character;
     CombatManager* attack;
-    vector<Chamber*> chambers;
     bool npc_movement;
     string last_action;
     int floor_level;
