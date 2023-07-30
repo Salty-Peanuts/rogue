@@ -9,7 +9,7 @@ using namespace std;
 class MerchantHoard : public Treasure
 {   
     public:
-        MerchantHoard();
+        MerchantHoard(int x, int y);
         ~MerchantHoard();
 };
 

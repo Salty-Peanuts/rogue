@@ -9,7 +9,7 @@ using namespace std;
 class SmallPile : public Treasure
 {   
     public:
-        SmallPile();
+        SmallPile(int x, int y);
         ~SmallPile();
 };
 
