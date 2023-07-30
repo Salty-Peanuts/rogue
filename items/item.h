@@ -12,7 +12,7 @@ class Item : public AbstractObject
         Item(int x, int y, char token);
         ~Item(); 
         virtual string identify() = 0;
-        virtual bool isTraversible();
+        virtual bool isTraversible(AbstractObject* traveler);
 };
 
 
