@@ -11,10 +11,10 @@ class Potion : public Item
     string potion_type;
     
  public:
-    Potion(int value);
+    Potion(int x, int y, string potion_type);
     ~Potion();
     bool isTraversible() override;
-    string identify;
+    string identify();
 
 };
 
