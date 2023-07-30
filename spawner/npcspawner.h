@@ -20,7 +20,7 @@ class NPCSpawner : public ObjectSpawner
         {"Merchant", 2}
     };
  public:
-    NPCSpawner(string npc_race);
+    NPCSpawner(string npc_race = "Human");
     ~NPCSpawner();
     AbstractObject* spawn(int x, int y) override;
     AbstractObject* spawnRandom(int x, int y) override;

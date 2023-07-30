@@ -48,6 +48,7 @@ class GameMap : public Subject
     char gameMapAt(int x, int y) const;
     AbstractObject* objectTilesAt(int x, int y) const;
     PlayerCharacter* getPlayerCharacter() const;
+    void addAction(string action);
 };
 
 #endif

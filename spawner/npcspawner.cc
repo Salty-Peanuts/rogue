@@ -9,7 +9,7 @@
 #include "../npcs/orc.h"
 using namespace std;
 
-NPCSpawner::NPCSpawner(string npc_race = "Human") npc_race{npc_race} {}
+NPCSpawner::NPCSpawner(string npc_race): npc_race{npc_race} {}
 
 NPCSpawner::~NPCSpawner() {}
 
@@ -32,7 +32,7 @@ AbstractObject* NPCSpawner::spawn(int x, int y)
 AbstractObject* NPCSpawner::spawnRandom(int x, int y) 
 {
     srand(time(0));
-    npc_index = rand() % npc_probability;
+    int npc_index = rand() % npc_probability;
     auto npc_iter = npc_type.begin();
     int total = 0;
     while (total < npc_index) {

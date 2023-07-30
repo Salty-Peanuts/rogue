@@ -10,7 +10,7 @@ class CombatManager
     int direction;
 
  public:
-    CombatManager(int dir);
+    CombatManager(int dir = 0);
     ~CombatManager();
     void NPCAttack(GameMap& game_map, AbstractCharacter* initiator, AbstractCharacter* reciever);
     void playerAttack(GameMap& game_map, AbstractCharacter* initiator);

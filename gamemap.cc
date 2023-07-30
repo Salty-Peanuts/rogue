@@ -3,32 +3,28 @@
 #include <ctime>
 #include "gamemap.h"
 #include "constants.h"
-#include "./npcs/NPC.h"
 #include "abstractcharacter.h"
-#include <vector>
-#include "itemspawner.h"
-#include "npcspawner.h"
-#include "objectspawner.h"
-#include "stairspawner.h"
-#include "playercharacter.h"
-#include "shade.h"
-#include "npcspawner.h"
-#include "stairspawner.h"
-#include "goblin.h"
-#include "drow.h"
-#include "treasure.h"
-#include "vampire.h"
-#include "troll.h"
-#include <cstdlib>
+#include "./npcs/NPC.h"
+#include "./spawner/itemspawner.h"
+#include "./spawner/npcspawner.h"
+#include "./spawner/objectspawner.h"
+#include "./spawner/stairspawner.h"
+#include "./characters/playercharacter.h"
+#include "./characters/shade.h"
+#include "./characters/goblin.h"
+#include "./characters/drow.h"
+#include "./characters/vampire.h"
+#include "./characters/troll.h"
+#include "./items/treasure.h"
 using namespace std;
 
 
 GameMap::GameMap(vector<vector<char>> game_map, string race): game_map{game_map}, player_race{race} {
     PlayerCharacter *pc = nullptr;
     player_character = pc;
-    for (int i = 0; i < col; i++) {
-        for (int j = 0; j < row; j++) {
-            object_tiles[i][j] = nullptr;
+    for (int i = 0; i < row; i++) {
+        for (int j = 0; j < col; j++) {
+            object_tiles[j][i] = nullptr;
         }
     }
     attack = new CombatManager(0);
@@ -102,9 +98,7 @@ void GameMap::start()
     int y_2 = all_dots.at(ran_num_2).y;
     all_dots.erase(all_dots.begin() + ran_num_2);
     StairSpawner *sspawner = new StairSpawner();
-    object_tiles[x_2][y_2] = sspawner->spawnRandom(x_2, y_2);
-    
-
+    object_tiles[x_2][y_2] = sspawner->spawnRandom(x_2, y_2); 
 
     // spawn enemy
     for (int i = 0; i < 20; i++) {
@@ -147,7 +141,7 @@ void GameMap::start()
                     else if (ran_dir == 1) y_temp--;
                     else if (ran_dir == 2) {
                         x_temp--;
-                        y_temp++:
+                        y_temp++;
                     }
                     else if (ran_dir == 3) x_temp--;
                     else if (ran_dir == 4) x_temp++;
@@ -225,13 +219,35 @@ bool GameMap::validMove(AbstractObject* object, int dir)
     NPC* npc = dynamic_cast<NPC*>(object);
     if (player) {
         // check collision for player
-        switch (dir) {
-             
-        }
+        if (dir == m_dir["no"]) {
+        if (object_tiles[x][y - 1]->isTraversible(object) && game_map[x][y - 1] == '.' || game_map[x][y - 1] == '+') return true;
+        else return false;
+    } else if (dir == m_dir["so"]) {
+        if (object_tiles[x][y + 1]->isTraversible(object)) return true;
+        else return false;
+    } else if (dir == m_dir["we"]) {
+        if (object_tiles[x - 1][y]->isTraversible(object)) return true;
+        else return false;
+    } else if (dir == m_dir["ea"]) {
+        if (object_tiles[x + 1][y] == nullptr) return true;
+        else return false;
+    } else if (dir == m_dir["ne"]) {
+        if (object_tiles[x + 1][y - 1] == nullptr) return true;
+        else return false;
+    } else if (dir == m_dir["nw"]) {
+        if (object_tiles[x - 1][y - 1] == nullptr) return true;
+        else return false;
+    } else if (dir == m_dir["se"]) {
+        if (object_tiles[x + 1][y + 1] == nullptr) return true;
+        else return false;
+    } else if (dir == m_dir["sw"]) {
+        if (object_tiles[x - 1][y + 1] == nullptr) return true;
+        else return false;
     } else if (npc) {
         // check collision for NPC
     } else {
         return false;
+    }
     }
 }
 
@@ -268,16 +284,20 @@ int GameMap::playerInRange(AbstractObject* npc)
 
 void GameMap::npcLogic() {
     // first look for NPC objects in the object_tiles vector
-    for (int i = 0; i < col; ++i) {
-        for (int j = 0; j < row; ++i) {
-            if (object_tiles[i][j] == nullptr) {
+    for (int y = 0; y < row; ++y) {
+        for (int x = 0; x < col; ++x) {
+            if (object_tiles[x][y] == nullptr) {
                 continue;
-            } else if (object_tiles[i][j]->identify() == "NPC" && playerInRange(object_tiles[i][j])) {
+            } else if (object_tiles[x][y]->identify() == "NPC" && playerInRange(object_tiles[x][y])) {
+                NPC* npc = dynamic_cast<NPC*>(object_tiles[x][y]);
+                if (!npc) {
+                    return;
+                }
                 // attack
-                attack->setDirection(playerInRange(object_tiles[i][j]));
-                attack->NPCAttack(*this, object_tiles[i][j], player_character);
-            } else if (object_tiles[i][j]->identify() == "NPC" && !playerInRange(object_tiles[i][j]) && npc_movement) {
-                NPC* npc = dynamic_cast<NPC*>(object_tiles[i][j]);
+                attack->setDirection(playerInRange(object_tiles[x][y]));
+                attack->NPCAttack(*this, npc, player_character);
+            } else if (object_tiles[x][y]->identify() == "NPC" && !playerInRange(object_tiles[x][y]) && npc_movement) {
+                NPC* npc = dynamic_cast<NPC*>(object_tiles[x][y]);
                 // check if npc was moved
                 if (npc->wasMoved()) {
                     continue;
@@ -301,11 +321,11 @@ void GameMap::npcLogic() {
         }
     }
     // need some way to unset all the wasMoved flags
-    for (int i = 0; i < col; ++i) {
-        for (int j = 0; j < row; ++i) {
-            if (object_tiles[i][j] == nullptr) {
+    for (int i = 0; i < row; ++i) {
+        for (int j = 0; j < col; ++i) {
+            if (object_tiles[j][i] == nullptr) {
                 continue;
-            } else if (object_tiles[i][j]->identify() == "NPC") {
+            } else if (object_tiles[j][i]->identify() == "NPC") {
                 NPC* npc = dynamic_cast<NPC*>(object_tiles[i][j]);
                 npc->setMoved(false);
             }
@@ -381,10 +401,12 @@ void GameMap::printMap() {
 
 int GameMap::getLevel() const { return floor_level; }
 
-string getLastAction() const { return last_action; }
+string GameMap::getLastAction() const { return last_action; }
 
 char GameMap::gameMapAt(int x, int y) const { return game_map[x][y]; }
 
 PlayerCharacter* GameMap::getPlayerCharacter() const { return player_character; }
 
 AbstractObject* GameMap::objectTilesAt(int x, int y) const { return object_tiles[x][y]; }
+
+void GameMap::addAction(string action) { last_action += action; }

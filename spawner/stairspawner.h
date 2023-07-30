@@ -10,6 +10,7 @@ class StairSpawner : public ObjectSpawner
     StairSpawner();
     ~StairSpawner();
     AbstractObject* spawn(int x, int y) override;
+    AbstractObject* spawnRandom(int x, int y) override;
 };
 
 #endif

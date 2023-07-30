@@ -2,7 +2,7 @@
 #include "constants.h"
 using namespace std;
 
-CombatManager::CombatManager(int dir = 0) : direction(dir) {}
+CombatManager::CombatManager(int dir) : direction(dir) {}
 
 CombatManager::~CombatManager() {}
 
@@ -10,9 +10,9 @@ void CombatManager::NPCAttack(GameMap& game_map, AbstractCharacter* initiator, A
 {
     int damage_num = initiator->attack(reciever);
     if (damage_num == MISSED_ATTACK) {
-        game_map.last_action += "PC barely dodges the attack from " + initiator->getToken() + ". ";
+        game_map.addAction("PC barely dodges the attack from " + to_string(initiator->getToken()) + ". ");
     } else {
-        game_map.last_action += "The " + initiator->getRace() + " deals " + to_string(damage_num) + " damage to PC. ";
+        game_map.addAction("The " + initiator->getRace() + " deals " + to_string(damage_num) + " damage to PC. ");
     }
 }
 
@@ -43,14 +43,14 @@ void CombatManager::playerAttack(GameMap& game_map, AbstractCharacter* initiator
     }
     AbstractCharacter* reciever = dynamic_cast<AbstractCharacter*>(game_map.objectTilesAt(attack_x, attack_y));
     if (!reciever) { 
-        game_map.last_action += "Your attack whiffed. ";
+        game_map.addAction("Your attack whiffed. ");
         return;
     }
     int damage_num = initiator->attack(reciever);
     if (damage_num == MISSED_ATTACK) {
-        game_map.last_action += "You swing to attack, but the enemy dodges just in time. ";
+        game_map.addAction("You swing to attack, but the enemy dodges just in time. ");
     } else {
-        game_map.last_action += "PC deals " + to_string(damage_num) + " damage to the " + reciever->getRace() + " ";
-        game_map.last_action += "(" + reciever->getHP() + " HP). ";
+        game_map.addAction("PC deals " + to_string(damage_num) + " damage to the " + reciever->getRace() + " ");
+        game_map.addAction("(" + to_string(reciever->getHP()) + " HP). ");
     }
 }
