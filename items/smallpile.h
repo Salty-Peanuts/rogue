@@ -7,12 +7,10 @@ using namespace std;
 
 
 class SmallPile : public Treasure
-{
-    int value;
-    
- public:
-    SmallPile();
-    ~SmallPile();
+{   
+    public:
+        SmallPile();
+        ~SmallPile();
 };
 
 #endif

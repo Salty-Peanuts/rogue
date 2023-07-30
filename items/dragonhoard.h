@@ -7,12 +7,10 @@ using namespace std;
 
 
 class DragonHoard : public Treasure
-{
-    int value;
-    
- public:
-    DragonHoard();
-    ~DragonHoard();
+{   
+    public:
+        DragonHoard();
+        ~DragonHoard();
 };
 
 #endif

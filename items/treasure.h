@@ -9,11 +9,13 @@ class Treasure : public Item
 {
     int value;
     
- public:
-    Treasure(int value);
-    ~Treasure();
-    void setValue(int value);
-    bool isTraversible() override;
+    public:
+        Treasure(int x, int y, int value);
+        ~Treasure();
+        void setValue(int value);
+        int getValue();
+        bool isTraversible() override;
+        string identify();
 };
 
 #endif

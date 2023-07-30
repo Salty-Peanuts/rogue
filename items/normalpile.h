@@ -7,12 +7,10 @@ using namespace std;
 
 
 class NormalPile : public Treasure
-{
-    int value;
-    
- public:
-    NormalPile();
-    ~NormalPile();
+{   
+    public:
+        NormalPile();
+        ~NormalPile();
 };
 
 #endif
