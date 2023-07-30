@@ -1,3 +1,4 @@
+#include <iostream>
 #include <cstdlib>
 #include <ctime>
 #include "gamemap.h"
@@ -11,8 +12,11 @@
 #include "stairspawner.h"
 #include "playercharacter.h"
 #include "shade.h"
+#include "npcspawner.h"
+#include "stairspawner.h"
 #include "goblin.h"
 #include "drow.h"
+#include "treasure.h"
 #include "vampire.h"
 #include "troll.h"
 #include <cstdlib>
@@ -24,7 +28,7 @@ GameMap::GameMap(vector<vector<char>> game_map, string race): game_map{game_map}
     player_character = pc;
     for (int i = 0; i < col; i++) {
         for (int j = 0; j < row; j++) {
-            object_tiles[j][i] = nullptr;
+            object_tiles[i][j] = nullptr;
         }
     }
     attack = new CombatManager(0);
@@ -61,7 +65,7 @@ void GameMap::start()
     vector<Coordinates> all_dots;
     for (int i = 0; i < col; i++) {
         for (int j = 0; j < row; j++) {
-            if (game_map[j][i] == '.') {
+            if (game_map[i][j] == '.') {
                 Coordinates dot;
                 dot.x = i;
                 dot.y = j;
@@ -70,7 +74,50 @@ void GameMap::start()
         }
     }
 
-    // spawn both potion and gold
+    // spawn player
+    int ran_num_1 = rand() % all_dots.size();
+    int x_1 = all_dots.at(ran_num_1).x;
+    int y_1 = all_dots.at(ran_num_1).y;
+    all_dots.erase(all_dots.begin() + ran_num_1);
+    if (player_race == "s") {
+        player_character = new Shade(x_1, y_1); 
+    }
+    if (player_race == "g") {
+        player_character = new Goblin(x_1, y_1); 
+    }
+    if (player_race == "d") {
+        player_character = new Drow(x_1, y_1); 
+    }
+    if (player_race == "v") {
+        player_character = new Vampire(x_1, y_1); 
+    }
+    if (player_race == "t") {
+        player_character = new Troll(x_1, y_1); 
+    }
+    object_tiles[x_1][y_1] = player_character;
+
+    // spawn stairs;
+    int ran_num_2 = rand() % all_dots.size();
+    int x_2 = all_dots.at(ran_num_2).x;
+    int y_2 = all_dots.at(ran_num_2).y;
+    all_dots.erase(all_dots.begin() + ran_num_2);
+    StairSpawner *sspawner = new StairSpawner();
+    object_tiles[x_2][y_2] = sspawner->spawnRandom(x_2, y_2);
+    
+
+
+    // spawn enemy
+    for (int i = 0; i < 20; i++) {
+        int ran_num = rand() % all_dots.size();
+        int x = all_dots.at(ran_num).x;
+        int y = all_dots.at(ran_num).y;
+        all_dots.erase(all_dots.begin() + ran_num);
+        NPCSpawner * npc_spawner = new NPCSpawner("Human");
+        object_tiles[x][y] = npc_spawner->spawnRandom(x, y);
+        delete npc_spawner;
+    }
+
+    // spawn potion and gold
     for (int i = 0; i < 20; i++) {
         int ran_num = rand() % all_dots.size();
         int x = all_dots.at(ran_num).x;
@@ -79,30 +126,58 @@ void GameMap::start()
         ItemSpawner *is;
         if (i < 10) is = new ItemSpawner("Potion");
         else is = new ItemSpawner("Treasure");
-        object_tiles.at(x).at(y) = is->spawnRandom(x, y);
+        object_tiles[x][y] = is->spawnRandom(x, y);
+        // if spawns a treasure
+        if (i >= 10) {
+            Treasure *tr = dynamic_cast<Treasure *>(object_tiles[x][y]);
+            // if spawns a dragon hoard
+            if (tr->getValue() == 6) {
+                NPCSpawner *npc_spawner = new NPCSpawner("Dragon");
+                bool exists = true;
+                // loop to find a coordinate that is unoccupied
+                while (exists)
+                {   
+                    int x_temp = x;
+                    int y_temp = y;
+                    int ran_dir = rand() % 8;
+                    if (ran_dir == 0) {
+                        x_temp--;
+                        y_temp--;
+                    }
+                    else if (ran_dir == 1) y_temp--;
+                    else if (ran_dir == 2) {
+                        x_temp--;
+                        y_temp++:
+                    }
+                    else if (ran_dir == 3) x_temp--;
+                    else if (ran_dir == 4) x_temp++;
+                    else if (ran_dir == 5) {
+                        x_temp--;
+                        y_temp++;
+                    }
+                    else if (ran_dir == 6) y_temp++;
+                    else if (ran_dir == 7) {
+                        x_temp++;
+                        y_temp++;
+                    }
+                    // loop through the all_dots to check if that point is valid
+                    for (int z = 0; z < all_dots.size(); z++) {
+                        Coordinates temp = all_dots[z];
+                        if (temp.x == x_temp && temp.y == y_temp) {
+                            exists = false;
+                            x = x_temp;
+                            y = y_temp;
+                            break;
+                        }
+                    }
+                    break;
+                }
+                object_tiles[x][y] = npc_spawner->spawn(x, y);
+                delete npc_spawner;
+            }
+            delete tr;
+        }
         delete is;
-    }
-
-
-    // spawn player
-    int ran_num = rand() % all_dots.size();
-    int x = all_dots.at(ran_num).x;
-    int y = all_dots.at(ran_num).y;
-    all_dots.erase(all_dots.begin() + ran_num);
-    if (player_race == "s") {
-        player_character = new Shade(x, y);
-    }
-    else if (player_race == "g") {
-        player_character = new Goblin(x, y);
-    }
-    else if (player_race == "d") {
-        player_character = new Drow(x, y);
-    }
-    else if (player_race == "v") {
-        player_character = new Vampire(x, y);
-    }
-    else if (player_race == "t") {
-        player_character = new Troll(x, y);
     }
 }
 
@@ -261,7 +336,18 @@ void GameMap::reset() {
 
 bool GameMap::isStair()
 {
-    
+    int x; 
+    int y;
+    for (int i = 0; i < col; ++i) {
+        for (int j = 0; j < row; ++i) {
+            if (game_map[i][j] == '\\') {
+                x = i;
+                y = j;
+            }
+        }
+    }
+    if (player_character->getX() == x && player_character->getY() == y) return true;
+    return false;
 }
 
 void GameMap::update() { notifyObservers(); }
@@ -276,6 +362,18 @@ bool GameMap::isDead() {
         return true;
     }
     return false;
+}
+
+void GameMap::printMap() {
+     for (int i = 0; i < col; ++i) {
+        for (int j = 0; j < row; ++i) {
+            if (object_tiles[i][j] != nullptr) {
+                cout << object_tiles[i][j]->getToken();
+            }
+            else cout << game_map[i][j];
+        }
+        cout << endl;
+     }
 }
 
 
