@@ -57,6 +57,7 @@ void CombatManager::playerAttack(GameMap& game_map, AbstractCharacter* initiator
     if (reciever->getHP() <= 0) {
         game_map.addAction("The " + reciever->getRace() + " is slain. ");
         game_map.deleteObject(reciever);
+        
     }
 }
 
