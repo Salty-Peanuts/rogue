@@ -1,10 +1,11 @@
 #include "playercharacter.h"
-#include "BoostAtk.h"
-#include "BoostDef.h"
-#include "PoisonHealth.h"
-#include "RestoreHealth.h"
-#include "WoundAtk.h"
-#include "WoundDef.h"
+#include "../potion_effects/BoostAtk.h"
+#include "../potion_effects/BoostDef.h"
+#include "../potion_effects/RestoreHealth.h"
+#include "../potion_effects/PoisonHealth.h"
+#include "../potion_effects/WoundAtk.h"
+#include "../potion_effects/WoundDef.h"
+
 
 using namespace std;
 

@@ -1,7 +1,7 @@
 #ifndef NPC_H
 #define NPC_H
 
-#include "abstractcharacter.h"
+#include "../abstractcharacter.h"
 
 using namespace std;
 

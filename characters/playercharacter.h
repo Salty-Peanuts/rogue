@@ -9,8 +9,8 @@
 #include <cstdlib>
 #include <ctime>
 
-#include "abstractcharacter.h"
-#include "PotionEffect.h"
+#include "../abstractcharacter.h"
+#include "../potion_effects/PoisonHealth.h"
 
 using namespace std;
 
