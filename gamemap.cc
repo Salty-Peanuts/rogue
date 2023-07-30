@@ -239,29 +239,31 @@ bool GameMap::validMove(AbstractObject* object, int dir)
     int x = object->getX();
     int y = object->getY();
     if (dir == m_dir["no"]) {
-        if (object_tiles[x][y - 1]->isTraversible(object) && game_map[x][y - 1]->isTraversible(object)) return true;
+        if (object_tiles[x][y - 1]->isTraversible(object) || game_map[x][y - 1]->isTraversible(object)) return true;
         else return false;
     } else if (dir == m_dir["so"]) {
-        if (object_tiles[x][y + 1]->isTraversible(object)) return true;
+        if (object_tiles[x][y + 1]->isTraversible(object) || game_map[x][y + 1]->isTraversible(object)) return true;
         else return false;
     } else if (dir == m_dir["we"]) {
-        if (object_tiles[x - 1][y]->isTraversible(object)) return true;
+        if (object_tiles[x - 1][y]->isTraversible(object) || game_map[x - 1][y]->isTraversible(object)) return true;
         else return false;
     } else if (dir == m_dir["ea"]) {
-        if (object_tiles[x + 1][y] == ) return true;
+        if (object_tiles[x + 1][y]->isTraversible(object) || game_map[x + 1][y]->isTraversible(object)) return true;
         else return false;
     } else if (dir == m_dir["ne"]) {
-        if (object_tiles[x + 1][y - 1] == nullptr) return true;
+        if (object_tiles[x + 1][y - 1]->isTraversible(object) || game_map[x + 1][y - 1]->isTraversible(object)) return true;
         else return false;
     } else if (dir == m_dir["nw"]) {
-        if (object_tiles[x - 1][y - 1] == nullptr) return true;
+        if (object_tiles[x - 1][y - 1]->isTraversible(object) || game_map[x - 1][y - 1]->isTraversible(object)) return true;
         else return false;
     } else if (dir == m_dir["se"]) {
-        if (object_tiles[x + 1][y + 1] == nullptr) return true;
+        if (object_tiles[x + 1][y + 1]->isTraversible(object) || game_map[x + 1][y + 1]->isTraversible(object)) return true;
         else return false;
     } else if (dir == m_dir["sw"]) {
-        if (object_tiles[x - 1][y + 1] == nullptr) return true;
+        if (object_tiles[x - 1][y + 1]->isTraversible(object) || game_map[x - 1][y + 1]->isTraversible(object)) return true;
         else return false;
+    } else {
+        return false
     }
 }
 
