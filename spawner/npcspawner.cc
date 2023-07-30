@@ -25,7 +25,7 @@ AbstractObject* NPCSpawner::spawn(int x, int y)
     else if (npc_race == "Elf") { new Elf(x, y); }
     else if (npc_race == "Orc") { new Orc(x, y); }
     else if (npc_race == "Merchant") { new Merchant(x, y); }
-    else if (npc_race == "Dragon") { new Dragon(x, y); }
+    else if (npc_race == "Dragon") { new Dragon(x, y); }    // ------ we need put DragonHoard as a param (we need to make DragonHoard before, then give it as parameter here)
     else { return nullptr; }
 }
 
