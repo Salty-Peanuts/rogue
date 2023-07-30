@@ -21,6 +21,7 @@ class NPC : public AbstractCharacter
         string identify() = 0;
         virtual int attack(AbstractCharacter* receiver);
         virtual string getRace();
+        void setMoved(bool input);
 };
 
 #endif

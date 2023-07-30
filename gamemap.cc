@@ -355,12 +355,14 @@ bool GameMap::playerAtk(int dir)
     attack->playerAttack(*this, player_character);
 }
 
+// revise
 void GameMap::reset() { 
     for (int i = 0; i < col; ++i) {
         for (int j = 0; j < row; ++i) {
             if (object_tiles[i][j] == nullptr) {
                 continue;
-            } else if (object_tiles[i][j]->identify() == "NPC") {
+            }
+            else { 
                 delete object_tiles[i][j];
                 object_tiles[i][j] = nullptr;
             }
@@ -376,7 +378,7 @@ bool GameMap::isStair()
     int y;
     for (int i = 0; i < col; ++i) {
         for (int j = 0; j < row; ++i) {
-            if (game_map[i][j] == '\\') {
+            if (game_map[i][j]->getToken() == '\\') {
                 x = i;
                 y = j;
             }
@@ -410,6 +412,15 @@ void GameMap::printMap() {
         }
         cout << endl;
      }
+
+    cout << "Race: " << player_race << " ";
+    cout << "Gold: " << player_character->getGold() << " ";
+    cout << "                                       ";
+    cout << "Floor: " << floor_level << endl;
+    cout << "HP: " << player_character->getHP() << endl;
+    cout << "Atk: " << player_character->getAtk() << endl;
+    cout << "Def: " << player_character->getDef() << endl;
+    cout << "Action: " << last_action << endl;
 }
 
 
@@ -426,3 +437,8 @@ PlayerCharacter* GameMap::getPlayerCharacter() const { return player_character; 
 AbstractObject* GameMap::objectTilesAt(int x, int y) const { return object_tiles[x][y]; }
 
 void GameMap::addAction(string action) { last_action += action; }
+
+int GameMap::getScore() const {
+    if (player_character->getRace() == "shade") return player_character->getGold() * 1.5;
+    else return player_character->getGold();
+}

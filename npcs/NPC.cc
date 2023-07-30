@@ -18,3 +18,6 @@ string NPC::identify() {
     return "NPC";
 }
 
+void NPC::setMoved(bool input) {
+    hasMoved = input;
+}

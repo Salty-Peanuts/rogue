@@ -52,6 +52,7 @@ int main() {
         // start game
         Controller *c = new Controller(map_layout, cmd);
         string result = c->run_game();
+        delete c;
 
         // check the ending state of the game
         if (result == "restart") {
@@ -59,12 +60,6 @@ int main() {
         }
         else if (result == "quit") {
             break;
-        }
-        else if (result == "won") {
-
-        }
-        else if (result == "lost") {
-
         }
 
         // ask if the player wants to restart
