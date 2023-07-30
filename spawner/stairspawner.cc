@@ -1,5 +1,5 @@
 #include "./stairspawner.h"
-#include "../stair.h"
+#include "../floortiles/stair.h"
 using namespace std;
 
 StairSpawner::StairSpawner() {}
@@ -7,7 +7,7 @@ StairSpawner::StairSpawner() {}
 StairSpawner::~StairSpawner() {}
 
 AbstractObject* StairSpawner::spawn(int x, int y) {
-    return new Stair(x, y, tile_type);
+    return new Stair(x, y);
 }
 
 AbstractObject* StairSpawner::spawnRandom(int x, int y) {

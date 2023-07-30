@@ -1,15 +1,15 @@
-#ifndef FLOOR_H
-#define FLOOR_H
+#ifndef DOORWAY_H
+#define DOORWAY_H
 #include <string>
 #include "./floortiles.h"
 #include "../abstractobject.h"
 using namespace std;
 
-class Floor : public FloorTiles
+class Doorway : public FloorTiles
 {
     public:
-        Floor(int x, int y);
-        ~Floor();
+        Doorway(int x, int y);
+        ~Doorway();
         bool isTraversible(AbstractObject* object) override;
 };
 
