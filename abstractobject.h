@@ -18,8 +18,8 @@ class AbstractObject
     void setX(int x);
     void setY(int y);
     char getToken();
-    virtual bool isTraversible();
-    virtual string identify();
+    virtual bool isTraversible(AbstractObject* object)  = 0;
+    virtual string identify() = 0;
 };
 
 #endif
