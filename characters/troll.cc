@@ -1,5 +1,4 @@
 #include "troll.h"
-#include "constants.h"
 
 using namespace std;
 

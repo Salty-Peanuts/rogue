@@ -1,5 +1,4 @@
 #include "vampire.h"
-#include "constants.h"
 
 using namespace std;
 
