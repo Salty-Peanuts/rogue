@@ -13,7 +13,7 @@ class Treasure : public Item
     Treasure(int x, int y, int value);
     ~Treasure();
     void setValue(int value);
-    bool isTraversible() override;
+    bool isTraversible(AbstractObject *traveler) override;
     int getValue();
     string identify();
 };

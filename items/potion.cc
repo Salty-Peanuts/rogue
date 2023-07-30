@@ -7,7 +7,7 @@ Potion::Potion(int x, int y, string potion_type) :
     Item{x, y, 'P'}, potion_type{potion_type} {}
 
 
-bool Potion::isTraversible() {
+bool Potion::isTraversible(AbstractObject *traveler) {
     return false;
 }
 

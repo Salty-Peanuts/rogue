@@ -263,7 +263,7 @@ bool GameMap::validMove(AbstractObject* object, int dir)
         if (object_tiles[x - 1][y + 1]->isTraversible(object) || game_map[x - 1][y + 1]->isTraversible(object)) return true;
         else return false;
     } else {
-        return false
+        return false;
     }
 }
 
