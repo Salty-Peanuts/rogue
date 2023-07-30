@@ -8,9 +8,9 @@ using namespace std;
 
 class Item : public AbstractObject
 {
-    string item_type;
-    char token;
-    public: 
+    public:
+        Item(int x, int y, char token);
+        ~Item(); 
         virtual string identify() = 0;
         virtual bool isTraversible();
 };
