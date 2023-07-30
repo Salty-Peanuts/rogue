@@ -9,7 +9,7 @@
 #include "../npcs/orc.h"
 using namespace std;
 
-NPCSpawner::NPCSpawner(string npc_race) npc_race{npc_race} {}
+NPCSpawner::NPCSpawner(string npc_race = "Human") npc_race{npc_race} {}
 
 NPCSpawner::~NPCSpawner() {}
 
