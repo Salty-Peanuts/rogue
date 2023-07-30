@@ -27,14 +27,12 @@ class PlayerCharacter : public AbstractCharacter
         ~PlayerCharacter();
         void activatePotion(string pot);
         void removePotions();
-        void death();
         void updateGold(int value);
-        string identify();
+        string identify() override;
         int &getMaxHP();
         void toggleMaxHP(bool has_max);
         int getGold();
         virtual string getRace() = 0;
-        virtual int attack(AbstractCharacter *receiver);
         
 };
 

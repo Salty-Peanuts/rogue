@@ -2,7 +2,7 @@
 #define DRAGON_H
 
 #include "NPC.h"
-#include "dragonhoard.h"
+#include "../items/dragonhoard.h"
 
 using namespace std;
 

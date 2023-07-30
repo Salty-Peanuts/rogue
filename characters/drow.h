@@ -2,7 +2,7 @@
 #define DROW
 
 #include "playercharacter.h"
-#include "abstractcharacter.h"
+#include "../abstractcharacter.h"
 
 using namespace std;
 

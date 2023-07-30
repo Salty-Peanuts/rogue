@@ -11,6 +11,8 @@
 #include "chamber.h"
 using namespace std;
 
+class CombatManager;
+
 class GameMap : public Subject
 {
     vector<vector<AbstractObject*>> game_map;

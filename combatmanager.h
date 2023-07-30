@@ -5,6 +5,9 @@
 #include "gamemap.h"
 using namespace std;
 
+class GameMap;
+
+
 class CombatManager
 {
     int direction;
