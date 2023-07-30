@@ -8,8 +8,8 @@ class PoisonHealth : public PotionEffect
     int health_decrease;
     public:
         PoisonHealth();
-        void usePotion(int &hp, int &atk, int &def, int max_hp);
-        void removePotion(int &hp, int &atk, int &def);
+        void usePotion(int &hp, int &atk, int &def, int max_hp) override;
+        void removePotion(int &hp, int &atk, int &def) override;
         int potionStrength() override;
 };
 

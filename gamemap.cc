@@ -269,7 +269,7 @@ bool GameMap::validMove(AbstractObject* object, int dir)
 
 void GameMap::usePotion(string potion)
 {
-    player_character->usePotion(potion);
+    player_character->activatePotion(potion);
 }
 
 
@@ -311,7 +311,7 @@ void GameMap::npcLogic() {
                 }
                 // attack
                 attack->setDirection(playerInRange(object_tiles[x][y]));
-                attack->NPCAttack(*this, npc, player_character);
+                attack->NPCAttack(this, npc, player_character);
             } else if (object_tiles[x][y]->identify() == "NPC" && !playerInRange(object_tiles[x][y]) && npc_movement) {
                 NPC* npc = dynamic_cast<NPC*>(object_tiles[x][y]);
                 // check if npc was moved
@@ -352,7 +352,7 @@ void GameMap::npcLogic() {
 bool GameMap::playerAtk(int dir)
 {
     attack->setDirection(dir);
-    attack->playerAttack(*this, player_character);
+    attack->playerAttack(this, player_character);
 }
 
 // revise

@@ -1,7 +1,7 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
-#include <gamemap.h>
+#include "gamemap.h"
 
 using namespace std;
 

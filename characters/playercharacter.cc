@@ -18,7 +18,7 @@ PlayerCharacter::~PlayerCharacter() {
 }
 
 
-void PlayerCharacter::usePotion(string pot) {
+void PlayerCharacter::activatePotion(string pot) {
     PotionEffect *new_pot;
     if (pot == "RH") {
         new_pot = new RestoreHealth();

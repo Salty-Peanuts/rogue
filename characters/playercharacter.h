@@ -25,7 +25,7 @@ class PlayerCharacter : public AbstractCharacter
     public:
         PlayerCharacter(int x, int y, int hp, int atk, int def);
         ~PlayerCharacter();
-        void usePotion(string pot);
+        void activatePotion(string pot);
         void removePotions();
         void death();
         void updateGold(int value);
