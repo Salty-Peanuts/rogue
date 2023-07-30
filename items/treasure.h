@@ -14,7 +14,6 @@ class Treasure : public Item
     ~Treasure();
     void setValue(int value);
     bool isTraversible() override;
-    int getValue();
 };
 
 #endif
