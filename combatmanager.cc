@@ -41,5 +41,16 @@ void CombatManager::playerAttack(GameMap& game_map, AbstractCharacter* initiator
         attack_x += 1;
         attack_y += 1;
     }
-    game_map.objectTilesAt(attack_x, attack_y)->attack(initiator);
+    AbstractCharacter* reciever = dynamic_cast<AbstractCharacter*>(game_map.objectTilesAt(attack_x, attack_y));
+    if (!reciever) { 
+        game_map.last_action += "Your attack whiffed. ";
+        return;
+    }
+    int damage_num = initiator->attack(reciever);
+    if (damage_num == MISSED_ATTACK) {
+        game_map.last_action += "You swing to attack, but the enemy dodges just in time. ";
+    } else {
+        game_map.last_action += "PC deals " + to_string(damage_num) + " damage to the " + reciever->getRace() + " ";
+        game_map.last_action += "(" + reciever->getHP() + " HP). ";
+    }
 }
