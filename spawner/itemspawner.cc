@@ -6,6 +6,7 @@
 #include "../items/normalpile.h"
 #include "../items/smallpile.h"
 #include "../items/dragonhoard.h"
+#include "../items/merchanthoard.h"
 // may need other includes
 using namespace std;
 
@@ -29,6 +30,7 @@ AbstractObject* ItemSpawner::spawn(int x, int y)
     else if (item_type == "Normal") { return new NormalPile(x, y); } 
     else if (item_type == "Small") { return new SmallPile(x, y); } 
     else if (item_type == "Dragon") { return new DragonHoard(x, y); }
+    else if (item_type == "Merchant") {return new MerchantHoard(x, y); }
     else { return nullptr; }
 }
 
