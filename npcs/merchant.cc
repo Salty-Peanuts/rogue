@@ -3,7 +3,6 @@
 using namespace std;
 
 
-
 Merchant::Merchant(int x, int y):
     NPC{x, y, 'M', 30, 70, 5} { 
         hostile = aggravated; 
