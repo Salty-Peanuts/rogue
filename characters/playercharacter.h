@@ -32,7 +32,6 @@ class PlayerCharacter : public AbstractCharacter
         int &getMaxHP();
         void toggleMaxHP(bool has_max);
         int getGold();
-        virtual string getRace() = 0;
         
 };
 
