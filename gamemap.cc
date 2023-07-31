@@ -215,8 +215,6 @@ void GameMap::deleteObject(AbstractObject* object)
 
 bool GameMap::moveCharacter(int dir)
 {
-    int x = player_character->getX();
-    int y = player_character->getY();
     if (validMove(player_character, dir)) {
         player_character->move(dir);
         auto dir_iter = m_dir.begin();
@@ -351,8 +349,37 @@ void GameMap::npcLogic() {
 
 bool GameMap::playerAtk(int dir)
 {
+    int attack_x = player_character->getX();
+    int attack_y = player_character->getY();
+    if (dir == m_dir["no"]) {
+        attack_y -= 1;
+    } else if (dir == m_dir["so"]) {
+        attack_y += 1;
+    } else if (dir == m_dir["ea"]) {
+        attack_x += 1;
+    } else if (dir == m_dir["we"]) {
+        attack_x -= 1;
+    } else if (dir == m_dir["nw"]) {
+        attack_x -= 1;
+        attack_y -= 1;
+    } else if (dir == m_dir["ne"]) {
+        attack_x += 1;
+        attack_y -= 1;
+    } else if (dir == m_dir["sw"]) {
+        attack_x -= 1;
+        attack_y += 1;
+    } else if (dir == m_dir["se"]) {
+        attack_x += 1;
+        attack_y += 1;
+    }
+    AbstractCharacter* reciever = dynamic_cast<AbstractCharacter*>(objectTilesAt(attack_x, attack_y));
+    if (!reciever) {
+        addAction("Your attack whiffed. ");
+        return false;
+    }
     attack->setDirection(dir);
-    attack->playerAttack(this, player_character);
+    attack->playerAttack(this, player_character, reciever);
+    return true;
 }
 
 // revise

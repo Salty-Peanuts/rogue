@@ -16,8 +16,8 @@ class CombatManager
     CombatManager(int dir = 0);
     ~CombatManager();
     void NPCAttack(GameMap *game_map, AbstractCharacter* initiator, AbstractCharacter* reciever);
-    void playerAttack(GameMap *game_map, AbstractCharacter* initiator);
-    //bool isValid(GameMap& game_map, AbstractCharacter* initiator, AbstractCharacter* reciever);
+    void playerAttack(GameMap *game_map, AbstractCharacter* initiator, AbstractCharacter* reciever);
+    // bool isValid(GameMap* game_map, AbstractCharacter* initiator, AbstractCharacter* reciever);
     void setDirection(int dir);
 };
 
