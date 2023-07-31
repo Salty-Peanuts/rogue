@@ -3,13 +3,13 @@
 using namespace std;
 
 
+
 Merchant::Merchant(int x, int y):
     NPC{x, y, 'M', 30, 70, 5} { 
         hostile = aggravated; 
         regular_gold_dropper = false;
+        aggravated = false;
     }
-
-bool Merchant::aggravated = false;
 
 Merchant::~Merchant() {}
 
@@ -38,4 +38,7 @@ void Merchant::makeAggravated() {
     aggravated = true;
     hostile = true;
 }
+
+
+
 
