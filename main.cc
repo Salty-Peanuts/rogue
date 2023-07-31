@@ -20,6 +20,7 @@ void readFile(string file_name, vector<vector<char>> map_layout) {
     for (int i = 0; i < row; i++) {
         getline(input, str);
         for (int j = 0; j < col; j++) {
+            // crashes here ====================================
             map_layout[j][i] = str[j];
         }
     }
@@ -37,7 +38,7 @@ void printMap(vector<vector<char>> map_layout) {
 
 int main() {
     vector<vector<char>> map_layout;
-    readFile("cc3k-emptySingleFloor.txt", map_layout);
+    readFile("./floors/cc3k-emptySingleFloor.txt", map_layout);
     printMap(map_layout);
 
     // ask to choose race
