@@ -2,6 +2,11 @@
 #define ABSTRACTCHARACTER_H
 
 #include "abstractobject.h"
+#include <math.h>
+
+// for random number generation
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
