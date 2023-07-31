@@ -12,7 +12,6 @@ class Potion : public Item
     
  public:
     Potion(int x, int y, string potion_type);
-    ~Potion();
     bool isTraversible(AbstractObject *traveler) override;
     string identify() override;
 

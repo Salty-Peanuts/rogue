@@ -10,7 +10,6 @@ class DragonHoard : public Treasure
 {   
     public:
         DragonHoard(int x, int y);
-        ~DragonHoard();
 };
 
 #endif

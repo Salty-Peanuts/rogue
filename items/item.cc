@@ -7,5 +7,3 @@ Item::Item(int x, int y, char token) :
     AbstractObject{x, y, token} {}
 
 
-
-

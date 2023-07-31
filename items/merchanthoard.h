@@ -10,7 +10,6 @@ class MerchantHoard : public Treasure
 {   
     public:
         MerchantHoard(int x, int y);
-        ~MerchantHoard();
 };
 
 #endif

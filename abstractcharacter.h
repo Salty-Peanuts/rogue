@@ -23,7 +23,7 @@ class AbstractCharacter : public AbstractObject
 
         virtual int attack(AbstractCharacter *character);
         virtual void recieveAttack(AbstractCharacter *character);
-        virtual void death();
+        // virtual void death();
         virtual string identify() = 0;
         virtual string getRace();
 };

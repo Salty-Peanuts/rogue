@@ -10,7 +10,6 @@ class NormalPile : public Treasure
 {   
     public:
         NormalPile(int x, int y);
-        ~NormalPile();
 };
 
 #endif

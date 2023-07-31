@@ -11,7 +11,6 @@ class Treasure : public Item
     
  public:
     Treasure(int x, int y, int value);
-    ~Treasure();
     void setValue(int value);
     bool isTraversible(AbstractObject *traveler) override;
     int getValue();

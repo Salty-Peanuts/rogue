@@ -10,7 +10,6 @@ class SmallPile : public Treasure
 {   
     public:
         SmallPile(int x, int y);
-        ~SmallPile();
 };
 
 #endif
