@@ -2,7 +2,6 @@
 #define FLOOR_H
 #include <string>
 #include "./floortiles.h"
-#include "../abstractobject.h"
 using namespace std;
 
 class Floor : public FloorTiles

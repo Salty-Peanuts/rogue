@@ -4,7 +4,6 @@
 #include <vector>
 #include <string>
 #include <map>
-#include "./observer/subject.h"
 #include "combatmanager.h"
 #include "./characters/playercharacter.h"
 #include "abstractobject.h"
@@ -13,7 +12,7 @@ using namespace std;
 
 class CombatManager;
 
-class GameMap : public Subject
+class GameMap
 {
     vector<vector<AbstractObject*>> game_map;
     string player_race;
@@ -38,7 +37,7 @@ class GameMap : public Subject
     int playerInRange(AbstractObject* object);
     void reset();
     bool isStair();
-    void update();
+    //void update();
     void changeNPCmovement();
     bool isDead();
     void printMap();

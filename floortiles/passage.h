@@ -2,7 +2,6 @@
 #define PASSAGE_H
 #include <string>
 #include "./floortiles.h"
-#include "../abstractobject.h"
 using namespace std;
 
 class Passage : public FloorTiles

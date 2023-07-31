@@ -419,7 +419,7 @@ bool GameMap::isStair()
     return false;
 }
 
-void GameMap::update() { notifyObservers(); }
+// void GameMap::update() { notifyObservers(); }
 
 void GameMap::changeNPCmovement() {
     if (npc_movement) npc_movement = false;

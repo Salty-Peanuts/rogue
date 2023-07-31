@@ -2,7 +2,6 @@
 #define DOORWAY_H
 #include <string>
 #include "./floortiles.h"
-#include "../abstractobject.h"
 using namespace std;
 
 class Doorway : public FloorTiles
