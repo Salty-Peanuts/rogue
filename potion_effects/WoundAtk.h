@@ -8,6 +8,7 @@ class WoundAtk : public PotionEffect
     int atk_decrease;
     public:
         WoundAtk();
+        ~WoundAtk();
         void usePotion(int &hp, int &atk, int &def, int max_hp) override;
         void removePotion(int &hp, int &atk, int &def) override;
         int potionStrength() override;

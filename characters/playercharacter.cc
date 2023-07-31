@@ -24,7 +24,7 @@ void PlayerCharacter::activatePotion(string pot) {
         new_pot = new RestoreHealth();
 
         // runs if the player does not have a max hp
-        if (has_max_hp = false) {
+        if (has_max_hp == false) {
             potion_effects.push_back(new_pot);
             new_pot->usePotion(getHP(), getAtk(), getDef(), getMaxHP() + new_pot->potionStrength());
             return;

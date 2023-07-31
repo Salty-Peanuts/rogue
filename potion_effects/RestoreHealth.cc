@@ -4,6 +4,8 @@ RestoreHealth::RestoreHealth():
     health_increase{10} {}
 
 
+RestoreHealth::~RestoreHealth() {}
+
 void RestoreHealth::usePotion(int &hp, int &atk, int &def, int max_hp) {
     if (hp + health_increase > max_hp) {
         hp = max_hp;

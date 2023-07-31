@@ -3,6 +3,8 @@
 WoundAtk::WoundAtk():
     atk_decrease{5} {}
 
+WoundAtk::~WoundAtk() {}
+
 
 void WoundAtk::usePotion(int &hp, int &atk, int &def, int max_hp) {
     if (atk - atk_decrease < 0) {

@@ -3,6 +3,8 @@
 WoundDef::WoundDef():
     def_decrease{5} {}
 
+WoundDef::~WoundDef() {}
+
 
 void WoundDef::usePotion(int &hp, int &atk, int &def, int max_hp) {
     if (atk - def_decrease < 0) {

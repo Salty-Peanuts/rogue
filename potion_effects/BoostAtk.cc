@@ -4,6 +4,8 @@ BoostAtk::BoostAtk():
     atk_increase{5} {}
 
 
+BoostAtk::~BoostAtk() {}
+
 void BoostAtk::usePotion(int &hp, int &atk, int &def, int max_hp) {
     atk += atk_increase;
 }
