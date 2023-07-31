@@ -26,11 +26,11 @@ class AbstractCharacter : public AbstractObject
         int &getAtk();
         int &getDef();
 
-        virtual int attack(AbstractCharacter *character);
-        virtual void recieveAttack(AbstractCharacter *character);
+        virtual int attack(AbstractCharacter *character) = 0;
+        //virtual void recieveAttack(AbstractCharacter *character);
         // virtual void death();
         virtual string identify() = 0;
-        virtual string getRace();
+        virtual string getRace() = 0;
 };
 
 #endif

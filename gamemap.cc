@@ -404,8 +404,8 @@ void GameMap::reset() {
 
 bool GameMap::isStair()
 {
-    int x; 
-    int y;
+    int x = 0; 
+    int y = 0;
     for (int i = 0; i < col; ++i) {
         for (int j = 0; j < row; ++i) {
             if (game_map[i][j]->getToken() == '\\') {

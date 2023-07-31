@@ -5,7 +5,7 @@
 AbstractObject::AbstractObject(int x, int y, char token) :
     x{x}, y{y}, token{token} {}
 
-
+AbstractObject::~AbstractObject() {}
 
 int AbstractObject::getX()
 {
