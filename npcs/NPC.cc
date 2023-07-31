@@ -12,6 +12,8 @@ void NPC::death() {
 }
 */
 
+NPC::~NPC() {}
+
 
 bool NPC::wasMoved() {
     return hasMoved;
