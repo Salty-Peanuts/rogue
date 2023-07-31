@@ -179,7 +179,8 @@ void GameMap::start()
                         y_temp++;
                     }
                     // loop through the all_dots to check if that point is valid
-                    for (int z = 0; z < all_dots.size(); z++) {
+                    int all_dots_size = all_dots.size();
+                    for (int z = 0; z < all_dots_size; z++) {
                         Coordinates temp = all_dots[z];
                         if (temp.x == x_temp && temp.y == y_temp) {
                             exists = false;
