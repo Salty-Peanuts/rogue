@@ -10,7 +10,7 @@
 using namespace std;
 
 PlayerCharacter::PlayerCharacter(int x, int y, int hp, int atk, int def):
-    AbstractCharacter{x, y, '@', hp, atk, def}, gold{0}, max_hp{hp} {}
+    AbstractCharacter{x, y, '@', hp, atk, def}, gold{0}, max_hp{hp}, has_max_hp{true} {}
 
 
 PlayerCharacter::~PlayerCharacter() {

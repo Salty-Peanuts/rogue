@@ -12,6 +12,7 @@ class Dragon : public NPC
 
     public:
         Dragon(int x, int y, DragonHoard *dragon_hoard);
+        ~Dragon();
         int attack(AbstractCharacter* receiver) override;
         string getRace() override;
         void assignDragonHoard(DragonHoard *dragon_hoard);

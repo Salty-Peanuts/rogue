@@ -5,6 +5,8 @@ using namespace std;
 Orc::Orc(int x, int y):
     NPC{x, y, 'O', 180, 30, 25} {}
 
+Orc::~Orc() {}
+
 
 int Orc::attack(AbstractCharacter* receiver) {
     // handles 50% of npc missing attack

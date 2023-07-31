@@ -11,6 +11,7 @@ class Merchant : public NPC
 
     public:
         Merchant(int x, int y);
+        ~Merchant();
         int attack(AbstractCharacter* receiver) override;
         string getRace() override;
         void makeAggravated();

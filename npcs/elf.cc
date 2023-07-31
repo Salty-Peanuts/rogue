@@ -5,6 +5,8 @@ using namespace std;
 Elf::Elf(int x, int y):
     NPC{x, y, 'E', 140, 30, 10} {}
 
+Elf::~Elf() {}
+
 
 int Elf::attack(AbstractCharacter* receiver) {
     // handles 50% of npc missing attack

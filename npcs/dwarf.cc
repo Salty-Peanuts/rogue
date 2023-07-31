@@ -6,6 +6,8 @@ Dwarf::Dwarf(int x, int y):
     NPC{x, y, 'W', 100, 20, 30} {}
 
 
+Dwarf::~Dwarf() {}
+
 int Dwarf::attack(AbstractCharacter* receiver) {
     // handles 50% of npc missing attack
     srand((unsigned) time(NULL));

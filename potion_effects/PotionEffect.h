@@ -5,6 +5,7 @@ class PotionEffect
 {
     public:
         PotionEffect();
+        virtual ~PotionEffect() = 0;
         virtual void usePotion(int &hp, int &atk, int &def, int max_hp) = 0;
         virtual void removePotion(int &hp, int &atk, int &def) = 0;
         virtual int potionStrength() = 0;

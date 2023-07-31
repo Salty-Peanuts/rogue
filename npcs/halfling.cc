@@ -6,6 +6,8 @@ Halfling::Halfling(int x, int y):
     NPC{x, y, 'H', 100, 15, 20} {}
 
 
+Halfling::~Halfling() {}
+
 int Halfling::attack(AbstractCharacter* receiver) {
     // handles 50% of npc missing attack
     srand((unsigned) time(NULL));

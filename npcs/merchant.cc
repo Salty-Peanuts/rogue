@@ -10,6 +10,8 @@ Merchant::Merchant(int x, int y):
         regular_gold_dropper = false;
     }
 
+Merchant::~Merchant() {}
+
 
 int Merchant::attack(AbstractCharacter* receiver) {
     // handles 50% of npc missing attack

@@ -7,6 +7,8 @@ Dragon::Dragon(int x, int y, DragonHoard *dragon_hoard):
         regular_gold_dropper = false;
     }
 
+Dragon::~Dragon() {}
+
 
 int Dragon::attack(AbstractCharacter* receiver) {
     int damage = ceil((100 / (100 + receiver->getDef())) * getAtk());

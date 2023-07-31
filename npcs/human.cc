@@ -5,6 +5,8 @@ using namespace std;
 Human::Human(int x, int y):
     NPC{x, y, 'H', 140, 20, 20} {}
 
+Human::~Human() {}
+
 
 int Human::attack(AbstractCharacter* receiver) {
     // handles 50% of npc missing attack
