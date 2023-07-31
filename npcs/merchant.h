@@ -18,7 +18,5 @@ class Merchant : public NPC
 };
 
 
-bool Merchant::aggravated = false;
-
 #endif
 

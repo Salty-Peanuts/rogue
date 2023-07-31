@@ -5,6 +5,9 @@ using namespace std;
 Troll::Troll(int x, int y) :
     PlayerCharacter{x, y, 120, 25, 15} {}
 
+
+Troll::~Troll() {}
+
 int Troll::attack(AbstractCharacter *receiver) {
     // deals with if receiver is halfling (50% chance of missing attack)
     if (receiver->getRace() == "halfling") {

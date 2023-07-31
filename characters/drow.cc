@@ -6,6 +6,9 @@ Drow::Drow(int x, int y) :
     PlayerCharacter{x, y, 150, 25, 15} {}
 
 
+Drow::~Drow() {}
+
+
 int Drow::attack(AbstractCharacter *receiver) {
     // deals with if receiver is halfling (50% chance of missing attack)
     if (receiver->getRace() == "halfling") {

@@ -5,6 +5,9 @@ using namespace std;
 Shade::Shade(int x, int y) :
     PlayerCharacter{x, y, 125, 25, 25} {}
 
+
+Shade::~Shade() {}
+
 int Shade::attack(AbstractCharacter *receiver) {
     // deals with if receiver is halfling (50% chance of missing attack)
     if (receiver->getRace() == "halfling") {

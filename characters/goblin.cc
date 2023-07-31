@@ -5,6 +5,10 @@ using namespace std;
 Goblin::Goblin(int x, int y) :
     PlayerCharacter{x, y, 110, 15, 20} {}
 
+
+Goblin::~Goblin() {}
+
+
 int Goblin::attack(AbstractCharacter *receiver) {
     // deals with if receiver is halfling (50% chance of missing attack)
     if (receiver->getRace() == "halfling") {

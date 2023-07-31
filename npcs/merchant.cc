@@ -9,6 +9,8 @@ Merchant::Merchant(int x, int y):
         regular_gold_dropper = false;
     }
 
+bool Merchant::aggravated = false;
+
 Merchant::~Merchant() {}
 
 
