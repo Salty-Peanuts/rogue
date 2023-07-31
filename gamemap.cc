@@ -16,6 +16,7 @@
 #include "./characters/vampire.h"
 #include "./characters/troll.h"
 #include "./items/treasure.h"
+#include "./npcs/dragon.h"
 #include "./floortiles/floor.h"
 #include "./floortiles/walls.h"
 #include "./floortiles/stair.h"
@@ -146,10 +147,10 @@ void GameMap::start()
         object_tiles[x][y] = is->spawnRandom(x, y);
         // if spawns a treasure
         if (i >= 10) {
-            Treasure *tr = dynamic_cast<Treasure *>(object_tiles[x][y]);
+            DragonHoard *dragon_hoard = dynamic_cast<DragonHoard *>(object_tiles[x][y]);
             // if spawns a dragon hoard
-            if (tr->getValue() == 6) {
-                NPCSpawner *npc_spawner = new NPCSpawner("Dragon");
+            if (dragon_hoard) {
+                NPCSpawner *npc_spawner = new NPCSpawner("dragon");
                 bool exists = true;
                 // loop to find a coordinate that is unoccupied
                 while (exists)
@@ -190,9 +191,11 @@ void GameMap::start()
                     break;
                 }
                 object_tiles[x][y] = npc_spawner->spawn(x, y);
+                Dragon *dragon = dynamic_cast<Dragon *>(object_tiles[x][y]);
+                dragon->assignDragonHoard(dragon_hoard);
                 delete npc_spawner;
             }
-            delete tr;
+            delete dragon_hoard;
         }
         delete is;
     }

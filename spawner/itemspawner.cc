@@ -27,10 +27,10 @@ AbstractObject* ItemSpawner::spawn(int x, int y)
     else if (item_type == "PH") { return new Potion(x, y, "PH"); } 
     else if (item_type == "WA") { return new Potion(x, y, "WA"); } 
     else if (item_type == "WD") { return new Potion(x, y, "WD"); } 
-    else if (item_type == "Normal") { return new NormalPile(x, y); } 
-    else if (item_type == "Small") { return new SmallPile(x, y); } 
-    else if (item_type == "Dragon") { return new DragonHoard(x, y); }
-    else if (item_type == "Merchant") {return new MerchantHoard(x, y); }
+    else if (item_type == "normal") { return new NormalPile(x, y); } 
+    else if (item_type == "small") { return new SmallPile(x, y); } 
+    else if (item_type == "dragon") { return new DragonHoard(x, y); }
+    else if (item_type == "merchant") {return new MerchantHoard(x, y); }
     else { return nullptr; }
 }
 

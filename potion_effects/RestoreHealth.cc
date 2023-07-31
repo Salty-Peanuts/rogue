@@ -1,7 +1,7 @@
 #include "RestoreHealth.h"
 
 RestoreHealth::RestoreHealth():
-    PotionEffect(true), health_increase{10} {}
+    health_increase{10} {}
 
 
 void RestoreHealth::usePotion(int &hp, int &atk, int &def, int max_hp) {

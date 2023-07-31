@@ -1,7 +1,7 @@
 #include "WoundDef.h"
 
 WoundDef::WoundDef():
-    PotionEffect(false), def_decrease{5} {}
+    def_decrease{5} {}
 
 
 void WoundDef::usePotion(int &hp, int &atk, int &def, int max_hp) {
@@ -9,7 +9,7 @@ void WoundDef::usePotion(int &hp, int &atk, int &def, int max_hp) {
         atk = 0;
     }
     else {
-        atk - def_decrease;
+        atk -= def_decrease;
     }
 }
 

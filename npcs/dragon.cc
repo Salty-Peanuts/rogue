@@ -19,3 +19,9 @@ string Dragon::getRace() {
     return "dragon";
 }
 
+
+void Dragon::assignDragonHoard(DragonHoard *dragon_hoard) {
+    this->dragon_hoard = dragon_hoard;
+}
+
+

@@ -20,13 +20,13 @@ void NPCSpawner::setNPCRace(string npc_race)
 AbstractObject* NPCSpawner::spawn(int x, int y) 
 {
     if (npc_race == "Human") { new Human(x, y); } // we need constructor here
-    else if (npc_race == "Dwarf") { new Dwarf(x, y); }
-    else if (npc_race == "Halfling") { new Halfling(x, y); }
-    else if (npc_race == "Elf") { new Elf(x, y); }
-    else if (npc_race == "Orc") { new Orc(x, y); }
-    else if (npc_race == "Merchant") { new Merchant(x, y); }
-    else if (npc_race == "Dragon") { new Dragon(x, y); }    // ------ we need put DragonHoard as a param (we need to make DragonHoard before, then give it as parameter here)
-    else { return nullptr; }
+    if (npc_race == "Dwarf") { new Dwarf(x, y); }
+    if (npc_race == "Halfling") { new Halfling(x, y); }
+    if (npc_race == "Elf") { new Elf(x, y); }
+    if (npc_race == "Orc") { new Orc(x, y); }
+    if (npc_race == "Merchant") { new Merchant(x, y); }
+    if (npc_race == "Dragon") { new Dragon(x, y, nullptr); }
+    return nullptr; 
 }
 
 AbstractObject* NPCSpawner::spawnRandom(int x, int y) 

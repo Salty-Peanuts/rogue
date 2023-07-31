@@ -1,7 +1,7 @@
 #include "PoisonHealth.h"
 
 PoisonHealth::PoisonHealth():
-    PotionEffect(true), health_decrease{10} {}
+    health_decrease{10} {}
 
 
 void PoisonHealth::usePotion(int &hp, int &atk, int &def, int max_hp) {

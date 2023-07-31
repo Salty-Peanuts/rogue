@@ -5,7 +5,6 @@
 
 class StairSpawner : public ObjectSpawner
 {
-    char tile_type = '\\';
  public:
     StairSpawner();
     ~StairSpawner();

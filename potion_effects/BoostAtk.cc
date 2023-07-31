@@ -1,7 +1,7 @@
 #include "BoostAtk.h"
 
 BoostAtk::BoostAtk():
-    PotionEffect(false), atk_increase{5} {}
+    atk_increase{5} {}
 
 
 void BoostAtk::usePotion(int &hp, int &atk, int &def, int max_hp) {

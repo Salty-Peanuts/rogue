@@ -1,7 +1,7 @@
 #include "WoundAtk.h"
 
 WoundAtk::WoundAtk():
-    PotionEffect(false), atk_decrease{5} {}
+    atk_decrease{5} {}
 
 
 void WoundAtk::usePotion(int &hp, int &atk, int &def, int max_hp) {
@@ -9,7 +9,7 @@ void WoundAtk::usePotion(int &hp, int &atk, int &def, int max_hp) {
         atk = 0;
     }
     else {
-        atk - atk_decrease;
+        atk -= atk_decrease;
     }
 }
 
