@@ -15,3 +15,7 @@ string Potion::identify() {
     return "Potion";
 }
 
+
+string Potion::getPotionType() {
+    return potion_type;
+}
