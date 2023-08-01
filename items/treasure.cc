@@ -11,10 +11,6 @@ bool Treasure::isTraversible(AbstractObject *traveler) {
     return true;
 }
 
-string Treasure::identify() {
-    return "Treasure";
-}
-
 
 int Treasure::getValue() {
     return value;

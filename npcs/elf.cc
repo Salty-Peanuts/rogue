@@ -23,7 +23,7 @@ int Elf::attack(AbstractCharacter* receiver) {
     int damage = 0;
 
     // attacks Drow once
-    if (receiver->getRace() == "drow") {
+    if (receiver->getRace() == "Drow") {
         damage = ceil((100 / (100 + receiver->getDef())) * getAtk());
         receiver->getHP() -= damage;
         return damage;
@@ -41,7 +41,7 @@ int Elf::attack(AbstractCharacter* receiver) {
 
 
 string Elf::getRace() {
-    return "elf";
+    return "Elf";
 }
 
 

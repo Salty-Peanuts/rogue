@@ -10,6 +10,7 @@ class SmallPile : public Treasure
 {   
     public:
         SmallPile(int x, int y);
+        string identify() override;
 };
 
 #endif

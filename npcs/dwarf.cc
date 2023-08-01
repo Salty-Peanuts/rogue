@@ -24,7 +24,7 @@ int Dwarf::attack(AbstractCharacter* receiver) {
 
 
 string Dwarf::getRace() {
-    return "dwarf";
+    return "Dwarf";
 }
 
 
