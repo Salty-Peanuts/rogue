@@ -36,6 +36,9 @@ string Controller::run_game() {
         else if (m_dir[cmd] != 0) {
             // if the move is valid
             if (gameMap->moveCharacter(m_dir[cmd])) {
+
+                cout << "this was a valid command, print this" << endl; // ------------------------------------------
+
                 // if the player reaches the stair
                 if (gameMap->isStair()) {
                     if (gameMap->getLevel() == 5) {
