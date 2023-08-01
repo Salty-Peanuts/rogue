@@ -617,6 +617,10 @@ void GameMap::printMap() {
     cout << "Action: " << last_action << endl;
 }
 
+void GameMap::resetAction() {
+    last_action = "";
+}
+
 
 // Getters
 

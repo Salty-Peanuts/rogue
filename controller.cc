@@ -10,8 +10,9 @@
 
 using namespace std;
 
+
 // read map layuout from file
-void readFile(string file_name, vector<vector<char>> &map_layout, int floor) {
+void readFromFile(string file_name, vector<vector<char>> &map_layout, int floor) {
     string str;
     ifstream input (file_name);
     for (int i = 0; i < col; i++) {
@@ -33,7 +34,7 @@ void readFile(string file_name, vector<vector<char>> &map_layout, int floor) {
 
 Controller::Controller(string race, bool given_map, string file_name) {
     vector<vector<char>> map_layout;
-    readFile(file_name, map_layout, 0);
+    readFromFile(file_name, map_layout, 0);
     GameMap *gm = new GameMap(map_layout, race, given_map, file_name);
     gameMap = gm;
 }
@@ -100,5 +101,6 @@ string Controller::run_game() {
             cout << "Your HP is below 0, you lost!" << endl;
             return "lost";
         }
+        gameMap->npcLogic();
     }
 }

@@ -43,6 +43,7 @@ class GameMap
     void changeNPCmovement();
     bool isDead();
     void printMap();
+    void resetAction();
 
     // Getters
     int getLevel() const;
