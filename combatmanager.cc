@@ -2,6 +2,8 @@
 #include "constants.h"
 #include "spawner/itemspawner.h"
 #include "npcs/NPC.h"
+#include <cstdlib>
+#include <ctime>
 #include <string>
 using namespace std;
 
@@ -49,8 +51,6 @@ void CombatManager::playerAttack(GameMap *game_map, AbstractCharacter* initiator
         game_map->addAction("Your attack whiffed. ");
     }
     int damage_num = initiator->attack(reciever);
-    int x = reciever->getX();
-    int y = reciever->getY();
     if (damage_num == MISSED_ATTACK) {
         game_map->addAction("You swing to attack, but the enemy dodges just in time. ");
     } else {
@@ -62,6 +62,8 @@ void CombatManager::playerAttack(GameMap *game_map, AbstractCharacter* initiator
         if (!npc) {
             return;
         }
+        int x = reciever->getX();
+        int y = reciever->getY();
         game_map->addAction("The " + reciever->getRace() + " is slain. ");
         game_map->deleteObject(reciever);
         // add drop gold logic here
@@ -69,7 +71,13 @@ void CombatManager::playerAttack(GameMap *game_map, AbstractCharacter* initiator
             ItemSpawner *item_spawner = new ItemSpawner("merchant");
             game_map->addObject(item_spawner->spawn(x, y));
         } else if (npc->regGoldDropper()) {
-
+            srand(time(0));
+            int gold_type = 1 + rand() % 2;
+            if (gold_type == 1) {
+                game_map->getPlayerCharacter()->updateGold(1);
+            } else {
+                game_map->getPlayerCharacter()->updateGold(2);
+            }
         }
     }
 }
