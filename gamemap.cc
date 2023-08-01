@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <fstream>
+#include <sstream>
 #include "gamemap.h"
 #include "constants.h"
 #include "abstractcharacter.h"
@@ -33,11 +35,7 @@
 using namespace std;
 
 
-GameMap::GameMap(vector<vector<char>> game_map_in, string race): player_race{race} {
-    //vector<vector<AbstractObject*>> game_map(col, std::vector<AbstractObject*>(row, nullptr));
-    game_map = vector<vector<AbstractObject*>>(col, std::vector<AbstractObject*>(row, nullptr));
-
-
+void translate(vector<vector<AbstractObject *>> &game_map, vector<vector<AbstractObject *>> &object_tiles, PlayerCharacter *player_character, string race, vector<vector<char>> &game_map_in) {
     for (int i = 0; i < row; i++) {
         for (int j = 0; j < col; j++) {
             if (game_map_in[j][i] == '.') {
@@ -58,14 +56,107 @@ GameMap::GameMap(vector<vector<char>> game_map_in, string race): player_race{rac
             if (game_map_in[j][i] == '#') {
                 game_map[j][i] = new Passage(i, j);
             }
-            //else game_map[j][i] = nullptr;
+
+
+            // add new stuffs
+            if (game_map_in[j][i] == '@') {
+                // add new player
+                if (race == "s") player_character = new Shade(j, i);
+                if (race == "g") player_character = new Goblin(j, i);
+                if (race == "d") player_character = new Drow(j, i);
+                if (race == "v") player_character = new Vampire(j, i);
+                if (race == "t") player_character = new Troll(j, i);
+            }
+            if (game_map_in[j][i] == '0') {
+                ItemSpawner *is = new ItemSpawner("RH");
+                object_tiles[j][i] = is->spawn(j, i);
+                delete is;
+            }
+            if (game_map_in[j][i] == '1') {
+                ItemSpawner *is = new ItemSpawner("BA");
+                object_tiles[j][i] = is->spawn(j, i);
+                delete is;
+            }
+            if (game_map_in[j][i] == '2') {
+                ItemSpawner *is = new ItemSpawner("BD");
+                object_tiles[j][i] = is->spawn(j, i);
+                delete is;
+            }
+            if (game_map_in[j][i] == '3') {
+                ItemSpawner *is = new ItemSpawner("PH");
+                object_tiles[j][i] = is->spawn(j, i);
+                delete is;
+            }
+            if (game_map_in[j][i] == '4') {
+                ItemSpawner *is = new ItemSpawner("WA");
+                object_tiles[j][i] = is->spawn(j, i);
+                delete is;
+            }
+            if (game_map_in[j][i] == '5') {
+                ItemSpawner *is = new ItemSpawner("WD");
+                object_tiles[j][i] = is->spawn(j, i);
+                delete is;
+            }
+            if (game_map_in[j][i] == '6') {
+                ItemSpawner *is = new ItemSpawner("normal");
+                object_tiles[j][i] = is->spawn(j, i);
+                delete is;
+            }
+            if (game_map_in[j][i] == '7') {
+                ItemSpawner *is = new ItemSpawner("small");
+                object_tiles[j][i] = is->spawn(j, i);
+                delete is;
+            }
+            if (game_map_in[j][i] == '8') {
+                ItemSpawner *is = new ItemSpawner("merchant");
+                object_tiles[j][i] = is->spawn(j, i);
+                delete is;
+            }
+            if (game_map_in[j][i] == '9') {
+                ItemSpawner *is = new ItemSpawner("dragon");
+                object_tiles[j][i] = is->spawn(j, i);
+                delete is;
+            }
         }
         
     }
-    PlayerCharacter *pc = nullptr;
-    player_character = pc;
+}
 
+
+// read map layuout from file
+void readFile(string file_name, vector<vector<char>> &map_layout, int floor) {
+    string str;
+    ifstream input (file_name);
+    for (int i = 0; i < col; i++) {
+        map_layout.push_back({});
+    }
+    for (int i = 0; i < row * floor; i++) {
+        getline(input, str);
+    }
+    for (int i = 0; i < row; i++) {
+        getline(input, str);
+        for (int j = 0; j < col; j++) {
+            // crashes here ====================================
+            //map_layout[j][i] = str[j];
+
+            map_layout[j].push_back(str[j]);
+        }
+    }
+}
+
+
+GameMap::GameMap(vector<vector<char>> game_map_in, string race, bool given_map, string file_name): player_race{race}, given_map{given_map}, file_name{file_name} {
+    //vector<vector<AbstractObject*>> game_map(col, std::vector<AbstractObject*>(row, nullptr));
+    game_map = vector<vector<AbstractObject*>>(col, std::vector<AbstractObject*>(row, nullptr));
+    
     object_tiles = vector<vector<AbstractObject*>>(col, std::vector<AbstractObject*>(row, nullptr));
+
+    translate(game_map, object_tiles, player_character, race, game_map_in);
+    
+    if (!given_map) {
+        PlayerCharacter *pc = nullptr;
+        player_character = pc;
+    }
 
     attack = new CombatManager(0);
     npc_movement = true;
@@ -436,6 +527,11 @@ void GameMap::reset() {
     }
     attack->setDirection(0);
     last_action = "";
+    if (given_map) {
+        vector<vector<char>> game_map_in;
+        readFile(file_name, game_map_in, floor_level);
+        translate(game_map, object_tiles, player_character, player_race, game_map_in);
+    }
 }
 
 bool GameMap::isStair()
@@ -540,3 +636,5 @@ int GameMap::getScore() const {
     if (player_character->getRace() == "Shade") return player_character->getGold() * 1.5;
     else return player_character->getGold();
 }
+
+bool GameMap::isGivenMap() const {return given_map;}

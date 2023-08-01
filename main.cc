@@ -10,40 +10,14 @@
 using namespace std;
 
 
-// read map layuout from file
-void readFile(string file_name, vector<vector<char>> &map_layout) {
-    string str;
-    ifstream input (file_name);
-    for (int i = 0; i < col; i++) {
-        map_layout.push_back({});
-    }
-    for (int i = 0; i < row; i++) {
-        getline(input, str);
-        for (int j = 0; j < col; j++) {
-            // crashes here ====================================
-            //map_layout[j][i] = str[j];
-
-            map_layout[j].push_back(str[j]);
-        }
-    }
-}
-
-// print out the map
-void printMap(vector<vector<char>> &map_layout) {
-    for (int i = 0; i < row; i++) { 
-        for (int j = 0; j < col; j++) {
-            cout << map_layout[j][i];
-        }
-        cout << endl;
-    }
-}
-
-int main() {
+int main (int argc, char *argv[]) {
+    bool given_map = false;
+    string file_name = "./floors/cc3k-emptySingleFloor.txt";
     srand((unsigned) time(NULL));
-    
-    vector<vector<char>> map_layout;
-    readFile("./floors/cc3k-emptySingleFloor.txt", map_layout);
-    printMap(map_layout);
+    if (argc == 2) {
+        file_name = argv[1];
+        given_map = true;
+    }
 
     // ask to choose race
     while (true) {
@@ -55,7 +29,7 @@ int main() {
         } while (cmd != "s" && cmd != "g" && cmd != "d" && cmd != "t" && cmd != "v");
 
         // start game
-        Controller *c = new Controller(map_layout, cmd);
+        Controller *c = new Controller(cmd, given_map, file_name);
         string result = c->run_game();
         delete c;
 

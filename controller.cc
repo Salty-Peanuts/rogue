@@ -2,17 +2,39 @@
 #include <string>
 #include "gamemap.h"
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include <map>
 #include "combatmanager.h"
 #include "constants.h"
 
 using namespace std;
 
+// read map layuout from file
+void readFile(string file_name, vector<vector<char>> &map_layout, int floor) {
+    string str;
+    ifstream input (file_name);
+    for (int i = 0; i < col; i++) {
+        map_layout.push_back({});
+    }
+    for (int i = 0; i < row * floor; i++) {
+        getline(input, str);
+    }
+    for (int i = 0; i < row; i++) {
+        getline(input, str);
+        for (int j = 0; j < col; j++) {
+            // crashes here ====================================
+            //map_layout[j][i] = str[j];
 
-Controller::Controller(vector<vector<char>> map_layout, string race) {
+            map_layout[j].push_back(str[j]);
+        }
+    }
+}
 
-    // set map layout, race of the player character, and npc movement = true
-    GameMap *gm = new GameMap(map_layout, race);
+Controller::Controller(string race, bool given_map, string file_name) {
+    vector<vector<char>> map_layout;
+    readFile(file_name, map_layout, 0);
+    GameMap *gm = new GameMap(map_layout, race, given_map, file_name);
     gameMap = gm;
 }
 
@@ -22,7 +44,7 @@ Controller::~Controller() {
 
 // run games and return the ending state of the game as a string
 string Controller::run_game() {
-    gameMap->start();
+    if (!gameMap->isGivenMap()) gameMap->start();
     cout << "The game starts now: " << endl;
     gameMap->printMap();
 
@@ -45,7 +67,7 @@ string Controller::run_game() {
                     else {
                         cout << "You reached a new floor!" << endl;
                         gameMap->reset();
-                        gameMap->start();
+                        if (!gameMap->isGivenMap()) gameMap->start();
                         continue;
                     }
                 }

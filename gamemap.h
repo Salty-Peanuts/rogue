@@ -22,9 +22,11 @@ class GameMap
     bool npc_movement;
     string last_action;
     int floor_level;
+    bool given_map;
+    string file_name;
 
  public:
-    GameMap(vector<vector<char>> game_map, string race);
+    GameMap(vector<vector<char>> game_map, string race, bool given_map, string file_name);
     ~GameMap();
     void start();
     void addObject(AbstractObject* object);
@@ -50,6 +52,7 @@ class GameMap
     PlayerCharacter* getPlayerCharacter() const;
     void addAction(string action);
     int getScore() const;
+    bool isGivenMap() const;
 };
 
 #endif

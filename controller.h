@@ -9,7 +9,7 @@ class Controller {
     GameMap *gameMap;
 
  public:
-    Controller(vector<vector<char>> map_layout, string race);
+    Controller(string race, bool given_map, string file_name);
     ~Controller();
     string run_game();
     
