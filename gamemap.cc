@@ -380,6 +380,36 @@ bool GameMap::validMove(AbstractObject* object, int dir)
     int x = object->getX();
     int y = object->getY();
     
+    if (dir == m_dir["no"]) y--;
+    else if (dir == m_dir["so"]) y++;
+    else if (dir == m_dir["ea"]) x++;
+    else if (dir == m_dir["we"]) x--;
+    else if (dir == m_dir["nw"]) {
+        x--;
+        y--;
+    }
+    else if (dir == m_dir["ne"]) {
+        y--;
+        x++;
+    }
+    else if (dir == m_dir["sw"]) {
+        y++;
+        x--;
+    }
+    else if (dir == m_dir["se"]) {
+        x++;
+        y++;
+    }
+
+    if (object->identify() != "PlayerCharacter") {
+        if (x == player_character->getX() && y == player_character->getY()) return false;
+    }
+
+    if ((object_tiles[x][y] == nullptr || object_tiles[x][y]->isTraversible(object)) && 
+                (game_map[x][y] == nullptr || game_map[x][y]->isTraversible(object)))return true;
+    else return false;
+
+    /*
     if (dir == m_dir["no"]) {
         if ((object_tiles[x][y - 1] != nullptr && object_tiles[x][y - 1]->isTraversible(object)) || 
                 (game_map[x][y - 1] != nullptr && game_map[x][y - 1]->isTraversible(object)) ||
@@ -423,6 +453,7 @@ bool GameMap::validMove(AbstractObject* object, int dir)
     } else {
         return false;
     }
+    */
 }
 
 void GameMap::usePotion(string potion)
@@ -493,17 +524,23 @@ void GameMap::npcLogic() {
             }
         }
     }
+
+    
     // need some way to unset all the wasMoved flags
     for (int i = 0; i < row; ++i) {
-        for (int j = 0; j < col; ++i) {
+        for (int j = 0; j < col; ++j) {
+
+            if (object_tiles[j][i] == nullptr) continue; 
+
+            
             NPC* npc = dynamic_cast<NPC*>(object_tiles[j][i]);
-            if (object_tiles[j][i] == nullptr) {
-                continue;
-            } else if (npc) {
+            if (npc) {
                 npc->setMoved(false);
             }
         }
     }
+
+
 }
 
 void GameMap::playerAtk(int dir)

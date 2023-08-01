@@ -6,7 +6,7 @@ Passage::Passage(int x, int y) : FloorTiles{x, y, '#'} {}
 Passage::~Passage() {}
 
 bool Passage::isTraversible(AbstractObject* object) {
-    if (object->identify() == "Player") {
+    if (object->identify() == "PlayerCharacter") {
         return true;
     } else {
         return false;

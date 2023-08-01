@@ -74,8 +74,8 @@ string Controller::run_game() {
                         continue;
                     }
                 }
-                gameMap->printMap();
                 gameMap->npcLogic();
+                gameMap->printMap();
                 gameMap->resetAction();
                 continue;
             }
@@ -91,8 +91,8 @@ string Controller::run_game() {
             cin >> cmd;
             if (m_dir[cmd] != 0) {
                 gameMap->playerAtk(m_dir[cmd]);
-                gameMap->printMap();
                 gameMap->npcLogic();
+                gameMap->printMap();
                 gameMap->resetAction();
                 continue;
             }

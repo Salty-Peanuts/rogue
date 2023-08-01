@@ -6,7 +6,7 @@ Doorway::Doorway(int x, int y) : FloorTiles{x, y, '+'} {}
 Doorway::~Doorway() {}
 
 bool Doorway::isTraversible(AbstractObject* object) {
-    if (object->identify() == "Player") {
+    if (object->identify() == "PlayerCharacter") {
         return true;
     } else {
         return false;
