@@ -11,6 +11,13 @@ Dragon::~Dragon() {}
 
 
 int Dragon::attack(AbstractCharacter* receiver) {
+    // handles 50% of npc missing attack
+    int random = rand() % 2;
+
+    if (random == 1) {
+        return MISSED_ATTACK;
+    }
+
     int damage = ceil((100 / (100 + receiver->getDef())) * getAtk());
     receiver->getHP() -= damage;
     return damage;
