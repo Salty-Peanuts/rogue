@@ -245,6 +245,7 @@ bool GameMap::moveCharacter(int dir)
             }
             last_action += "You picked up" + to_string(treasure->getValue()) + " gold. ";
             player_character->updateGold(treasure->getValue());
+            deleteObject(object_tiles[player_character->getX()][player_character->getY()]);
         } else if (obj == "DragonHoard") {
             DragonHoard *dragonhoard = dynamic_cast<DragonHoard *>(object_tiles[player_character->getX()][player_character->getY()]);
             if (!dragonhoard) {
@@ -253,6 +254,7 @@ bool GameMap::moveCharacter(int dir)
             if (!dragonhoard->isDragonAlive()) {
                 last_action += "You picked up" + to_string(dragonhoard->getValue()) + " gold. ";
                 player_character->updateGold(dragonhoard->getValue());
+                deleteObject(object_tiles[player_character->getX()][player_character->getY()]);
             } else {
                 last_action += "You cannot pick up the dragon hoard. ";
             }
