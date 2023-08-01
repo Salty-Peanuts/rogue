@@ -2,9 +2,10 @@
 
 using namespace std;
 
+bool Merchant::aggravated = false;
+
 Merchant::Merchant(int x, int y):
     NPC{x, y, 'M', 30, 70, 5} { 
-        aggravated = false;
         hostile = aggravated; 
         regular_gold_dropper = false;
     }
