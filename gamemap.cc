@@ -123,7 +123,7 @@ void translate(vector<vector<AbstractObject *>> &game_map, vector<vector<Abstrac
 }
 
 
-// read map layuout from file
+// read map layout from file
 void readFile(string file_name, vector<vector<char>> &map_layout, int floor) {
     string str;
     ifstream input (file_name);
@@ -337,12 +337,13 @@ bool GameMap::moveCharacter(int dir)
         if (object_tiles[player_character->getX()][player_character->getY()] != nullptr) {
             obj = object_tiles[player_character->getX()][player_character->getY()]->identify();
         }
+        // gold logic
         if (obj == "NormalPile" || obj == "SmallPile" || obj == "MerchantHoard") {
             Treasure *treasure = dynamic_cast<Treasure *>(object_tiles[player_character->getX()][player_character->getY()]);
             if (!treasure) {
                 return false;
             }
-            last_action += "You picked up" + to_string(treasure->getValue()) + " gold. ";
+            last_action += "You picked up " + to_string(treasure->getValue()) + " gold. ";
             player_character->updateGold(treasure->getValue());
             deleteObject(object_tiles[player_character->getX()][player_character->getY()]);
         } else if (obj == "DragonHoard") {
@@ -351,7 +352,7 @@ bool GameMap::moveCharacter(int dir)
                 return false;
             }
             if (!dragonhoard->isDragonAlive()) {
-                last_action += "You picked up" + to_string(dragonhoard->getValue()) + " gold. ";
+                last_action += "You picked up " + to_string(dragonhoard->getValue()) + " gold. ";
                 player_character->updateGold(dragonhoard->getValue());
                 deleteObject(object_tiles[player_character->getX()][player_character->getY()]);
             } else {
@@ -365,6 +366,7 @@ bool GameMap::moveCharacter(int dir)
             if (dir_iter->second == dir) {
                 last_action += "The player has moved ";
                 last_action += dir_iter->first;
+                last_action += ". ";
                 break;
             }
             dir_iter++;
@@ -407,7 +409,7 @@ bool GameMap::validMove(AbstractObject* object, int dir)
 
 
     if ((object_tiles[x][y] == nullptr || object_tiles[x][y]->isTraversible(object)) && 
-                (game_map[x][y] != nullptr && game_map[x][y]->isTraversible(object)))return true;
+                (game_map[x][y] != nullptr && game_map[x][y]->isTraversible(object))) return true;
     else return false;
 
     /*
@@ -457,9 +459,30 @@ bool GameMap::validMove(AbstractObject* object, int dir)
     */
 }
 
-void GameMap::usePotion(string potion)
+bool GameMap::usePotion(int dir)
 {
-    player_character->activatePotion(potion);
+    int x = player_character->getX();
+    int y = player_character->getY();
+
+    if (dir == m_dir["no"]) { y -= 1; }
+    else if (dir == m_dir["so"]) { y += 1; }
+    else if (dir == m_dir["ea"]) { x += 1; }
+    else if (dir == m_dir["we"]) { x -= 1; }
+    else if (dir == m_dir["ne"]) { x += 1; y -= 1; }
+    else if (dir == m_dir["nw"]) { x -= 1; y -= 1; }
+    else if (dir == m_dir["se"]) { x += 1; y += 1; }
+    else if (dir == m_dir["sw"]) { x -= 1; y += 1; }
+    else { return false; }
+    
+    Potion* potion = dynamic_cast<Potion*>(object_tiles[x][y]);
+    if (potion) {
+        player_character->activatePotion(potion->getPotionType());
+        last_action += "You used a " + potion->getPotionType() + ". ";
+        return true;
+    } else {
+        return false;
+    }
+    // player_character->activatePotion();
 }
 
 
@@ -660,6 +683,15 @@ void GameMap::resetAction() {
     last_action = "";
 }
 
+void GameMap::trollSpecialAbility() {
+    if (player_character->getRace() == "Troll") {
+        if (player_character->getHP() + 5 <= player_character->getMaxHP()) {
+            player_character->getHP() + 5;
+        } else {
+            player_character->getHP() = player_character->getMaxHP();
+        }
+    }
+}
 
 // Getters
 

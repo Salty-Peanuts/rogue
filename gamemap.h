@@ -33,7 +33,7 @@ class GameMap
     void deleteObject(AbstractObject* object);
     bool moveCharacter(int dir);
     bool validMove(AbstractObject* object, int dir);
-    void usePotion(string potion);
+    bool usePotion(int dir);
     void npcLogic();
     void playerAtk(int dir);
     int playerInRange(AbstractObject* object);
@@ -44,6 +44,7 @@ class GameMap
     bool isDead();
     void printMap();
     void resetAction();
+    void trollSpecialAbility();
 
     // Getters
     int getLevel() const;
