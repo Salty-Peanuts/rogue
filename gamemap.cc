@@ -340,20 +340,16 @@ void GameMap::npcLogic() {
     // first look for NPC objects in the object_tiles vector
     for (int y = 0; y < row; ++y) {
         for (int x = 0; x < col; ++x) {
+            NPC* npc = dynamic_cast<NPC*>(object_tiles[x][y]);
             if (object_tiles[x][y] == nullptr) {
                 continue;
-            } else if (object_tiles[x][y]->identify() == "NPC" && playerInRange(object_tiles[x][y])) {
-                NPC* npc = dynamic_cast<NPC*>(object_tiles[x][y]);
-                if (!npc) {
-                    return;
-                }
+            } else if (npc && playerInRange(object_tiles[x][y])) {
                 // attack
                 if (npc->isHostile()) {
                     attack->setDirection(playerInRange(object_tiles[x][y]));
                     attack->NPCAttack(this, npc, player_character);
                 }
-            } else if (object_tiles[x][y]->identify() == "NPC" && !playerInRange(object_tiles[x][y]) && npc_movement) {
-                NPC* npc = dynamic_cast<NPC*>(object_tiles[x][y]);
+            } else if (npc && !playerInRange(object_tiles[x][y]) && npc_movement) {
                 // check if npc was moved
                 if (npc->wasMoved()) {
                     continue;
@@ -379,10 +375,10 @@ void GameMap::npcLogic() {
     // need some way to unset all the wasMoved flags
     for (int i = 0; i < row; ++i) {
         for (int j = 0; j < col; ++i) {
+            NPC* npc = dynamic_cast<NPC*>(object_tiles[j][i]);
             if (object_tiles[j][i] == nullptr) {
                 continue;
-            } else if (object_tiles[j][i]->identify() == "NPC") {
-                NPC* npc = dynamic_cast<NPC*>(object_tiles[i][j]);
+            } else if (npc) {
                 npc->setMoved(false);
             }
         }
