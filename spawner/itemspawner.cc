@@ -36,7 +36,7 @@ AbstractObject* ItemSpawner::spawn(int x, int y)
 
 AbstractObject* ItemSpawner::spawnRandom(int x, int y) 
 {
-    srand(time(0));
+    srand((unsigned) time(NULL));
     if (item_type == "Potion") {
         int potion_index = rand() % potion_probability;
         auto potion_iter = potion_type.begin();

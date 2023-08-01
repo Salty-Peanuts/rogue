@@ -31,7 +31,7 @@ AbstractObject* NPCSpawner::spawn(int x, int y)
 
 AbstractObject* NPCSpawner::spawnRandom(int x, int y) 
 {
-    srand(time(0));
+    srand((unsigned) time(NULL));
     int npc_index = rand() % npc_probability;
     auto npc_iter = npc_type.begin();
     int total = 0;
