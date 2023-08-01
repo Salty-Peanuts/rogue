@@ -405,8 +405,9 @@ bool GameMap::validMove(AbstractObject* object, int dir)
         if (x == player_character->getX() && y == player_character->getY()) return false;
     }
 
+
     if ((object_tiles[x][y] == nullptr || object_tiles[x][y]->isTraversible(object)) && 
-                (game_map[x][y] == nullptr || game_map[x][y]->isTraversible(object)))return true;
+                (game_map[x][y] != nullptr && game_map[x][y]->isTraversible(object)))return true;
     else return false;
 
     /*

@@ -51,6 +51,7 @@ string Controller::run_game() {
 
     while (true) {
         string cmd;
+        cout << "Enter command: ";
         cin >> cmd;
         if (cmd == "r") {
             return "restart";
@@ -102,6 +103,7 @@ string Controller::run_game() {
         }
         else if (cmd == "f") {
             gameMap->changeNPCmovement();
+            cout << "You just changed the state of the NPCs" << endl;
         }
         else {
             cout << "Please enter a valid command. Try again!" << endl;
