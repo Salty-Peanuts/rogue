@@ -492,6 +492,7 @@ int GameMap::playerInRange(AbstractObject* npc)
 
 void GameMap::npcLogic() {
     // first look for NPC objects in the object_tiles vector
+    if (!npc_movement) return;
     for (int y = 0; y < row; ++y) {
         for (int x = 0; x < col; ++x) {
             NPC* npc;
@@ -503,9 +504,9 @@ void GameMap::npcLogic() {
                     attack->setDirection(playerInRange(object_tiles[x][y]));
                     attack->NPCAttack(this, npc, player_character);
                 }
-            } else if (npc && !playerInRange(object_tiles[x][y]) && npc_movement) {
+            } else if (npc && !playerInRange(object_tiles[x][y])) {
                 // check if npc was moved
-                if (npc->wasMoved()) {
+                if (npc->wasMoved() || npc->getRace() == "Dragon") {
                     continue;
                 }
                 // move in a random direction
