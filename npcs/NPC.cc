@@ -26,3 +26,9 @@ string NPC::identify() {
 void NPC::setMoved(bool input) {
     hasMoved = input;
 }
+
+
+bool NPC::regGoldDropper() {
+    return regular_gold_dropper;
+}
+
