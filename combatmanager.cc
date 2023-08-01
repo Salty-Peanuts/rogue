@@ -46,6 +46,10 @@ void CombatManager::playerAttack(GameMap *game_map, AbstractCharacter* initiator
         attack_x += 1;
         attack_y += 1;
     }
+    if (game_map->objectTilesAt(attack_x, attack_y) == nullptr) {
+        game_map->addAction("Your attack whiffed. ");
+        return;
+    }
     AbstractCharacter* reciever = dynamic_cast<AbstractCharacter*>(game_map->objectTilesAt(attack_x, attack_y));
     if (!reciever) {
         game_map->addAction("Your attack whiffed. ");
