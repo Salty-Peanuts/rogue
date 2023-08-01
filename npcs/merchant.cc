@@ -21,7 +21,7 @@ int Merchant::attack(AbstractCharacter* receiver) {
         return MISSED_ATTACK;
     }
 
-    float damage_calc = (100 / (100 + receiver->getDef())) * getAtk();
+    float damage_calc = (100.0 / (100.0 + receiver->getDef())) * getAtk();
     int damage = ceil(damage_calc);
     receiver->getHP() -= damage;
     return damage;
