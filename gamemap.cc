@@ -22,36 +22,62 @@
 #include "./floortiles/stair.h"
 #include "./floortiles/ceiling.h"
 #include "./floortiles/passage.h"
+#include "./floortiles/doorway.h"
 
 using namespace std;
 
 
 GameMap::GameMap(vector<vector<char>> game_map_in, string race): player_race{race} {
+    //this->game_map = vector<vector<AbstractObject *>> game_map;
+   
     for (int i = 0; i < col; i++) {
-        for (int j = 0; j < row; j++) {
-            if (game_map_in[i][j] == '.') {
-                game_map[i][j] = new Floor(i, j);
+        game_map.push_back({});
+    }
+
+    for (int i = 0; i < row; i++) {
+        for (int j = 0; j < col; j++) {
+            if (game_map_in[j][i] == '.') {
+                game_map[j].push_back(new Floor(i, j));
             }
-            if (game_map_in[i][j] == '|') {
-                game_map[i][j] = new Walls(i, j);
+            if (game_map_in[j][i] == '+') {
+                game_map[j].push_back(new Doorway(i, j));
             }
-            if (game_map_in[i][j] == '\\') {
-                game_map[i][j] = new Stair(i, j);
+            if (game_map_in[j][i] == '|') {
+                game_map[j].push_back(new Walls(i, j));
             }
-            if (game_map_in[i][j] == '-') {
-                game_map[i][j] = new Ceiling(i, j);
+            if (game_map_in[j][i] == '\\') {
+                game_map[j].push_back(new Stair(i, j));
             }
-            if (game_map_in[i][j] == '#') {
-                game_map[i][j] = new Passage(i, j);
+            if (game_map_in[j][i] == '-') {
+                game_map[j].push_back(new Ceiling(i, j));
             }
-            else game_map[i][j] = nullptr;
+            if (game_map_in[j][i] == '#') {
+                game_map[j].push_back(new Passage(i, j));
+            }
+            else game_map[j].push_back(nullptr);
+
+            
+            if (game_map[j][i] == nullptr) {
+                cout << " ";
+            }
+            else {
+                cout << game_map[j][i]->getToken();
+            }
+            
         }
+        cout << endl;
+        
     }
     PlayerCharacter *pc = nullptr;
     player_character = pc;
+
+    for (int i = 0; i < col; i++) {
+        object_tiles.push_back({});
+    }
+
     for (int i = 0; i < row; i++) {
         for (int j = 0; j < col; j++) {
-            object_tiles[j][i] = nullptr;
+            object_tiles[j].push_back(nullptr);
         }
     }
     attack = new CombatManager(0);
@@ -85,7 +111,7 @@ void GameMap::start()
     vector<Coordinates> all_dots;
     for (int i = 0; i < col; i++) {
         for (int j = 0; j < row; j++) {
-            if (game_map[i][j]->getToken() == '.') {
+            if (game_map[i][j] != nullptr && game_map[i][j]->getToken() == '.') {
                 Coordinates dot;
                 dot.x = i;
                 dot.y = j;
@@ -434,17 +460,20 @@ bool GameMap::isDead() {
 }
 
 void GameMap::printMap() {
-     for (int i = 0; i < col; ++i) {
-        for (int j = 0; j < row; ++i) {
-            if (object_tiles[i][j] != nullptr) {
-                cout << object_tiles[i][j]->getToken();
+     for (int i = 0; i < row; ++i) {
+        for (int j = 0; j < col; ++j) {
+            if (object_tiles[j][i] != nullptr) {
+                cout << object_tiles[j][i]->getToken();
             }
-            else cout << game_map[i][j]->getToken();
+            else if (game_map[j][i] == nullptr) {
+                cout << " ";
+            }
+            else cout << game_map[j][i]->getToken();
         }
         cout << endl;
      }
 
-    cout << "Race: " << player_race << " ";
+    cout << "Race: " << player_character->getRace() << " ";
     cout << "Gold: " << player_character->getGold() << " ";
     cout << "                                       ";
     cout << "Floor: " << floor_level << endl;

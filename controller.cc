@@ -24,6 +24,7 @@ Controller::~Controller() {
 string Controller::run_game() {
     gameMap->start();
     cout << "The game starts now: " << endl;
+    gameMap->printMap();
 
     while (true) {
         string cmd;

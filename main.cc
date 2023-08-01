@@ -11,7 +11,7 @@ using namespace std;
 
 
 // read map layuout from file
-void readFile(string file_name, vector<vector<char>> map_layout) {
+void readFile(string file_name, vector<vector<char>> &map_layout) {
     string str;
     ifstream input (file_name);
     for (int i = 0; i < col; i++) {
@@ -21,13 +21,15 @@ void readFile(string file_name, vector<vector<char>> map_layout) {
         getline(input, str);
         for (int j = 0; j < col; j++) {
             // crashes here ====================================
-            map_layout[j][i] = str[j];
+            //map_layout[j][i] = str[j];
+
+            map_layout[j].push_back(str[j]);
         }
     }
 }
 
 // print out the map
-void printMap(vector<vector<char>> map_layout) {
+void printMap(vector<vector<char>> &map_layout) {
     for (int i = 0; i < row; i++) { 
         for (int j = 0; j < col; j++) {
             cout << map_layout[j][i];
@@ -46,9 +48,9 @@ int main() {
         string cmd;
         do {
             cout << "Welcome to CC3K" << endl << "Please choose a race to start:" << endl
-            << "Shade: s" << endl << "Goblin: g" << endl << "Drow: d" << endl << "Vampire: v" << endl << "Troll: t";
+            << "Shade: s" << endl << "Goblin: g" << endl << "Drow: d" << endl << "Vampire: v" << endl << "Troll: t" << endl;
             cin >> cmd;
-        } while (cmd != "s" || cmd != "g" || cmd != "d" || cmd != "t" || cmd != "v");
+        } while (cmd != "s" && cmd != "g" && cmd != "d" && cmd != "t" && cmd != "v");
 
         // start game
         Controller *c = new Controller(map_layout, cmd);
