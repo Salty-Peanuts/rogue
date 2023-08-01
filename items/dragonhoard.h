@@ -10,6 +10,7 @@ class DragonHoard : public Treasure
 {   
     public:
         DragonHoard(int x, int y);
+        string identify() override;
 };
 
 #endif

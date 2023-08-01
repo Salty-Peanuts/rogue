@@ -14,7 +14,6 @@ class Treasure : public Item
     void setValue(int value);
     bool isTraversible(AbstractObject *traveler) override;
     int getValue();
-    string identify() override;
 };
 
 #endif
