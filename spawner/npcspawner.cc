@@ -19,7 +19,7 @@ void NPCSpawner::setNPCRace(string npc_race)
 }
 AbstractObject* NPCSpawner::spawn(int x, int y) 
 {
-    if (npc_race == "Human") { return new Human(x, y); } // we need constructor here
+    if (npc_race == "Human") { return new Human(x, y); }
     if (npc_race == "Dwarf") { return new Dwarf(x, y); }
     if (npc_race == "Halfling") { return new Halfling(x, y); }
     if (npc_race == "Elf") { return new Elf(x, y); }
