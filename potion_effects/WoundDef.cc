@@ -1,7 +1,11 @@
 #include "WoundDef.h"
 
-WoundDef::WoundDef():
-    def_decrease{5} {}
+WoundDef::WoundDef(string race):
+    def_decrease{5} { 
+        if (race == "Drow") {
+            def_decrease *= 1.5;
+        }
+    }
 
 WoundDef::~WoundDef() {}
 

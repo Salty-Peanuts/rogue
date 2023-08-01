@@ -1,7 +1,11 @@
 #include "BoostDef.h"
 
-BoostDef::BoostDef():
-    def_increase{5} {}
+BoostDef::BoostDef(string race):
+    def_increase{5} { 
+        if (race == "Drow") {
+            def_increase *= 1.5;
+        }
+    }
 
 BoostDef::~BoostDef() {}
 

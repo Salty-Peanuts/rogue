@@ -1,7 +1,11 @@
 #include "WoundAtk.h"
 
-WoundAtk::WoundAtk():
-    atk_decrease{5} {}
+WoundAtk::WoundAtk(string race):
+    atk_decrease{5} { 
+        if (race == "Drow") {
+            atk_decrease *= 1.5;
+        }
+    }
 
 WoundAtk::~WoundAtk() {}
 

@@ -21,7 +21,7 @@ PlayerCharacter::~PlayerCharacter() {
 void PlayerCharacter::activatePotion(string pot) {
     PotionEffect *new_pot;
     if (pot == "RH") {
-        new_pot = new RestoreHealth();
+        new_pot = new RestoreHealth(getRace());
 
         // runs if the player does not have a max hp
         if (has_max_hp == false) {
@@ -32,19 +32,19 @@ void PlayerCharacter::activatePotion(string pot) {
         
     }
     if (pot == "BA") {
-        new_pot = new BoostAtk();
+        new_pot = new BoostAtk(getRace());
     }
     if (pot == "BD") {
-        new_pot = new BoostDef();
+        new_pot = new BoostDef(getRace());
     }
     if (pot == "PH") {
-        new_pot = new PoisonHealth();
+        new_pot = new PoisonHealth(getRace());
     }
     if (pot == "WA") {
-        new_pot = new WoundAtk();
+        new_pot = new WoundAtk(getRace());
     }
     if (pot == "WD") {
-        new_pot = new WoundDef();
+        new_pot = new WoundDef(getRace());
     }
 
     potion_effects.push_back(new_pot);

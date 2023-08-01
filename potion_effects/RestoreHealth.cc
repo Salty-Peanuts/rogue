@@ -1,7 +1,11 @@
 #include "RestoreHealth.h"
 
-RestoreHealth::RestoreHealth():
-    health_increase{10} {}
+RestoreHealth::RestoreHealth(string race):
+    health_increase{10} { 
+        if (race == "Drow") {
+            health_increase *= 1.5;
+        }
+    }
 
 
 RestoreHealth::~RestoreHealth() {}

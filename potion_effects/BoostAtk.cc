@@ -1,7 +1,11 @@
 #include "BoostAtk.h"
 
-BoostAtk::BoostAtk():
-    atk_increase{5} {}
+BoostAtk::BoostAtk(string race) :
+    atk_increase{5} { 
+        if (race == "Drow") {
+            atk_increase *= 1.5;
+        }
+    }
 
 
 BoostAtk::~BoostAtk() {}

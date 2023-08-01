@@ -1,7 +1,11 @@
 #include "PoisonHealth.h"
 
-PoisonHealth::PoisonHealth():
-    health_decrease{10} {}
+PoisonHealth::PoisonHealth(string race):
+    health_decrease{10} { 
+        if (race == "Drow") {
+            health_decrease *= 1.5;
+        }
+    }
 
 
 PoisonHealth::~PoisonHealth() {}
