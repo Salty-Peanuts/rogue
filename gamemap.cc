@@ -434,14 +434,14 @@ void GameMap::printMap() {
         for (int j = 0; j < col; ++j) {
             if (i == player_character->getY() && j == player_character->getX()) {
                 cout << player_character->getToken();
-            }
-            if (object_tiles[j][i] != nullptr && object_tiles[j][i] != player_character) {
+            } else if (object_tiles[j][i] != nullptr && object_tiles[j][i] != player_character) {
                 cout << object_tiles[j][i]->getToken();
             }
             else if (game_map[j][i] == nullptr) {
                 cout << " ";
+            } else {
+                cout << game_map[j][i]->getToken();
             }
-            else cout << game_map[j][i]->getToken();
         }
         cout << endl;
      }
