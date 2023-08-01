@@ -58,13 +58,6 @@ void PlayerCharacter::removePotions() {
     }
 }
 
-/*
-void PlayerCharacter::death() {
-    // implement death
-}
-*/
-
-
 
 
 // adds [value] amount to current gold balance
