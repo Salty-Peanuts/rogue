@@ -228,10 +228,12 @@ void GameMap::deleteObject(AbstractObject* object)
 
 bool GameMap::moveCharacter(int dir)
 {
+
     if (validMove(player_character, dir)) {
         int old_x = player_character->getX();
         int old_y = player_character->getY();
         player_character->move(dir);
+        
         deleteObject(object_tiles[old_x][old_y]);
         object_tiles[player_character->getX()][player_character->getY()] = player_character; // moving on object_tiles
         auto dir_iter = m_dir.begin();
@@ -459,6 +461,6 @@ AbstractObject* GameMap::objectTilesAt(int x, int y) const { return object_tiles
 void GameMap::addAction(string action) { last_action += action; }
 
 int GameMap::getScore() const {
-    if (player_character->getRace() == "shade") return player_character->getGold() * 1.5;
+    if (player_character->getRace() == "Shade") return player_character->getGold() * 1.5;
     else return player_character->getGold();
 }
