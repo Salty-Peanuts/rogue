@@ -19,13 +19,15 @@ int Orc::attack(AbstractCharacter* receiver) {
 
     // Orcs have special interaction with Goblin (50% more damage)
     if (receiver->getRace() == "Goblin") {
-        int damage = ceil((100 / (100 + receiver->getDef())) * getAtk()) * 1.5;
+        float damage_calc = (100 / (100 + receiver->getDef())) * getAtk() * 1.5;
+        int damage = ceil(damage_calc);
         receiver->getHP() -= damage;
         return damage;
     }
 
     // regular attack against any other race
-    int damage = ceil((100 / (100 + receiver->getDef())) * getAtk());
+    float damage_calc = (100 / (100 + receiver->getDef())) * getAtk();
+    int damage = ceil(damage_calc);
     receiver->getHP() -= damage;
     return damage;
 }

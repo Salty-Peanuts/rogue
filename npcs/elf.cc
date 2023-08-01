@@ -23,14 +23,16 @@ int Elf::attack(AbstractCharacter* receiver) {
 
     // attacks Drow once
     if (receiver->getRace() == "Drow") {
-        damage = ceil((100 / (100 + receiver->getDef())) * getAtk());
+        float damage_calc = (100 / (100 + receiver->getDef())) * getAtk();
+        damage = ceil(damage_calc);
         receiver->getHP() -= damage;
         return damage;
     }
 
     // attacks twice otherwise
     for (int i = 0; i < 2; i++) {
-        damage = ceil((100 / (100 + receiver->getDef())) * getAtk());
+        float damage_calc = (100 / (100 + receiver->getDef())) * getAtk();
+        damage = ceil(damage_calc);
         receiver->getHP() -= damage;
     }
     return damage * 2;

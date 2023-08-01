@@ -19,7 +19,8 @@ int Human::attack(AbstractCharacter* receiver) {
         return MISSED_ATTACK;
     }
 
-    int damage = ceil((100 / (100 + receiver->getDef())) * getAtk());
+    float damage_calc = (100 / (100 + receiver->getDef())) * getAtk();
+    int damage = ceil(damage_calc);
     receiver->getHP() -= damage;
     return damage;
 }
