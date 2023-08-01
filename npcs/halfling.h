@@ -12,6 +12,7 @@ class Halfling : public NPC
         ~Halfling();
         int attack(AbstractCharacter* receiver) override;
         string getRace() override;
+        void death() override;
 };
 
 

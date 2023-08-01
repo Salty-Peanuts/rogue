@@ -36,3 +36,7 @@ string Orc::getRace() {
     return "orc";
 }
 
+
+
+void Orc::death() {}
+

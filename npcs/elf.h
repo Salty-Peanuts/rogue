@@ -12,6 +12,7 @@ class Elf : public NPC
         ~Elf();
         int attack(AbstractCharacter* receiver) override;
         string getRace() override;
+        void death() override;
 };
 
 

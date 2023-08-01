@@ -1,9 +1,12 @@
 #include "human.h"
+#include "../spawner/itemspawner.h"
 
 using namespace std;
 
 Human::Human(int x, int y):
-    NPC{x, y, 'H', 140, 20, 20} {}
+    NPC{x, y, 'H', 140, 20, 20} { 
+        regular_gold_dropper = false;
+    }
 
 Human::~Human() {}
 
@@ -21,6 +24,10 @@ int Human::attack(AbstractCharacter* receiver) {
     receiver->getHP() -= damage;
     return damage;
 }
+
+
+void Human::death() {}
+
 
 
 string Human::getRace() {

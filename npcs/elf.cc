@@ -44,3 +44,6 @@ string Elf::getRace() {
     return "elf";
 }
 
+
+void Elf::death() {}
+

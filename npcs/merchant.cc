@@ -2,13 +2,11 @@
 
 using namespace std;
 
-
-
 Merchant::Merchant(int x, int y):
     NPC{x, y, 'M', 30, 70, 5} { 
+        aggravated = false;
         hostile = aggravated; 
         regular_gold_dropper = false;
-        aggravated = false;
     }
 
 Merchant::~Merchant() {}
@@ -40,5 +38,7 @@ void Merchant::makeAggravated() {
 }
 
 
+
+void Merchant::death() {}
 
 

@@ -28,3 +28,5 @@ string Halfling::getRace() {
 }
 
 
+void Halfling::death() {}
+

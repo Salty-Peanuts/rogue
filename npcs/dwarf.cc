@@ -27,3 +27,6 @@ string Dwarf::getRace() {
     return "dwarf";
 }
 
+
+void Dwarf::death() {}
+

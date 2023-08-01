@@ -27,3 +27,5 @@ void Dragon::assignDragonHoard(DragonHoard *dragon_hoard) {
 }
 
 
+void Dragon::death() {}
+
