@@ -11,9 +11,8 @@ Drow::~Drow() {}
 
 int Drow::attack(AbstractCharacter *receiver) {
     // deals with if receiver is halfling (50% chance of missing attack)
-    if (receiver->getRace() == "halfling") {
+    if (receiver->getRace() == "Halfling") {
         // randomly produces either 0 or 1
-        srand((unsigned) time(NULL));
         int random = rand() % 2;
 
         if (random == 1) {
@@ -28,7 +27,7 @@ int Drow::attack(AbstractCharacter *receiver) {
 
 
 string Drow::getRace() {
-    return "drow";
+    return "Drow";
 }
 
 

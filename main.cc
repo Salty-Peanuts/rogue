@@ -39,6 +39,8 @@ void printMap(vector<vector<char>> &map_layout) {
 }
 
 int main() {
+    srand((unsigned) time(NULL));
+    
     vector<vector<char>> map_layout;
     readFile("./floors/cc3k-emptySingleFloor.txt", map_layout);
     printMap(map_layout);

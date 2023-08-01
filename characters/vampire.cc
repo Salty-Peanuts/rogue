@@ -10,9 +10,8 @@ Vampire::~Vampire() {}
 
 int Vampire::attack(AbstractCharacter *receiver) {
     // deals with if receiver is halfling (50% chance of missing attack)
-    if (receiver->getRace() == "halfling") {
+    if (receiver->getRace() == "Halfling") {
         // randomly produces either 0 or 1
-        srand((unsigned) time(NULL));
         int random = rand() % 2;
 
         if (random == 1) {
@@ -28,7 +27,7 @@ int Vampire::attack(AbstractCharacter *receiver) {
     // vampires gain 5 hp with every successfull attack
         // except when attacking dwarf
 
-    if (receiver->getRace() == "dwarf") {
+    if (receiver->getRace() == "Dwarf") {
         getHP() -= 5;
     }
     else {
@@ -40,6 +39,6 @@ int Vampire::attack(AbstractCharacter *receiver) {
 
 
 string Vampire::getRace() {
-    return "vampire";
+    return "Vampire";
 }
 

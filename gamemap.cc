@@ -105,7 +105,6 @@ void GameMap::start()
 
 
     // spawn player
-    srand((unsigned) time(NULL));
     int ran_num_1 = rand() % all_dots.size();
     int x_1 = all_dots.at(ran_num_1).x;
     int y_1 = all_dots.at(ran_num_1).y;
@@ -360,7 +359,6 @@ void GameMap::npcLogic() {
                 // move in a random direction
                 bool success = false;
                 while (!success) {
-                    srand((unsigned) time(NULL));
                     int random_dir = 1 + (rand() % 8);
                     if (!npc->wasMoved() && validMove(npc, random_dir)) {
                         int old_x = npc->getX();
