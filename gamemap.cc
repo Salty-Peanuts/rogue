@@ -105,6 +105,7 @@ void GameMap::start()
 
 
     // spawn player
+    srand((unsigned) time(NULL));
     int ran_num_1 = rand() % all_dots.size();
     int x_1 = all_dots.at(ran_num_1).x;
     int y_1 = all_dots.at(ran_num_1).y;
@@ -127,6 +128,7 @@ void GameMap::start()
     object_tiles[x_1][y_1] = player_character;
 
     // spawn stairs;
+    
     int ran_num_2 = rand() % all_dots.size();
     int x_2 = all_dots.at(ran_num_2).x;
     int y_2 = all_dots.at(ran_num_2).y;
@@ -233,7 +235,13 @@ bool GameMap::moveCharacter(int dir)
         int old_x = player_character->getX();
         int old_y = player_character->getY();
         player_character->move(dir);
-        
+        string obj = object_tiles[player_character->getX()][player_character->getY()]->identify();
+        if (obj == "NormalPile" || obj == "SmallPile" || obj == "MerchantHoard") {
+            Treasure *treasure = dynamic_cast<Treasure *>(object_tiles[player_character->getX()][player_character->getY()]);
+            last_action += "You picked up" + to_string(treasure->getValue()) + " gold. ";
+            player_character->updateGold(treasure->getValue());
+        } else if (obj == "DragonHoard") {
+        }
         deleteObject(object_tiles[old_x][old_y]);
         object_tiles[player_character->getX()][player_character->getY()] = player_character; // moving on object_tiles
         auto dir_iter = m_dir.begin();
@@ -340,7 +348,7 @@ void GameMap::npcLogic() {
                 // move in a random direction
                 bool success = false;
                 while (!success) {
-                    srand(time(0));
+                    srand((unsigned) time(NULL));
                     int random_dir = 1 + (rand() % 8);
                     if (!npc->wasMoved() && validMove(npc, random_dir)) {
                         int old_x = npc->getX();
@@ -424,7 +432,10 @@ bool GameMap::isDead() {
 void GameMap::printMap() {
      for (int i = 0; i < row; ++i) {
         for (int j = 0; j < col; ++j) {
-            if (object_tiles[j][i] != nullptr) {
+            if (i == player_character->getY() && j == player_character->getX()) {
+                cout << player_character->getToken();
+            }
+            if (object_tiles[j][i] != nullptr && object_tiles[j][i] != player_character) {
                 cout << object_tiles[j][i]->getToken();
             }
             else if (game_map[j][i] == nullptr) {
