@@ -229,7 +229,11 @@ void GameMap::deleteObject(AbstractObject* object)
 bool GameMap::moveCharacter(int dir)
 {
     if (validMove(player_character, dir)) {
+        int old_x = player_character->getX();
+        int old_y = player_character->getY();
         player_character->move(dir);
+        deleteObject(object_tiles[old_x][old_y]);
+        object_tiles[player_character->getX()][player_character->getY()] = player_character; // moving on object_tiles
         auto dir_iter = m_dir.begin();
         while (dir_iter != m_dir.end()) {
             if (dir_iter->second == dir) {
@@ -321,8 +325,10 @@ void GameMap::npcLogic() {
                     return;
                 }
                 // attack
-                attack->setDirection(playerInRange(object_tiles[x][y]));
-                attack->NPCAttack(this, npc, player_character);
+                if (npc->isHostile()) {
+                    attack->setDirection(playerInRange(object_tiles[x][y]));
+                    attack->NPCAttack(this, npc, player_character);
+                }
             } else if (object_tiles[x][y]->identify() == "NPC" && !playerInRange(object_tiles[x][y]) && npc_movement) {
                 NPC* npc = dynamic_cast<NPC*>(object_tiles[x][y]);
                 // check if npc was moved
@@ -360,39 +366,10 @@ void GameMap::npcLogic() {
     }
 }
 
-bool GameMap::playerAtk(int dir)
+void GameMap::playerAtk(int dir)
 {
-    int attack_x = player_character->getX();
-    int attack_y = player_character->getY();
-    if (dir == m_dir["no"]) {
-        attack_y -= 1;
-    } else if (dir == m_dir["so"]) {
-        attack_y += 1;
-    } else if (dir == m_dir["ea"]) {
-        attack_x += 1;
-    } else if (dir == m_dir["we"]) {
-        attack_x -= 1;
-    } else if (dir == m_dir["nw"]) {
-        attack_x -= 1;
-        attack_y -= 1;
-    } else if (dir == m_dir["ne"]) {
-        attack_x += 1;
-        attack_y -= 1;
-    } else if (dir == m_dir["sw"]) {
-        attack_x -= 1;
-        attack_y += 1;
-    } else if (dir == m_dir["se"]) {
-        attack_x += 1;
-        attack_y += 1;
-    }
-    AbstractCharacter* reciever = dynamic_cast<AbstractCharacter*>(objectTilesAt(attack_x, attack_y));
-    if (!reciever) {
-        addAction("Your attack whiffed. ");
-        return false;
-    }
     attack->setDirection(dir);
-    attack->playerAttack(this, player_character, reciever);
-    return true;
+    attack->playerAttack(this, player_character);
 }
 
 // revise

@@ -33,7 +33,7 @@ class GameMap
     bool validMove(AbstractObject* object, int dir);
     void usePotion(string potion);
     void npcLogic();
-    bool playerAtk(int dir);
+    void playerAtk(int dir);
     int playerInRange(AbstractObject* object);
     void reset();
     bool isStair();
