@@ -45,6 +45,7 @@ class GameMap
     void printMap();
     void resetAction();
     void trollSpecialAbility();
+    void translate(vector<vector<char>> &game_map_in);
 
     // Getters
     int getLevel() const;

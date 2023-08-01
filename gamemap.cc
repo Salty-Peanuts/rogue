@@ -35,88 +35,142 @@
 using namespace std;
 
 
-void translate(vector<vector<AbstractObject *>> &game_map, vector<vector<AbstractObject *>> &object_tiles, PlayerCharacter *player_character, string race, vector<vector<char>> &game_map_in) {
+void GameMap::translate(vector<vector<char>> &game_map_in) {
     for (int i = 0; i < row; i++) {
         for (int j = 0; j < col; j++) {
             if (game_map_in[j][i] == '.') {
-                game_map[j][i] = new Floor(i, j);
+                game_map[j][i] = new Floor(j, i);
             }
-            if (game_map_in[j][i] == '+') {
-                game_map[j][i] = new Doorway(i, j);
+            else if (game_map_in[j][i] == '+') {
+                game_map[j][i] = new Doorway(j, i);
             }
-            if (game_map_in[j][i] == '|') {
-                game_map[j][i] = new Walls(i, j);
+            else if (game_map_in[j][i] == '|') {
+                game_map[j][i] = new Walls(j, i);
             }
-            if (game_map_in[j][i] == '\\') {
-                game_map[j][i] = new Stair(i, j);
+            else if (game_map_in[j][i] == '\\') {
+                game_map[j][i] = new Stair(j, i);
             }
-            if (game_map_in[j][i] == '-') {
-                game_map[j][i] = new Ceiling(i, j);
+            else if (game_map_in[j][i] == '-') {
+                game_map[j][i] = new Ceiling(j, i);
             }
-            if (game_map_in[j][i] == '#') {
-                game_map[j][i] = new Passage(i, j);
+            else if (game_map_in[j][i] == '#') {
+                game_map[j][i] = new Passage(j, i);
             }
+            else if (game_map_in[j][i] != ' ') {
+                game_map[j][i] = new Floor(j, i);
+            }
+
 
 
             // add new stuffs
             if (game_map_in[j][i] == '@') {
                 // add new player
-                if (race == "s") player_character = new Shade(j, i);
-                if (race == "g") player_character = new Goblin(j, i);
-                if (race == "d") player_character = new Drow(j, i);
-                if (race == "v") player_character = new Vampire(j, i);
-                if (race == "t") player_character = new Troll(j, i);
+                if (player_race == "s") player_character = new Shade(j, i);
+                if (player_race == "g") player_character = new Goblin(j, i);
+                if (player_race == "d") player_character = new Drow(j, i);
+                if (player_race == "v") player_character = new Vampire(j, i);
+                if (player_race == "t") player_character = new Troll(j, i);
             }
-            if (game_map_in[j][i] == '0') {
+
+            else if (game_map_in[j][i] == '0') {
                 ItemSpawner *is = new ItemSpawner("RH");
                 object_tiles[j][i] = is->spawn(j, i);
                 delete is;
+                game_map[j][i] = new Passage(j, i);
             }
-            if (game_map_in[j][i] == '1') {
+            else if (game_map_in[j][i] == '1') {
                 ItemSpawner *is = new ItemSpawner("BA");
                 object_tiles[j][i] = is->spawn(j, i);
+                
                 delete is;
             }
-            if (game_map_in[j][i] == '2') {
+            else if (game_map_in[j][i] == '2') {
                 ItemSpawner *is = new ItemSpawner("BD");
                 object_tiles[j][i] = is->spawn(j, i);
+                
                 delete is;
             }
-            if (game_map_in[j][i] == '3') {
+            else if (game_map_in[j][i] == '3') {
                 ItemSpawner *is = new ItemSpawner("PH");
                 object_tiles[j][i] = is->spawn(j, i);
+                
                 delete is;
             }
-            if (game_map_in[j][i] == '4') {
+            else if (game_map_in[j][i] == '4') {
                 ItemSpawner *is = new ItemSpawner("WA");
                 object_tiles[j][i] = is->spawn(j, i);
+                
                 delete is;
             }
-            if (game_map_in[j][i] == '5') {
+            else if (game_map_in[j][i] == '5') {
                 ItemSpawner *is = new ItemSpawner("WD");
                 object_tiles[j][i] = is->spawn(j, i);
+                
                 delete is;
             }
-            if (game_map_in[j][i] == '6') {
+            else if (game_map_in[j][i] == '6') {
                 ItemSpawner *is = new ItemSpawner("normal");
                 object_tiles[j][i] = is->spawn(j, i);
+                
                 delete is;
             }
-            if (game_map_in[j][i] == '7') {
+            else if (game_map_in[j][i] == '7') {
                 ItemSpawner *is = new ItemSpawner("small");
                 object_tiles[j][i] = is->spawn(j, i);
+                
                 delete is;
             }
-            if (game_map_in[j][i] == '8') {
+            else if (game_map_in[j][i] == '8') {
                 ItemSpawner *is = new ItemSpawner("merchant");
                 object_tiles[j][i] = is->spawn(j, i);
+                
                 delete is;
             }
-            if (game_map_in[j][i] == '9') {
+            else if (game_map_in[j][i] == '9') {
                 ItemSpawner *is = new ItemSpawner("dragon");
                 object_tiles[j][i] = is->spawn(j, i);
+                
                 delete is;
             }
+            
+
+            // spawn enemy
+            else if (game_map_in[j][i] == 'H') {
+                NPCSpawner *ns = new NPCSpawner("Human");
+                object_tiles[j][i] = ns->spawn(j, i);
+                delete ns;
+            }
+            else if (game_map_in[j][i] == 'W') {
+                NPCSpawner *ns = new NPCSpawner("Dwarf");
+                object_tiles[j][i] = ns->spawn(j, i);
+                delete ns;
+            }
+            else if (game_map_in[j][i] == 'E') {
+                NPCSpawner *ns = new NPCSpawner("Elf");
+                object_tiles[j][i] = ns->spawn(j, i);
+                delete ns;
+            }
+            else if (game_map_in[j][i] == 'O') {
+                NPCSpawner *ns = new NPCSpawner("Orc");
+                object_tiles[j][i] = ns->spawn(j, i);
+                delete ns;
+            }
+            else if (game_map_in[j][i] == 'M') {
+                NPCSpawner *ns = new NPCSpawner("Merchant");
+                object_tiles[j][i] = ns->spawn(j, i);
+                delete ns;
+            }
+            else if (game_map_in[j][i] == 'D') {
+                NPCSpawner *ns = new NPCSpawner("Dragon");
+                object_tiles[j][i] = ns->spawn(j, i);
+                delete ns;
+            }
+            else if (game_map_in[j][i] == 'L') {
+                NPCSpawner *ns = new NPCSpawner("Halfling");
+                object_tiles[j][i] = ns->spawn(j, i);
+                delete ns;
+            }
+
         }
         
     }
@@ -151,7 +205,7 @@ GameMap::GameMap(vector<vector<char>> game_map_in, string race, bool given_map, 
     
     object_tiles = vector<vector<AbstractObject*>>(col, std::vector<AbstractObject*>(row, nullptr));
 
-    translate(game_map, object_tiles, player_character, race, game_map_in);
+    translate(game_map_in);
     
     if (!given_map) {
         PlayerCharacter *pc = nullptr;
@@ -592,7 +646,7 @@ void GameMap::reset() {
     if (given_map) {
         vector<vector<char>> game_map_in;
         readFile(file_name, game_map_in, floor_level);
-        translate(game_map, object_tiles, player_character, player_race, game_map_in);
+        translate(game_map_in);
     }
 }
 
