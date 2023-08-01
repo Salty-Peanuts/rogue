@@ -258,7 +258,7 @@ void GameMap::start()
             DragonHoard *dragon_hoard = dynamic_cast<DragonHoard *>(object_tiles[x][y]);
             // if spawns a dragon hoard
             if (dragon_hoard) {
-                NPCSpawner *npc_spawner = new NPCSpawner("dragon");
+                NPCSpawner *npc_spawner = new NPCSpawner("Dragon");
                 bool exists = true;
                 // loop to find a coordinate that is unoccupied
                 while (exists)
@@ -304,7 +304,7 @@ void GameMap::start()
                 dragon->assignDragonHoard(dragon_hoard);
                 delete npc_spawner;
             }
-            delete dragon_hoard;
+            //delete dragon_hoard;
         }
         delete is;
     }
@@ -686,7 +686,7 @@ void GameMap::resetAction() {
 void GameMap::trollSpecialAbility() {
     if (player_character->getRace() == "Troll") {
         if (player_character->getHP() + 5 <= player_character->getMaxHP()) {
-            player_character->getHP() + 5;
+            player_character->getHP() += 5;
         } else {
             player_character->getHP() = player_character->getMaxHP();
         }
