@@ -101,6 +101,9 @@ void GameMap::start()
         }
     }
 
+    NPCSpawner * npc_spawner = new NPCSpawner("Human");
+
+
     // spawn player
     int ran_num_1 = rand() % all_dots.size();
     int x_1 = all_dots.at(ran_num_1).x;
@@ -137,9 +140,7 @@ void GameMap::start()
         int x = all_dots.at(ran_num).x;
         int y = all_dots.at(ran_num).y;
         all_dots.erase(all_dots.begin() + ran_num);
-        NPCSpawner * npc_spawner = new NPCSpawner("Human");
         object_tiles[x][y] = npc_spawner->spawnRandom(x, y);
-        delete npc_spawner;
     }
 
     // spawn potion and gold
@@ -206,6 +207,7 @@ void GameMap::start()
             delete dragon_hoard;
         }
         delete is;
+        delete npc_spawner;
     }
 }
 
