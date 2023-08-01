@@ -30,7 +30,7 @@ int Merchant::attack(AbstractCharacter* receiver) {
 
 
 string Merchant::getRace() {
-    return "merchant";
+    return "Merchant";
 }
 
 void Merchant::makeAggravated() {

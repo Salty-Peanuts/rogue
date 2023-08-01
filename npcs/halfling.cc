@@ -24,7 +24,7 @@ int Halfling::attack(AbstractCharacter* receiver) {
 
 
 string Halfling::getRace() {
-    return "halfling";
+    return "Halfling";
 }
 
 

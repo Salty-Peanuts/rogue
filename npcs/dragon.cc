@@ -18,7 +18,7 @@ int Dragon::attack(AbstractCharacter* receiver) {
 
 
 string Dragon::getRace() {
-    return "dragon";
+    return "Dragon";
 }
 
 

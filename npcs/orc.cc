@@ -19,7 +19,7 @@ int Orc::attack(AbstractCharacter* receiver) {
 
 
     // Orcs have special interaction with Goblin (50% more damage)
-    if (receiver->getRace() == "goblin") {
+    if (receiver->getRace() == "Goblin") {
         int damage = ceil((100 / (100 + receiver->getDef())) * getAtk()) * 1.5;
         receiver->getHP() -= damage;
         return damage;
@@ -33,7 +33,7 @@ int Orc::attack(AbstractCharacter* receiver) {
 
 
 string Orc::getRace() {
-    return "orc";
+    return "Orc";
 }
 
 

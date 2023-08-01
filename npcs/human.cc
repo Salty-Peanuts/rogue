@@ -31,6 +31,6 @@ bool Human::deathLoot() { return true; }
 
 
 string Human::getRace() {
-    return "human";
+    return "Human";
 }
 
