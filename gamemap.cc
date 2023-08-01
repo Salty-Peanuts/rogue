@@ -415,7 +415,7 @@ bool GameMap::isStair()
     int y = 0;
     for (int i = 0; i < col; ++i) {
         for (int j = 0; j < row; ++i) {
-            if (game_map[i][j]->getToken() == '\\') {
+            if (game_map[i][j] != nullptr && game_map[i][j]->getToken() == '\\') {
                 x = i;
                 y = j;
             }
