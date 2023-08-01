@@ -69,10 +69,14 @@ string Controller::run_game() {
                         cout << "You reached a new floor!" << endl;
                         gameMap->reset();
                         if (!gameMap->isGivenMap()) gameMap->start();
+                        gameMap->resetAction();
+                        gameMap->printMap();
                         continue;
                     }
                 }
                 gameMap->printMap();
+                gameMap->npcLogic();
+                gameMap->resetAction();
                 continue;
             }
             // if the move is not valid
@@ -88,6 +92,8 @@ string Controller::run_game() {
             if (m_dir[cmd] != 0) {
                 gameMap->playerAtk(m_dir[cmd]);
                 gameMap->printMap();
+                gameMap->npcLogic();
+                gameMap->resetAction();
                 continue;
             }
             else {
@@ -97,10 +103,13 @@ string Controller::run_game() {
         else if (cmd == "f") {
             gameMap->changeNPCmovement();
         }
+        else {
+            cout << "Please enter a valid command. Try again!" << endl;
+            continue;
+        }
         if (gameMap->isDead()) {
             cout << "Your HP is below 0, you lost!" << endl;
             return "lost";
         }
-        gameMap->npcLogic();
     }
 }

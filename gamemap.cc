@@ -462,10 +462,10 @@ void GameMap::npcLogic() {
     // first look for NPC objects in the object_tiles vector
     for (int y = 0; y < row; ++y) {
         for (int x = 0; x < col; ++x) {
-            NPC* npc = dynamic_cast<NPC*>(object_tiles[x][y]);
-            if (object_tiles[x][y] == nullptr) {
-                continue;
-            } else if (npc && playerInRange(object_tiles[x][y])) {
+            NPC* npc;
+            if (object_tiles[x][y]) npc = dynamic_cast<NPC*>(object_tiles[x][y]);
+            else continue;
+            if (npc && playerInRange(object_tiles[x][y])) {
                 // attack
                 if (npc->isHostile()) {
                     attack->setDirection(playerInRange(object_tiles[x][y]));
