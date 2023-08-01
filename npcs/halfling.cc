@@ -28,5 +28,5 @@ string Halfling::getRace() {
 }
 
 
-void Halfling::death() {}
+bool Halfling::deathLoot() { return false; }
 

@@ -45,5 +45,5 @@ string Elf::getRace() {
 }
 
 
-void Elf::death() {}
+bool Elf::deathLoot() { return false; }
 

@@ -15,7 +15,7 @@ class Merchant : public NPC
         int attack(AbstractCharacter* receiver) override;
         string getRace() override;
         void makeAggravated();
-        void death() override;
+        bool deathLoot() override;
 };
 
 

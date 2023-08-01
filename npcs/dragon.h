@@ -16,7 +16,7 @@ class Dragon : public NPC
         int attack(AbstractCharacter* receiver) override;
         string getRace() override;
         void assignDragonHoard(DragonHoard *dragon_hoard);
-        void death() override;
+        bool deathLoot() override;
 };
 
 

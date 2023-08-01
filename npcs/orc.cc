@@ -38,5 +38,5 @@ string Orc::getRace() {
 
 
 
-void Orc::death() {}
+bool Orc::deathLoot() { return false; }
 

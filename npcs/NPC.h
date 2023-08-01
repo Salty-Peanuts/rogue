@@ -20,7 +20,7 @@ class NPC : public AbstractCharacter
         bool wasMoved();
         string identify() override;
         void setMoved(bool input);
-        virtual void death() = 0;
+        virtual bool deathLoot() = 0;
 };
 
 #endif

@@ -12,7 +12,7 @@ class Human : public NPC
         ~Human();
         int attack(AbstractCharacter* receiver) override;
         string getRace() override;
-        void death() override;
+        bool deathLoot() override;
 };
 
 

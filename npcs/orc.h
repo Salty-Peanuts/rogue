@@ -12,7 +12,7 @@ class Orc : public NPC
         ~Orc();
         int attack(AbstractCharacter* receiver) override;
         string getRace() override;
-        void death() override;
+        bool deathLoot() override;
 };
 
 

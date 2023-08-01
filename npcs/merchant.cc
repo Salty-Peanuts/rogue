@@ -39,6 +39,6 @@ void Merchant::makeAggravated() {
 
 
 
-void Merchant::death() {}
+bool Merchant::deathLoot() { return true; }
 
 

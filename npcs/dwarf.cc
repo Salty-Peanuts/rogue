@@ -28,5 +28,5 @@ string Dwarf::getRace() {
 }
 
 
-void Dwarf::death() {}
+bool Dwarf::deathLoot() { return false; }
 

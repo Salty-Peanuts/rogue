@@ -26,7 +26,7 @@ int Human::attack(AbstractCharacter* receiver) {
 }
 
 
-void Human::death() {}
+bool Human::deathLoot() { return true; }
 
 
 

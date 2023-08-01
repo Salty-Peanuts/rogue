@@ -27,5 +27,5 @@ void Dragon::assignDragonHoard(DragonHoard *dragon_hoard) {
 }
 
 
-void Dragon::death() {}
+bool Dragon::deathLoot() { return false; }
 
