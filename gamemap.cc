@@ -238,10 +238,16 @@ bool GameMap::moveCharacter(int dir)
         string obj = object_tiles[player_character->getX()][player_character->getY()]->identify();
         if (obj == "NormalPile" || obj == "SmallPile" || obj == "MerchantHoard") {
             Treasure *treasure = dynamic_cast<Treasure *>(object_tiles[player_character->getX()][player_character->getY()]);
+            if (!treasure) {
+                return false;
+            }
             last_action += "You picked up" + to_string(treasure->getValue()) + " gold. ";
             player_character->updateGold(treasure->getValue());
         } else if (obj == "DragonHoard") {
             DragonHoard *dragonhoard = dynamic_cast<DragonHoard *>(object_tiles[player_character->getX()][player_character->getY()]);
+            if (!dragonhoard) {
+                return false;
+            }
             if (!dragonhoard->isDragonAlive()) {
                 last_action += "You picked up" + to_string(dragonhoard->getValue()) + " gold. ";
                 player_character->updateGold(dragonhoard->getValue());
