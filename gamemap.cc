@@ -207,8 +207,8 @@ void GameMap::start()
             delete dragon_hoard;
         }
         delete is;
-        delete npc_spawner;
     }
+    delete npc_spawner;
 }
 
 void GameMap::addObject(AbstractObject* object)
