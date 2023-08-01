@@ -16,6 +16,7 @@
 #include "./characters/vampire.h"
 #include "./characters/troll.h"
 #include "./items/treasure.h"
+#include "./items/potion.h"
 #include "./npcs/dragon.h"
 #include "./floortiles/floor.h"
 #include "./floortiles/walls.h"
@@ -23,7 +24,12 @@
 #include "./floortiles/ceiling.h"
 #include "./floortiles/passage.h"
 #include "./floortiles/doorway.h"
-
+#define ESC "\033["
+#define BLUE "34"
+#define RED "31"
+#define YELLOW "33"
+#define GREEN "32"
+#define RESET "\033[m"
 using namespace std;
 
 
@@ -124,7 +130,9 @@ void GameMap::start()
     if (player_race == "t") {
         player_character = new Troll(x_1, y_1); 
     }
-    object_tiles[x_1][y_1] = player_character;
+    //object_tiles[x_1][y_1] = player_character;
+    player_character->setX(x_1);
+    player_character->setY(y_1);
 
     // spawn stairs;
     
@@ -231,8 +239,8 @@ bool GameMap::moveCharacter(int dir)
 {
 
     if (validMove(player_character, dir)) {
-        int old_x = player_character->getX();
-        int old_y = player_character->getY();
+        //int old_x = player_character->getX();
+        //int old_y = player_character->getY();
         player_character->move(dir);
         string obj = "";
         if (object_tiles[player_character->getX()][player_character->getY()] != nullptr) {
@@ -259,8 +267,8 @@ bool GameMap::moveCharacter(int dir)
                 last_action += "You cannot pick up the dragon hoard. ";
             }
         }
-        deleteObject(object_tiles[old_x][old_y]);
-        object_tiles[player_character->getX()][player_character->getY()] = player_character; // moving on object_tiles
+        //deleteObject(object_tiles[old_x][old_y]);
+        //object_tiles[player_character->getX()][player_character->getY()] = player_character; // moving on object_tiles
         auto dir_iter = m_dir.begin();
         while (dir_iter != m_dir.end()) {
             if (dir_iter->second == dir) {
@@ -280,29 +288,46 @@ bool GameMap::validMove(AbstractObject* object, int dir)
 {
     int x = object->getX();
     int y = object->getY();
+    
     if (dir == m_dir["no"]) {
-        if ((object_tiles[x][y - 1] != nullptr && object_tiles[x][y - 1]->isTraversible(object)) || (game_map[x][y - 1] != nullptr && game_map[x][y - 1]->isTraversible(object))) return true;
+        if ((object_tiles[x][y - 1] != nullptr && object_tiles[x][y - 1]->isTraversible(object)) || 
+                (game_map[x][y - 1] != nullptr && game_map[x][y - 1]->isTraversible(object)) ||
+                (x != player_character->getX() && (y - 1) != player_character->getY())) return true;
         else return false;
     } else if (dir == m_dir["so"]) {
-        if ((object_tiles[x][y + 1] != nullptr && object_tiles[x][y + 1]->isTraversible(object)) || (game_map[x][y + 1] != nullptr && game_map[x][y + 1]->isTraversible(object))) return true;
+        if ((object_tiles[x][y + 1] != nullptr && object_tiles[x][y + 1]->isTraversible(object)) || 
+            (game_map[x][y + 1] != nullptr && game_map[x][y + 1]->isTraversible(object)) ||
+            (x != player_character->getX() && (y + 1) != player_character->getY())) return true;
         else return false;
     } else if (dir == m_dir["we"]) {
-        if ((object_tiles[x - 1][y] != nullptr && object_tiles[x - 1][y]->isTraversible(object)) || (game_map[x - 1][y] != nullptr && game_map[x - 1][y]->isTraversible(object))) return true;
+        if ((object_tiles[x - 1][y] != nullptr && object_tiles[x - 1][y]->isTraversible(object)) || 
+            (game_map[x - 1][y] != nullptr && game_map[x - 1][y]->isTraversible(object)) ||
+            ((x - 1) != player_character->getX() && y != player_character->getY())) return true;
         else return false;
     } else if (dir == m_dir["ea"]) {
-        if ((object_tiles[x + 1][y] != nullptr && object_tiles[x + 1][y]->isTraversible(object)) || (game_map[x + 1][y] != nullptr && game_map[x + 1][y]->isTraversible(object))) return true;
+        if ((object_tiles[x + 1][y] != nullptr && object_tiles[x + 1][y]->isTraversible(object)) || 
+            (game_map[x + 1][y] != nullptr && game_map[x + 1][y]->isTraversible(object)) ||
+            ((x + 1) != player_character->getX() && y != player_character->getY())) return true;
         else return false;
     } else if (dir == m_dir["ne"]) {
-        if ((object_tiles[x + 1][y - 1] != nullptr && object_tiles[x + 1][y - 1]->isTraversible(object)) || (game_map[x + 1][y - 1] != nullptr && game_map[x + 1][y - 1]->isTraversible(object))) return true;
+        if ((object_tiles[x + 1][y - 1] != nullptr && object_tiles[x + 1][y - 1]->isTraversible(object)) || 
+            (game_map[x + 1][y - 1] != nullptr && game_map[x + 1][y - 1]->isTraversible(object)) ||
+            ((x + 1) != player_character->getX() && (y - 1) != player_character->getY())) return true;
         else return false;
     } else if (dir == m_dir["nw"]) {
-        if ((object_tiles[x - 1][y - 1] != nullptr && object_tiles[x - 1][y - 1]->isTraversible(object)) || (game_map[x - 1][y - 1] != nullptr && game_map[x - 1][y - 1]->isTraversible(object))) return true;
+        if ((object_tiles[x - 1][y - 1] != nullptr && object_tiles[x - 1][y - 1]->isTraversible(object)) || 
+            (game_map[x - 1][y - 1] != nullptr && game_map[x - 1][y - 1]->isTraversible(object)) ||
+            ((x - 1) != player_character->getX() && (y - 1) != player_character->getY())) return true;
         else return false;
     } else if (dir == m_dir["se"]) {
-        if ((object_tiles[x + 1][y + 1] != nullptr && object_tiles[x + 1][y + 1]->isTraversible(object)) || (game_map[x + 1][y + 1] != nullptr && game_map[x + 1][y + 1]->isTraversible(object))) return true;
+        if ((object_tiles[x + 1][y + 1] != nullptr && object_tiles[x + 1][y + 1]->isTraversible(object)) || 
+            (game_map[x + 1][y + 1] != nullptr && game_map[x + 1][y + 1]->isTraversible(object)) || 
+            ((x + 1) != player_character->getX() && (y + 1) != player_character->getY())) return true;
         else return false;
     } else if (dir == m_dir["sw"]) {
-        if ((object_tiles[x - 1][y + 1] != nullptr && object_tiles[x - 1][y + 1]->isTraversible(object)) || (game_map[x - 1][y + 1] != nullptr && game_map[x - 1][y + 1]->isTraversible(object))) return true;
+        if ((object_tiles[x - 1][y + 1] != nullptr && object_tiles[x - 1][y + 1]->isTraversible(object)) || 
+            (game_map[x - 1][y + 1] != nullptr && game_map[x - 1][y + 1]->isTraversible(object)) ||
+            ((x - 1) != player_character->getX() && (y + 1) != player_character->getY())) return true;
         else return false;
     } else {
         return false;
@@ -319,21 +344,23 @@ int GameMap::playerInRange(AbstractObject* npc)
 {
     int x = npc->getX();
     int y = npc->getY();
-    if (object_tiles[x][y - 1] == player_character) {
+    int p_x = player_character->getX();
+    int p_y = player_character->getY();
+    if (p_x == x && p_y == y - 1) {
         return m_dir["no"];
-    } else if (object_tiles[x][y + 1] == player_character) {
+    } else if (p_x == x && p_y == y + 1) {
         return m_dir["so"];
-    } else if (object_tiles[x - 1][y] == player_character) {
+    } else if (p_x == x - 1 && p_y == y) {
         return m_dir["we"];
-    } else if (object_tiles[x + 1][y] == player_character) {
+    } else if (p_x == x + 1 && p_y == y) {
         return m_dir["ea"];
-    } else if (object_tiles[x + 1][y + 1] == player_character) {
+    } else if (p_x == x + 1 && p_y == y + 1) {
         return m_dir["se"];
-    } else if (object_tiles[x + 1][y - 1] == player_character) {
+    } else if (p_x == x + 1 && p_y == y - 1) {
         return m_dir["ne"];
-    } else if (object_tiles[x - 1][y + 1] == player_character) {
+    } else if (p_x == x - 1 && p_y == y + 1) {
         return m_dir["sw"];
-    } else if (object_tiles[x - 1][y - 1] == player_character) {
+    } else if (p_x == x - 1 && p_y == y - 1) {
         return m_dir["nw"];
     } else {
         return 0;
@@ -413,9 +440,14 @@ void GameMap::reset() {
 
 bool GameMap::isStair()
 {
-    int x = 0; 
-    int y = 0;
-
+    int x = player_character->getX(); 
+    int y = player_character->getY();
+    if (object_tiles[x][y] != nullptr && object_tiles[x][y]->getToken() == '\\') {
+        return true;
+    } else {
+        return false;
+    }
+    /*
     for (int i = 0; i < col; ++i) {
         for (int j = 0; j < row; ++i) {
             // issue here -----------------------------------------------------------------------
@@ -427,6 +459,7 @@ bool GameMap::isStair()
     }
     if (player_character->getX() == x && player_character->getY() == y) return true;
     return false;
+    */
 }
 
 // void GameMap::update() { notifyObservers(); }
@@ -447,9 +480,27 @@ void GameMap::printMap() {
      for (int i = 0; i < row; ++i) {
         for (int j = 0; j < col; ++j) {
             if (i == player_character->getY() && j == player_character->getX()) {
-                cout << player_character->getToken();
-            } else if (object_tiles[j][i] != nullptr && object_tiles[j][i] != player_character) {
-                cout << object_tiles[j][i]->getToken();
+                cout << ESC << BLUE << "m" << player_character->getToken() << ESC << RESET; // print blue
+            } else if (object_tiles[j][i] != nullptr) {
+                Treasure* t = dynamic_cast<Treasure*>(object_tiles[j][i]);
+                Potion* p = dynamic_cast<Potion*>(object_tiles[j][i]);
+                NPC* npc = dynamic_cast<NPC*>(object_tiles[j][i]);
+                Stair* s = dynamic_cast<Stair*>(object_tiles[j][i]);
+                if (t) {
+                    // print yellow
+                    cout << ESC << YELLOW << "m" << t->getToken() << ESC << RESET;
+                } else if (p) {
+                    // print green
+                    cout << ESC << GREEN << "m" << p->getToken() << ESC << RESET;
+                } else if (npc) {
+                    // print red
+                    cout << ESC << RED << "m" << npc->getToken() << ESC << RESET;
+                } else if (s) {
+                    // print blue
+                    cout << ESC << BLUE << "m" << s->getToken() << ESC << RESET;
+                } else {
+                    cout << object_tiles[j][i]->getToken();
+                }
             }
             else if (game_map[j][i] == nullptr) {
                 cout << " ";
@@ -462,7 +513,7 @@ void GameMap::printMap() {
 
     cout << "Race: " << player_character->getRace() << " ";
     cout << "Gold: " << player_character->getGold() << " ";
-    cout << "                                       ";
+    cout << "                                                  ";
     cout << "Floor: " << floor_level << endl;
     cout << "HP: " << player_character->getHP() << endl;
     cout << "Atk: " << player_character->getAtk() << endl;

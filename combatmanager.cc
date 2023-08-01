@@ -70,8 +70,7 @@ void CombatManager::playerAttack(GameMap *game_map, AbstractCharacter* initiator
         if (npc->deathLoot()) {
             ItemSpawner *item_spawner = new ItemSpawner("merchant");
             game_map->addObject(item_spawner->spawn(x, y));
-        } else if (npc->regGoldDropper()) {
-            srand(time(0));
+        } else if (npc->regGoldDropper()) { // I USE RANDOM HERE
             int gold_type = 1 + rand() % 2;
             if (gold_type == 1) {
                 game_map->getPlayerCharacter()->updateGold(1);
