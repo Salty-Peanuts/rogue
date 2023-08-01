@@ -235,7 +235,10 @@ bool GameMap::moveCharacter(int dir)
         int old_x = player_character->getX();
         int old_y = player_character->getY();
         player_character->move(dir);
-        string obj = object_tiles[player_character->getX()][player_character->getY()]->identify();
+        string obj = "";
+        if (object_tiles[player_character->getX()][player_character->getY()] != nullptr) {
+            obj = object_tiles[player_character->getX()][player_character->getY()]->identify();
+        }
         if (obj == "NormalPile" || obj == "SmallPile" || obj == "MerchantHoard") {
             Treasure *treasure = dynamic_cast<Treasure *>(object_tiles[player_character->getX()][player_character->getY()]);
             if (!treasure) {
