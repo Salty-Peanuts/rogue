@@ -2,6 +2,7 @@
 #include "constants.h"
 #include "spawner/itemspawner.h"
 #include "npcs/NPC.h"
+#include "npcs/merchant.h"
 #include <cstdlib>
 #include <ctime>
 #include <string>
@@ -55,6 +56,10 @@ void CombatManager::playerAttack(GameMap *game_map, AbstractCharacter* initiator
         game_map->addAction("Your attack whiffed. ");
         return;
     }
+    if (reciever->getRace() == "Merchant") {
+        Merchant* merchant = dynamic_cast<Merchant*>(reciever);
+        merchant->makeAggravated();
+    }
     int damage_num = initiator->attack(reciever);
     if (damage_num == MISSED_ATTACK) {
         game_map->addAction("You swing to attack, but the enemy dodges just in time. ");
@@ -69,12 +74,13 @@ void CombatManager::playerAttack(GameMap *game_map, AbstractCharacter* initiator
         }
         int x = reciever->getX();
         int y = reciever->getY();
-        game_map->addAction("The " + reciever->getRace() + " is slain. ");
-        game_map->deleteObject(reciever);
+        game_map->addAction("The " + npc->getRace() + " is slain. ");
+        game_map->deleteObject(npc);
         // add drop gold logic here
         if (npc->deathLoot()) {
             ItemSpawner *item_spawner = new ItemSpawner("merchant");
             game_map->addObject(item_spawner->spawn(x, y));
+            delete item_spawner;
         } else if (npc->regGoldDropper()) { // I USE RANDOM HERE
             int gold_type = 1 + rand() % 2;
             if (gold_type == 1) {
