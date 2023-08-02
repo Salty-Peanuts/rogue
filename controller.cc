@@ -12,7 +12,8 @@ using namespace std;
 
 
 // read map layuout from file
-void readFromFile(string file_name, vector<vector<char>> &map_layout, int floor) {
+bool readFromFile(string file_name, vector<vector<char>> &map_layout, int floor) {
+    bool check = false;
     string str;
     ifstream input (file_name);
     for (int i = 0; i < col; i++) {
@@ -26,16 +27,18 @@ void readFromFile(string file_name, vector<vector<char>> &map_layout, int floor)
         for (int j = 0; j < col; j++) {
             // crashes here ====================================
             //map_layout[j][i] = str[j];
-
+            if (str[j] == '@' || str[j] == 'H' || str[j] == 'W' || str[j] == 'O' || str[j] == 'L' || str[j] == 'E' || str[j] == 'M' || str[j] == 'D' || str[j] == '1' ||
+                str[j] == '2' || str[j] == '3' || str[j] == '4' || str[j] == '5' || str[j] == '6' || str[j] == '7' || str[j] == 'G' || str[j] == '8' || str[j] == '9') check = true;
             map_layout[j].push_back(str[j]);
         }
     }
+    return check;
 }
 
 Controller::Controller(string race, bool given_map, string file_name) {
     vector<vector<char>> map_layout;
-    readFromFile(file_name, map_layout, 0);
-    GameMap *gm = new GameMap(map_layout, race, given_map, file_name);
+    bool check = readFromFile(file_name, map_layout, 0);
+    GameMap *gm = new GameMap(map_layout, race, check, file_name);
     gameMap = gm;
 }
 
@@ -97,7 +100,7 @@ string Controller::run_game() {
 
         // if attack
         else if (cmd == "a") {
-            //cout << "Enter direction: "; 
+            cout << "Enter direction: "; 
             cin >> cmd;
             if (m_dir[cmd] != 0) {
                 gameMap->playerAtk(m_dir[cmd]);
@@ -121,7 +124,7 @@ string Controller::run_game() {
             cout << "You just changed the state of the NPCs" << endl;
         }
         else if (cmd == "u") {
-            //cout << "Enter direction: "; 
+            cout << "Enter direction: "; 
             cin >> cmd;
             if (m_dir[cmd] != 0) {
                 if (gameMap->usePotion(m_dir[cmd])) {

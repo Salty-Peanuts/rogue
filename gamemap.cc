@@ -312,7 +312,7 @@ void GameMap::start()
             DragonHoard *dragon_hoard = dynamic_cast<DragonHoard *>(object_tiles[x][y]);
             // if spawns a dragon hoard
             if (dragon_hoard) {
-                npc_spawner->setNPCRace("Dragon");
+                NPCSpawner *dragon_spawner = new NPCSpawner("Dragon");
                 bool exists = true;
                 // loop to find a coordinate that is unoccupied
                 while (exists)
@@ -353,16 +353,16 @@ void GameMap::start()
                     }
                     break;
                 }
-                object_tiles[x][y] = npc_spawner->spawn(x, y);
+                object_tiles[x][y] = dragon_spawner->spawn(x, y);
                 Dragon *dragon = dynamic_cast<Dragon *>(object_tiles[x][y]);
                 dragon->assignDragonHoard(dragon_hoard);
-                //delete npc_spawner;
+                delete npc_spawner;
             }
             //delete dragon_hoard;
         }
         delete is;
     }
-    delete npc_spawner;
+    //delete npc_spawner;
     delete sspawner;
 }
 
