@@ -35,6 +35,7 @@ void Dragon::assignDragonHoard(DragonHoard *dragon_hoard) {
     this->dragon_hoard = dragon_hoard;
 }
 
+DragonHoard* Dragon::getDragonHoard() { return dragon_hoard; }
 
 bool Dragon::deathLoot() { return false; }
 

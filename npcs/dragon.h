@@ -17,6 +17,7 @@ class Dragon : public NPC
         string getRace() override;
         void assignDragonHoard(DragonHoard *dragon_hoard);
         bool deathLoot() override;
+        DragonHoard *getDragonHoard();
 };
 
 

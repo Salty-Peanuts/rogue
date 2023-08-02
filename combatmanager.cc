@@ -3,6 +3,7 @@
 #include "spawner/itemspawner.h"
 #include "npcs/NPC.h"
 #include "npcs/merchant.h"
+#include "npcs/dragon.h"
 #include <cstdlib>
 #include <ctime>
 #include <string>
@@ -67,6 +68,9 @@ void CombatManager::playerAttack(GameMap *game_map, AbstractCharacter* initiator
     int damage_num = initiator->attack(reciever);
     if (damage_num == MISSED_ATTACK) {
         game_map->addAction("You swing to attack, but the enemy dodges just in time. ");
+    } else if (reciever->getHP() <= 0) {
+        game_map->addAction("PC deals " + to_string(damage_num) + " damage to the " + reciever->getRace() + " ");
+        game_map->addAction("(0 HP). ");
     } else {
         game_map->addAction("PC deals " + to_string(damage_num) + " damage to the " + reciever->getRace() + " ");
         game_map->addAction("(" + to_string(reciever->getHP()) + " HP). ");
@@ -75,6 +79,13 @@ void CombatManager::playerAttack(GameMap *game_map, AbstractCharacter* initiator
         NPC* npc = dynamic_cast<NPC*>(reciever);
         if (!npc) {
             return;
+        }
+        // update if dragon dies
+        Dragon* dragon = dynamic_cast<Dragon*>(npc);
+        if (!dragon) {
+            return;
+        } else {
+            dragon->getDragonHoard()->dragonDies();
         }
         int x = reciever->getX();
         int y = reciever->getY();
