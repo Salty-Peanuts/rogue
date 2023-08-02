@@ -51,7 +51,7 @@ void CombatManager::playerAttack(GameMap *game_map, AbstractCharacter* initiator
         game_map->addAction("Your attack whiffed. ");
         return;
     }
-    
+
     AbstractCharacter* reciever = dynamic_cast<AbstractCharacter*>(game_map->objectTilesAt(attack_x, attack_y));
     
     if (!reciever) {
@@ -79,7 +79,6 @@ void CombatManager::playerAttack(GameMap *game_map, AbstractCharacter* initiator
         int x = reciever->getX();
         int y = reciever->getY();
         game_map->addAction("The " + npc->getRace() + " is slain. ");
-        game_map->deleteObject(npc);
         // add drop gold logic here
         if (npc->deathLoot()) {
             ItemSpawner *item_spawner = new ItemSpawner("merchant");
@@ -93,6 +92,7 @@ void CombatManager::playerAttack(GameMap *game_map, AbstractCharacter* initiator
                 game_map->getPlayerCharacter()->updateGold(2);
             }
         }
+        game_map->deleteObject(npc);
     }
 }
 /*

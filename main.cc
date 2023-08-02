@@ -57,7 +57,7 @@ int main (int argc, char *argv[]) {
 
     // print out results
     cout << "Thank you for playing!" << endl;
-    cout << "Project by Adam Han, Dat Bui, Jerry Zhang" << endl;
+    cout << "Project by Adam Han, Dat Bui, Jerry Zheng" << endl;
     
 
 

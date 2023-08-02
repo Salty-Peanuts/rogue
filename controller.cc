@@ -97,7 +97,7 @@ string Controller::run_game() {
 
         // if attack
         else if (cmd == "a") {
-            cout << "Enter direction: "; 
+            //cout << "Enter direction: "; 
             cin >> cmd;
             if (m_dir[cmd] != 0) {
                 gameMap->playerAtk(m_dir[cmd]);
@@ -121,7 +121,7 @@ string Controller::run_game() {
             cout << "You just changed the state of the NPCs" << endl;
         }
         else if (cmd == "u") {
-            cout << "Enter direction: "; 
+            //cout << "Enter direction: "; 
             cin >> cmd;
             if (m_dir[cmd] != 0) {
                 if (gameMap->usePotion(m_dir[cmd])) {
