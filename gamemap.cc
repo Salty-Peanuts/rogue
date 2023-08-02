@@ -48,7 +48,8 @@ void GameMap::translate(vector<vector<char>> &game_map_in) {
                 game_map[j][i] = new Walls(j, i);
             }
             else if (game_map_in[j][i] == '\\') {
-                game_map[j][i] = new Stair(j, i);
+                game_map[j][i] = new Floor(j, i);
+                object_tiles[j][i] = new Stair(j, i);
             }
             else if (game_map_in[j][i] == '-') {
                 game_map[j][i] = new Ceiling(j, i);
@@ -76,7 +77,7 @@ void GameMap::translate(vector<vector<char>> &game_map_in) {
                 ItemSpawner *is = new ItemSpawner("RH");
                 object_tiles[j][i] = is->spawn(j, i);
                 delete is;
-                game_map[j][i] = new Passage(j, i);
+                //game_map[j][i] = new Passage(j, i);
             }
             else if (game_map_in[j][i] == '1') {
                 ItemSpawner *is = new ItemSpawner("BA");
@@ -163,6 +164,7 @@ void GameMap::translate(vector<vector<char>> &game_map_in) {
             else if (game_map_in[j][i] == 'D') {
                 NPCSpawner *ns = new NPCSpawner("Dragon");
                 object_tiles[j][i] = ns->spawn(j, i);
+                // dragon linking
                 delete ns;
             }
             else if (game_map_in[j][i] == 'L') {
@@ -348,12 +350,22 @@ void GameMap::start()
                             exists = false;
                             x = x_temp;
                             y = y_temp;
+                            all_dots.erase(all_dots.begin() + z);
                             break;
                         }
                     }
                     break;
                 }
                 object_tiles[x][y] = dragon_spawner->spawn(x, y);
+                /*
+                for (int z = 0; z < all_dots.size(); z++) {
+                    Coordinates temp = all_dots[z];
+                    if (temp.x == x && temp.y == y) {
+                        all_dots.erase(all_dots.begin() + z);
+                        break;
+                    }
+                }
+                */
                 Dragon *dragon = dynamic_cast<Dragon *>(object_tiles[x][y]);
                 dragon->assignDragonHoard(dragon_hoard);
                 delete npc_spawner;
@@ -632,15 +644,10 @@ void GameMap::playerAtk(int dir)
 
 // revise
 void GameMap::reset() { 
-    for (int i = 0; i < col; ++i) {
-        for (int j = 0; j < row; ++i) {
-            if (object_tiles[i][j] == nullptr) {
-                continue;
-            }
-            else { 
-                delete object_tiles[i][j];
-                object_tiles[i][j] = nullptr;
-            }
+    for (int i = 0; i < row; ++i) {
+        for (int j = 0; j < col; ++j) {
+            if (!object_tiles[j][i]) continue;
+            deleteObject(object_tiles[j][i]);
         }
     }
     attack->setDirection(0);
@@ -657,6 +664,7 @@ bool GameMap::isStair()
     int x = player_character->getX(); 
     int y = player_character->getY();
     if (object_tiles[x][y] != nullptr && object_tiles[x][y]->getToken() == '\\') {
+        floor_level += 1;
         return true;
     } else {
         return false;

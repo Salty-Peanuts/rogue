@@ -22,7 +22,6 @@ int Orc::attack(AbstractCharacter* receiver) {
     if (receiver->getRace() == "Goblin") {
         float damage_calc = (100.0 / (100.0 + receiver->getDef())) * getAtk() * 1.5;
         int damage = ceil(damage_calc);
-        cout << damage << endl;
         receiver->getHP() -= damage;
         return damage;
     }
@@ -30,7 +29,6 @@ int Orc::attack(AbstractCharacter* receiver) {
     // regular attack against any other race
     float damage_calc = (100.0 / (100.0 + receiver->getDef())) * getAtk();
     int damage = ceil(damage_calc);
-    cout << damage << endl;
     receiver->getHP() -= damage;
     return damage;
 }
