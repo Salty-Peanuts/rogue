@@ -26,8 +26,10 @@ int main (int argc, char *argv[]) {
             cout << "Welcome to CC3K" << endl << "Please choose a race to start:" << endl
             << "Shade: s" << endl << "Goblin: g" << endl << "Drow: d" << endl << "Vampire: v" << endl << "Troll: t" << endl;
             cin >> cmd;
-        } while (cmd != "s" && cmd != "g" && cmd != "d" && cmd != "t" && cmd != "v");
+        } while (cmd != "s" && cmd != "g" && cmd != "d" && cmd != "t" && cmd != "v" && cmd != "q");
 
+
+        if (cmd == "q") break;
         // start game
         Controller *c = new Controller(cmd, given_map, file_name);
         string result = c->run_game();
@@ -45,7 +47,7 @@ int main (int argc, char *argv[]) {
         do {
             cout << "Do you want to replay (r) or quit (q)?" << endl;
             cin >> cmd;
-        } while (cmd != "r" || cmd != "q");
+        } while (cmd != "r" && cmd != "q");
 
         if (cmd == "r") {
             continue;

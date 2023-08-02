@@ -105,6 +105,21 @@ string Controller::run_game() {
             gameMap->changeNPCmovement();
             cout << "You just changed the state of the NPCs" << endl;
         }
+        else if (cmd == "u") {
+            cin >> cmd;
+            if (m_dir[cmd] != 0) {
+                if (gameMap->usePotion(m_dir[cmd])) {
+                    gameMap->npcLogic();
+                    gameMap->printMap();
+                    gameMap->resetAction();
+                }
+                else cout << "There is no potion there, try again." << endl;
+            }
+            else cout << "Please enter a valid direction" << endl;
+        }
+        else if (cmd == "q") {
+            return "lost";
+        }
         else {
             cout << "Please enter a valid command. Try again!" << endl;
             continue;
