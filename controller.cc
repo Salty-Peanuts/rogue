@@ -67,6 +67,10 @@ string Controller::run_game() {
                         return "won";
                     }
                     else {
+                        if (gameMap->isDead()) {
+                            cout << "Your HP is below 0, you lost!" << endl;
+                            return "lost";
+                        }       
                         cout << "You reached a new floor!" << endl;
                         gameMap->reset();
                         if (!gameMap->isGivenMap()) gameMap->start();
@@ -76,6 +80,10 @@ string Controller::run_game() {
                     }
                 }
                 gameMap->npcLogic();
+                if (gameMap->isDead()) {
+                    cout << "Your HP is below 0, you lost!" << endl;
+                    return "lost";
+                }
                 gameMap->printMap();
                 gameMap->resetAction();
                 continue;
@@ -89,10 +97,17 @@ string Controller::run_game() {
 
         // if attack
         else if (cmd == "a") {
+            cout << "Enter direction: "; 
             cin >> cmd;
             if (m_dir[cmd] != 0) {
                 gameMap->playerAtk(m_dir[cmd]);
                 gameMap->npcLogic();
+                
+                if (gameMap->isDead()) {
+                    cout << "Your HP is below 0, you lost!" << endl;
+                    return "lost";
+                }
+
                 gameMap->printMap();
                 gameMap->resetAction();
                 continue;
@@ -106,10 +121,15 @@ string Controller::run_game() {
             cout << "You just changed the state of the NPCs" << endl;
         }
         else if (cmd == "u") {
+            cout << "Enter direction: "; 
             cin >> cmd;
             if (m_dir[cmd] != 0) {
                 if (gameMap->usePotion(m_dir[cmd])) {
                     gameMap->npcLogic();
+                    if (gameMap->isDead()) {
+                        cout << "Your HP is below 0, you lost!" << endl;
+                        return "lost";
+                    }
                     gameMap->printMap();
                     gameMap->resetAction();
                 }
@@ -123,10 +143,6 @@ string Controller::run_game() {
         else {
             cout << "Please enter a valid command. Try again!" << endl;
             continue;
-        }
-        if (gameMap->isDead()) {
-            cout << "Your HP is below 0, you lost!" << endl;
-            return "lost";
         }
     }
 }
