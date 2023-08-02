@@ -4,9 +4,11 @@
 #include "npcs/NPC.h"
 #include "npcs/merchant.h"
 #include "npcs/dragon.h"
+#include "npcs/human.h"
 #include <cstdlib>
 #include <ctime>
 #include <string>
+#include <iostream>
 using namespace std;
 
 CombatManager::CombatManager(int dir) : direction(dir) {}
@@ -81,10 +83,8 @@ void CombatManager::playerAttack(GameMap *game_map, AbstractCharacter* initiator
             return;
         }
         // update if dragon dies
-        Dragon* dragon = dynamic_cast<Dragon*>(npc);
-        if (!dragon) {
-            return;
-        } else {
+        Dragon* dragon = dynamic_cast<Dragon*>(reciever);
+        if (dragon) {
             dragon->getDragonHoard()->dragonDies();
         }
         int x = reciever->getX();
@@ -92,18 +92,20 @@ void CombatManager::playerAttack(GameMap *game_map, AbstractCharacter* initiator
         game_map->addAction("The " + npc->getRace() + " is slain. ");
         // add drop gold logic here
         if (npc->deathLoot()) {
+            game_map->deleteObject(npc);
             ItemSpawner *item_spawner = new ItemSpawner("merchant");
             game_map->addObject(item_spawner->spawn(x, y));
             delete item_spawner;
         } else if (npc->regGoldDropper()) { // I USE RANDOM HERE
             int gold_type = 1 + rand() % 2;
             if (gold_type == 1) {
+                game_map->deleteObject(npc);
                 game_map->getPlayerCharacter()->updateGold(1);
             } else {
+                game_map->deleteObject(npc);
                 game_map->getPlayerCharacter()->updateGold(2);
             }
         }
-        game_map->deleteObject(npc);
     }
 }
 /*

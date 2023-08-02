@@ -3,7 +3,7 @@
 using namespace std;
 
 Halfling::Halfling(int x, int y):
-    NPC{x, y, 'H', 100, 15, 20} {}
+    NPC{x, y, 'L', 100, 15, 20} {}
 
 
 Halfling::~Halfling() {}
