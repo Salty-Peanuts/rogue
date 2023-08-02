@@ -7,7 +7,6 @@
 #include "combatmanager.h"
 #include "./characters/playercharacter.h"
 #include "abstractobject.h"
-#include "chamber.h"
 using namespace std;
 
 class CombatManager;

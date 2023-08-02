@@ -51,15 +51,19 @@ void CombatManager::playerAttack(GameMap *game_map, AbstractCharacter* initiator
         game_map->addAction("Your attack whiffed. ");
         return;
     }
+    
     AbstractCharacter* reciever = dynamic_cast<AbstractCharacter*>(game_map->objectTilesAt(attack_x, attack_y));
+    
     if (!reciever) {
         game_map->addAction("Your attack whiffed. ");
         return;
     }
+
     if (reciever->getRace() == "Merchant") {
         Merchant* merchant = dynamic_cast<Merchant*>(reciever);
         merchant->makeAggravated();
     }
+
     int damage_num = initiator->attack(reciever);
     if (damage_num == MISSED_ATTACK) {
         game_map->addAction("You swing to attack, but the enemy dodges just in time. ");
