@@ -26,7 +26,7 @@ class ItemSpawner : public ObjectSpawner
         {"dragon", 2}
     };
  public:
-    ItemSpawner(string item_type);
+    ItemSpawner(string item_type = "RH");
     ~ItemSpawner();
     AbstractObject* spawn(int x, int y) override;
     AbstractObject* spawnRandom(int x, int y) override;

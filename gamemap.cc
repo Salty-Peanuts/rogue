@@ -252,7 +252,7 @@ void GameMap::start()
         }
     }
 
-    NPCSpawner * npc_spawner = new NPCSpawner("Human");
+    NPCSpawner* npc_spawner = new NPCSpawner("Human");
 
 
     // spawn player
@@ -312,7 +312,7 @@ void GameMap::start()
             DragonHoard *dragon_hoard = dynamic_cast<DragonHoard *>(object_tiles[x][y]);
             // if spawns a dragon hoard
             if (dragon_hoard) {
-                NPCSpawner *npc_spawner = new NPCSpawner("Dragon");
+                npc_spawner->setNPCRace("Dragon");
                 bool exists = true;
                 // loop to find a coordinate that is unoccupied
                 while (exists)
@@ -356,13 +356,14 @@ void GameMap::start()
                 object_tiles[x][y] = npc_spawner->spawn(x, y);
                 Dragon *dragon = dynamic_cast<Dragon *>(object_tiles[x][y]);
                 dragon->assignDragonHoard(dragon_hoard);
-                delete npc_spawner;
+                //delete npc_spawner;
             }
             //delete dragon_hoard;
         }
         delete is;
     }
     delete npc_spawner;
+    delete sspawner;
 }
 
 void GameMap::addObject(AbstractObject* object)
@@ -532,6 +533,7 @@ bool GameMap::usePotion(int dir)
     if (potion) {
         player_character->activatePotion(potion->getPotionType());
         last_action += "You used a " + potion->getPotionType() + ". ";
+        deleteObject(object_tiles[x][y]);
         return true;
     } else {
         return false;
